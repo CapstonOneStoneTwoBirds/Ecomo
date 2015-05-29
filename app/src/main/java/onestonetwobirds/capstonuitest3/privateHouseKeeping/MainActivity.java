@@ -19,9 +19,11 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rey.material.app.ToolbarManager;
 import com.rey.material.util.ThemeUtil;
+import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 
@@ -64,6 +66,18 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         vp = (CustomViewPager) findViewById(R.id.main_vp);
         tpi = (TabPageIndicator) findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar) findViewById(R.id.main_sn);
+
+        FloatingActionButton InsertBtn = (FloatingActionButton)findViewById(R.id.insert_btn);
+
+        InsertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (v instanceof FloatingActionButton) {
+                    FloatingActionButton bt = (FloatingActionButton) v;
+                    bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
+                }
+            }
+        });
 
 
         mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);

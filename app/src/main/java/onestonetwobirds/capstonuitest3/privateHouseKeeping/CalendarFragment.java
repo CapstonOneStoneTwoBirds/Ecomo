@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.rey.material.widget.Button;
+import com.rey.material.widget.FloatingActionButton;
 
 import onestonetwobirds.capstonuitest3.R;
 
@@ -28,6 +29,8 @@ public class CalendarFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         Button TestBtn = (Button) v.findViewById(R.id.test_btn);
+
+
 
         TestBtn.setOnClickListener(new View.OnClickListener() {
             @Override

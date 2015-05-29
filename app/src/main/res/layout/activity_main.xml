@@ -45,6 +45,28 @@
             android:layout_gravity="bottom"
             android:visibility="gone" />
 
+
+        <!-- 버튼 위치 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0"
+            android:gravity="right|bottom"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="20sp"
+            android:padding="8dp" >
+
+
+            <com.rey.material.widget.FloatingActionButton
+                style="@style/FloatingColorActionButton"
+                android:id="@+id/insert_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
     </FrameLayout>
 
     <FrameLayout
@@ -65,5 +87,7 @@
             android:listSelector="@android:color/transparent" />
 
     </FrameLayout>
+
+
 
 </android.support.v4.widget.DrawerLayout>
