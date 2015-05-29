@@ -33,6 +33,8 @@ import onestonetwobirds.capstonuitest3.groupHouseKeeping.GroupActivity;
 
 public class MainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
+    // 기터브 커밋 ㅎㅎ
+
     private DrawerLayout dl_navigator;      // 우측에 리스트 화면 뜨는 거
     private FrameLayout fl_drawer;          // 프레임 레이아웃
     private ListView lv_drawer;
