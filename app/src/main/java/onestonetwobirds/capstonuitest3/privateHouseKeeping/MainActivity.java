@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ToolbarManager;
 import com.rey.material.util.ThemeUtil;
+
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
@@ -57,6 +59,9 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
     private Tab[] mItems = new Tab[]{Tab.CURRENTCONDITION, Tab.CALENDAR, Tab.WIDGET};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
 
+    final private static int DIALOG_INSERT = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,25 +85,9 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                     FloatingActionButton bt = (FloatingActionButton) v;
                     bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
                 }
-                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight) {
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment) {
-                        Toast.makeText(getApplicationContext(), "Agreed", Toast.LENGTH_SHORT).show();
-                        super.onPositiveActionClicked(fragment);
-                    }
 
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment) {
-                        Toast.makeText(getApplicationContext(), "Disagreed", Toast.LENGTH_SHORT).show();
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
+                GoDialog(DIALOG_INSERT);
 
-                ((SimpleDialog.Builder) builder).message("Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.")
-                        .title("Use Google's location service?")
-                        .positiveAction("AGREE")
-                        .negativeAction("DISAGREE");
-                System.out.println("Complete");
             }
         });
 
@@ -358,4 +347,67 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
             return mFragments.length;
         }
     }
+
+    protected void GoDialog(int id) {
+
+        Dialog.Builder builder = null;
+        switch (id) {
+            case DIALOG_INSERT:
+                builder = new SimpleDialog.Builder(R.style.SimpleDialogLight) {
+
+                    @Override
+                    protected void onBuildDone(Dialog dialog) {
+                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        PrepareDialog(DIALOG_INSERT, dialog);
+                    }
+
+                    @Override // 취소 or 뒤로가기 누르면 다시 원이 회전하도록 만드셈
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                builder.title("어떤 방식으로 입력하시겠습니까?").negativeAction("취소")
+                        .contentView(R.layout.insert_dialog);
+
+                FragmentManager fm = getSupportFragmentManager();
+                DialogFragment diaFM = DialogFragment.newInstance(builder);
+                diaFM.show(fm, null);
+                break;
+        }
+
+    }
+
+    protected void PrepareDialog(int id, Dialog dialog) {
+        switch (id) {
+            case DIALOG_INSERT:
+                final Dialog dialogD = (Dialog) dialog;
+                ImageView InsertOCRBtn = (ImageView) dialogD.findViewById(R.id.insert_ocr_btn);
+                ImageView InsertSpeechBtn = (ImageView) dialogD.findViewById(R.id.insert_speech_btn);
+                ImageView InsertHandBtn = (ImageView) dialogD.findViewById(R.id.insert_hand_btn);
+
+                InsertOCRBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "OCR", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Speech", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                InsertHandBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getApplicationContext(), "Hand", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                break;
+        }
+    }
+
 }
