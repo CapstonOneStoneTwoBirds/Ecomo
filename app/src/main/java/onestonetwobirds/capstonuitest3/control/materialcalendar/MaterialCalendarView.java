@@ -512,28 +512,12 @@ public class MaterialCalendarView extends FrameLayout {
         adapter.setWeekDayFormatter(formatter == null ? WeekDayFormatter.DEFAULT : formatter);
     }
 
-    /**
-     * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.WeekDayFormatter}
-     * with the provided week day labels
-     *
-     * @see com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-     * @see #setWeekDayFormatter(com.prolificinteractive.materialcalendarview.format.WeekDayFormatter)
-     *
-     * @param weekDayLabels Labels to use for the days of the week
-     */
+
     public void setWeekDayLabels(CharSequence[] weekDayLabels) {
         setWeekDayFormatter(new ArrayWeekDayFormatter(weekDayLabels));
     }
 
-    /**
-     * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.WeekDayFormatter}
-     * with the provided week day labels
-     *
-     * @see com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-     * @see #setWeekDayFormatter(com.prolificinteractive.materialcalendarview.format.WeekDayFormatter)
-     *
-     * @param arrayRes String array resource of week day labels
-     */
+
     public void setWeekDayLabels(@ArrayRes int arrayRes) {
         setWeekDayLabels(getResources().getTextArray(arrayRes));
     }
@@ -554,28 +538,12 @@ public class MaterialCalendarView extends FrameLayout {
         updateUi();
     }
 
-    /**
-     * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.TitleFormatter}
-     * using the provided month labels
-     *
-     * @see com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
-     * @see #setTitleFormatter(com.prolificinteractive.materialcalendarview.format.TitleFormatter)
-     *
-     * @param monthLabels month labels to use
-     */
+
     public void setTitleMonths(CharSequence[] monthLabels) {
         setTitleFormatter(new MonthArrayTitleFormatter(monthLabels));
     }
 
-    /**
-     * Set a {@linkplain com.prolificinteractive.materialcalendarview.format.TitleFormatter}
-     * using the provided month labels
-     *
-     * @see com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
-     * @see #setTitleFormatter(com.prolificinteractive.materialcalendarview.format.TitleFormatter)
-     *
-     * @param arrayRes String array resource of month labels to use
-     */
+
     public void setTitleMonths(@ArrayRes int arrayRes) {
         setTitleMonths(getResources().getTextArray(arrayRes));
     }

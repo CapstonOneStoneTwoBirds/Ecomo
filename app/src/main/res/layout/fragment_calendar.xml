@@ -7,13 +7,13 @@
     android:padding="16dp"
     tools:context=".BasicActivity" >
 
-    <onestonetwobirds.capstonuitest3.MaterialCalendarView
+    <onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/calendar_textView"
         android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

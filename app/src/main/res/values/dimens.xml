@@ -5,4 +5,6 @@
     <dimen name="title_text">16sp</dimen>
 
     <dimen name="bt_height">36dp</dimen>
+
+    <integer name="mcv_default_tile_size">44</integer>
 </resources>
