@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
 
         });
 
-        mDrawerAdapter.setSelected(Tab.PRIVATEINFO);           // 디폴트 값 progress로 설정
+        mDrawerAdapter.setSelected(Tab.PRIVATEINFO);           // 디폴트 값 '개인정보수정' 설정
         vp.setCurrentItem(0);
     }
 
@@ -185,7 +185,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         PRIVATEINFO("개인 정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
-        CURRENTCONDITION("CurrentCondition"),
+        CURRENTCONDITION("지출 현황"),
         CALENDAR("Calendar"),
         WIDGET("Widget");
 
