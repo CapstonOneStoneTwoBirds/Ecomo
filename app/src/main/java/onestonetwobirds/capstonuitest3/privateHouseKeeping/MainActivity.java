@@ -2,6 +2,7 @@ package onestonetwobirds.capstonuitest3.privateHouseKeeping;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -21,6 +22,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ToolbarManager;
 import com.rey.material.util.ThemeUtil;
 import com.rey.material.widget.FloatingActionButton;
@@ -76,6 +80,25 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                     FloatingActionButton bt = (FloatingActionButton) v;
                     bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
                 }
+                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight) {
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+                        Toast.makeText(getApplicationContext(), "Agreed", Toast.LENGTH_SHORT).show();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(getApplicationContext(), "Disagreed", Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                ((SimpleDialog.Builder) builder).message("Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.")
+                        .title("Use Google's location service?")
+                        .positiveAction("AGREE")
+                        .negativeAction("DISAGREE");
+                System.out.println("Complete");
             }
         });
 
