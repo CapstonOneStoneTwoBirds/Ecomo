@@ -404,6 +404,8 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                     public void onClick(View v) {
                         Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.fade, R.anim.hold);
+                        return;
                     }
                 });
 

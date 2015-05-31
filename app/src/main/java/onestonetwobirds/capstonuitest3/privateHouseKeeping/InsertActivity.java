@@ -1,5 +1,6 @@
 package onestonetwobirds.capstonuitest3.privateHouseKeeping;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -31,6 +34,28 @@ import onestonetwobirds.capstonuitest3.R;
 /**
  * Created by YeomJi on 15. 5. 31..
  */
+
+public class InsertActivity  extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.insert_main);
+
+        LinearLayout insertLinear = (LinearLayout) findViewById(R.id.insert_linear);
+        insertLinear.setAlpha((float) 0.6);
+
+
+
+
+
+    }
+}
+
+
+
+/*
 public class InsertActivity  extends ActionBarActivity  implements ToolbarManager.OnToolbarGroupChangedListener  {
 
     private Toolbar mToolbar;               // 화면 상단의 액션바
@@ -45,6 +70,7 @@ public class InsertActivity  extends ActionBarActivity  implements ToolbarManage
 
         mToolbar = (Toolbar) findViewById(R.id.insert_toolbar);
         setSupportActionBar(mToolbar);
+        //mToolbar.getBackground().setAlpha(20);
 
 
         mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
@@ -87,7 +113,4 @@ public class InsertActivity  extends ActionBarActivity  implements ToolbarManage
     public void onToolbarGroupChanged(int oldGroupId, int groupId) {
         mToolbarManager.notifyNavigationStateChanged();
     }
-
-
-
-}
+}*/
