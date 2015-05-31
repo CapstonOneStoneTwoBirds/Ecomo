@@ -43,8 +43,8 @@ public class InsertActivity  extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.insert_main);
 
-        LinearLayout insertLinear = (LinearLayout) findViewById(R.id.insert_linear);
-        insertLinear.setAlpha((float) 0.6);
+        //LinearLayout insertLinear = (LinearLayout) findViewById(R.id.insert_linear);
+        //insertLinear.setAlpha(0);
 
 
 
