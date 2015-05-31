@@ -402,7 +402,8 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                 InsertHandBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Hand", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
+                        startActivity(intent);
                     }
                 });
 

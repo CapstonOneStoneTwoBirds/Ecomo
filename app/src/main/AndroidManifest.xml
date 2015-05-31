@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".privateHouseKeeping.MainActivity"
-            android:label="@string/app_name" >
+            android:label="개인 가계부" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,11 @@
         </activity>
         <activity
             android:name=".groupHouseKeeping.GroupActivity"
-            android:label="@string/app_name" >
+            android:label="그룹 가계부" >
+        </activity>
+        <activity
+            android:name=".privateHouseKeeping.InsertActivity"
+            android:label="가계부 입력" >
         </activity>
     </application>
 
