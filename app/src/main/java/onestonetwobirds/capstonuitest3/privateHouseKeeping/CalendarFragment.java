@@ -16,11 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.control.materialcalendar.CalendarDay;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.OnDateChangedListener;
 
 
-public class CalendarFragment extends Fragment {
+public class CalendarFragment extends Fragment implements OnDateChangedListener {
 
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
     private TextView textView;
@@ -36,10 +37,9 @@ public class CalendarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_calendar, container, false);
 
-        textView = (TextView) v.findViewById(R.id.calendar_textView);
-/*
+
         MaterialCalendarView widget = (MaterialCalendarView) v.findViewById(R.id.calendarView);
-        widget.setOnDateChangedListener();
+        widget.setOnDateChangedListener(this);
 
         Calendar calendar = Calendar.getInstance();
         widget.setSelectedDate(calendar.getTime());
@@ -49,11 +49,16 @@ public class CalendarFragment extends Fragment {
 
         calendar.set(calendar.get(Calendar.YEAR) + 2, Calendar.OCTOBER, 31);
         widget.setMaximumDate(calendar.getTime());
-*/
+
 
 
 
         return v;
+    }
+
+    @Override
+    public void onDateChanged(MaterialCalendarView widget, CalendarDay date) { // 다른 날짜가 눌러졌을 때 취하는 액션 --> 리스트를 다이얼로그로 띄우면 될듯
+
     }
 
     @Override
