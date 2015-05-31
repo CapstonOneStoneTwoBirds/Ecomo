@@ -186,8 +186,8 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
         CURRENTCONDITION("지출 현황"),
-        CALENDAR("Calendar"),
-        WIDGET("Widget");
+        CALENDAR("캘린더"),
+        WIDGET("위젯");
 
         private final String name;
 

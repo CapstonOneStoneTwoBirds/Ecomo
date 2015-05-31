@@ -18,12 +18,12 @@
     <style name="AppBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="selectableItemBackground">@null</item>
 
-        <item name="android:textColorPrimary">#000000</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
         <item name="colorAccent">#FF4081</item>
-        <item name="colorPrimary">#d3d3d3</item>
-        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#303F9F</item>
         <item name="colorControlHighlight">#00CC55</item>
-        <item name="colorControlNormal">#000000</item>
+        <item name="colorControlNormal">#FFFFFF</item>
     </style>
 
     <!-- Navigator Drawable -->
@@ -31,7 +31,7 @@
     <style name="NavigatorDrawableIcon" parent="Material.Drawable.NavigationDrawerIcon">
         <item name="lmd_strokeSize">3dp</item>
         <item name="lmd_padding">18dp</item>
-        <item name="lmd_strokeColor">#000000</item>
+        <item name="lmd_strokeColor">#FFFFFF</item>
     </style>
 
     <style name="NavigationDrawerDrawable">

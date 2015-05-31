@@ -29,8 +29,8 @@
     <color name="rb_disable">#FFB0B0B0</color>
 
     <!-- 텝 안의 글자가 체크 되었을 때랑 체크 안되어있을 때 색깔 차이~ -->
-    <color name="tpi_checked">#2f4f4f</color>
-    <color name="tpi_unchecked">#708090</color>
+    <color name="tpi_checked">#FFFFFF</color>
+    <color name="tpi_unchecked">#808080</color>
 
     <color name="et_divider_focused">@color/colorControlActivated</color>
     <color name="et_divider_not_focused">#FF6D6D6D</color>

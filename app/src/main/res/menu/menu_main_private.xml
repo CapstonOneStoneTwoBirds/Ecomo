@@ -5,13 +5,13 @@
     <item
         android:id="@+id/tb_group"
         app:showAsAction="always"
-        android:icon="@drawable/people"
+        android:icon="@drawable/peopleaction"
         android:title="Group mode"/>
 
     <item
         android:id="@+id/tb_new"
         app:showAsAction="always"
-        android:icon="@drawable/new_page"
+        android:icon="@drawable/refresh"
         android:title="Refresh"/>
 
     
