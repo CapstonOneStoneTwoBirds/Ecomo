@@ -5,11 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bt_4"
+    android:background="@drawable/bt_5"
     android:orientation="vertical">
 
         <TextView
-            android:id="@+id/insert_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="30sp"
@@ -26,7 +25,9 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:orientation="horizontal"
-            android:padding="0.2sp"/>
+            android:layout_marginRight="24sp"
+            android:layout_marginLeft="24sp"
+            android:padding="0.05sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,11 +114,13 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:orientation="horizontal"
+            android:layout_marginRight="24sp"
+            android:layout_marginLeft="24sp"
             android:padding="0.2sp"/>
 
             <com.rey.material.widget.EditText
                 style="@style/Material.Widget.EditText.Light"
-                android:id="@+id/textfield_et_char_counter"
+                android:id="@+id/insert_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
@@ -141,6 +144,8 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:orientation="horizontal"
+            android:layout_marginRight="24sp"
+            android:layout_marginLeft="24sp"
             android:padding="0.2sp"/>
 
         <com.rey.material.widget.Spinner
@@ -167,11 +172,13 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:orientation="horizontal"
+            android:layout_marginRight="24sp"
+            android:layout_marginLeft="24sp"
             android:padding="0.2sp"/>
 
         <com.rey.material.widget.EditText
             style="@style/Material.Widget.EditText.Light"
-            android:id="@+id/textfield_et_char_counter2"
+            android:id="@+id/insert_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"

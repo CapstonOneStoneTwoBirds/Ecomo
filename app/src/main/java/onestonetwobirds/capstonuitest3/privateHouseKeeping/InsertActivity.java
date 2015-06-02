@@ -1,33 +1,19 @@
 package onestonetwobirds.capstonuitest3.privateHouseKeeping;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import com.rey.material.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.rey.material.app.ToolbarManager;
-import com.rey.material.util.ThemeUtil;
-import com.rey.material.widget.SnackBar;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import com.rey.material.app.DatePickerDialog;
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.TimePickerDialog;
+import com.rey.material.widget.Button;
+import java.text.SimpleDateFormat;
 
 import onestonetwobirds.capstonuitest3.R;
 
@@ -37,80 +23,74 @@ import onestonetwobirds.capstonuitest3.R;
 
 public class InsertActivity  extends Activity {
 
+
+    Button InsertBtnDay, InsertBtnTime;
+    TextView IsertTextDay, IsertTextTime;
+    EditText InsertTitle, InsertContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.insert_main);
 
-        //LinearLayout insertLinear = (LinearLayout) findViewById(R.id.insert_linear);
-        //insertLinear.setAlpha(0);
+        InsertBtnDay = (Button)findViewById(R.id.insert_btn_day);
+        InsertBtnTime = (Button)findViewById(R.id.insert_btn_time);
+        IsertTextDay = (TextView)findViewById(R.id.insert_text_day);
+        IsertTextTime = (TextView)findViewById(R.id.insert_text_time);
+        InsertTitle = (EditText)findViewById(R.id.insert_title);
+        InsertContent = (EditText)findViewById(R.id.insert_content);
 
+        InsertBtnDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Check day");
+                Dialog.Builder builder = new TimePickerDialog.Builder(6, 00){
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+                        TimePickerDialog dialog = (TimePickerDialog)fragment.getDialog();
+                        Toast.makeText(InsertActivity.this, "Time is " + dialog.getFormattedTime(SimpleDateFormat.getTimeInstance()), Toast.LENGTH_SHORT).show();
+                        super.onPositiveActionClicked(fragment);
+                    }
 
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(InsertActivity.this, "Cancelled" , Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
 
+                builder.positiveAction("OK")
+                        .negativeAction("CANCEL");
+                builder.contentView(R.layout.insert_main);
+            }
+        });
 
+        InsertBtnTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("Check time");
+                Dialog.Builder builder = new DatePickerDialog.Builder(){
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+                        DatePickerDialog dialog = (DatePickerDialog)fragment.getDialog();
+                        String date = dialog.getFormattedDate(SimpleDateFormat.getDateInstance());
+                        Toast.makeText(InsertActivity.this, "Date is " + date, Toast.LENGTH_SHORT).show();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        Toast.makeText(InsertActivity.this, "Cancelled" , Toast.LENGTH_SHORT).show();
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+                builder.positiveAction("OK")
+                        .negativeAction("CANCEL");
+
+            }
+        });
 
     }
 }
 
-
-
-/*
-public class InsertActivity  extends ActionBarActivity  implements ToolbarManager.OnToolbarGroupChangedListener  {
-
-    private Toolbar mToolbar;               // 화면 상단의 액션바
-    private ToolbarManager mToolbarManager;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.insert_main);
-
-
-        mToolbar = (Toolbar) findViewById(R.id.insert_toolbar);
-        setSupportActionBar(mToolbar);
-        //mToolbar.getBackground().setAlpha(20);
-
-
-        mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
-        //mToolbar.setNavigationIcon(R.drawable.hand);
-
-        mToolbarManager.registerOnToolbarGroupChangedListener(this);
-
-
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        mToolbarManager.createMenu(R.menu.menu_insert);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        mToolbarManager.onPrepareMenu();
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.tb_new:                                 // 새로 고침
-                //mToolbarManager.setCurrentGroup(0);
-                break;
-        }
-
-        return true;
-
-    }
-
-    @Override
-    public void onToolbarGroupChanged(int oldGroupId, int groupId) {
-        mToolbarManager.notifyNavigationStateChanged();
-    }
-}*/
