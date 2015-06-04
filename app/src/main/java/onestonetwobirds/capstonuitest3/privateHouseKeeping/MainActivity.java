@@ -185,9 +185,9 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         PRIVATEINFO("개인 정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
-        CURRENTCONDITION("지출 현황"),
-        CALENDAR("캘린더"),
-        WIDGET("위젯");
+        CURRENTCONDITION("CURRE"),
+        CALENDAR("CALENDAR"),
+        WIDGET("WIDGET");
 
         private final String name;
 
@@ -368,7 +368,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                     }
                 };
 
-                builder.title("어떤 방식으로 입력하시겠습니까?").negativeAction("취소")
+                builder.title("어떤 방식으로 입력하시겠습니까?").negativeAction("CANCEL")
                         .contentView(R.layout.insert_dialog);
 
                 FragmentManager fm = getSupportFragmentManager();
@@ -405,6 +405,8 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                         Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.fade, R.anim.hold);
+                        dialogD.dismiss();
+
                         return;
                     }
                 });

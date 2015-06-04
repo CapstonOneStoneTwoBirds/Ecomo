@@ -9,19 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
         android:padding="8dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Raise"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-            android:textColor="#FF000000"
-            android:textSize="@dimen/title_text" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,17 +20,25 @@
             android:weightSum="1.0">
 
             <com.rey.material.widget.Button
-                android:id="@+id/test_btn"
+                android:id="@+id/new_widget_btn"
                 style="@style/RaiseColorButtonRippleStyle"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/bt_height"
                 android:layout_weight="0.4"
-                android:text="BUTTON"
+                android:text="NEW Widget"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
                 android:textColor="#FFFFFFFF"
+                android:layout_margin="20sp"
                 app:rd_delayClick="afterRelease" />
 
         </LinearLayout>
+
+        <ListView
+            android:id="@+id/WidgetList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
     </LinearLayout>
 
 

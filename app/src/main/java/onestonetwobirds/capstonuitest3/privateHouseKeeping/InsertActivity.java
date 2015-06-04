@@ -15,6 +15,8 @@ import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.TimePickerDialog;
 import com.rey.material.widget.Button;
+import com.rey.material.widget.SnackBar;
+
 import java.text.SimpleDateFormat;
 
 import onestonetwobirds.capstonuitest3.R;
@@ -25,12 +27,15 @@ import onestonetwobirds.capstonuitest3.R;
 
 public class InsertActivity  extends FragmentActivity {
 
+    private SnackBar mSnackBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.insert_for_fragment_main);
+
+        mSnackBar = (SnackBar)findViewById(R.id.insert_sn);
 
         Fragment newFragment = new InsertActivityFragment();
 
@@ -40,6 +45,10 @@ public class InsertActivity  extends FragmentActivity {
 
         transaction.commit();
 
+    }
+
+    public SnackBar getSnackBar(){
+        return mSnackBar;
     }
 }
 

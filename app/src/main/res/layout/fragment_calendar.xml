@@ -10,7 +10,8 @@
     <onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView
         android:id="@+id/calendarView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="#c0c0c0" />
 \
 
 </LinearLayout>

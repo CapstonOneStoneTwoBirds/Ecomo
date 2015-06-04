@@ -10,4 +10,11 @@
 
     </LinearLayout>
 
+    <com.rey.material.widget.SnackBar
+        android:id="@+id/insert_sn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom"/>
+
 </RelativeLayout>
