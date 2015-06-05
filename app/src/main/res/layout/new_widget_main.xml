@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/bt_5"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="40sp"
+        android:gravity="center"
+        android:text="위젯 입력"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24sp"
+        android:layout_marginRight="24sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.05sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24sp"
+        android:layout_marginRight="24sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <com.rey.material.widget.Spinner
+        android:id="@+id/spinner_widget"
+        style="@style/Material.Widget.Spinner.Light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="13sp"
+        android:minWidth="128dp"
+        app:rd_delayClick="none"
+        app:rd_enable="true"
+        app:rd_style="@style/Material.Drawable.Ripple.Wave.Light"
+        app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
+        app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
+        app:spn_arrowSwitchMode="true"
+        app:spn_label="카테고리"
+        app:spn_labelEnable="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24sp"
+        android:layout_marginRight="24sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <EditText
+        android:id="@+id/txtWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="13sp"
+        android:ems="10"
+        android:hint="한계 금액"
+        android:inputType="textShortMessage"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24sp"
+        android:layout_marginRight="24sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.05sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40sp"
+        android:layout_marginLeft="35sp"
+        android:layout_marginRight="35sp"
+        android:layout_marginTop="13sp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/Nwidget_OK"
+            style="@style/RaiseColorButtonRippleStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10sp"
+            android:layout_weight="0.4"
+            android:text="입력"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#FFFFFF"
+            app:rd_delayClick="afterRelease" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.1" />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/Nwidget_Cancel"
+            style="@style/RaiseColorButtonRippleStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10sp"
+            android:layout_weight="0.4"
+            android:text="취소"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#FFFFFF"
+            app:rd_delayClick="afterRelease" />
+
+    </LinearLayout>
+
+    <com.rey.material.widget.SnackBar
+        android:id="@+id/Nwidget_sn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom"/>
+
+
+</LinearLayout>
+
+
+

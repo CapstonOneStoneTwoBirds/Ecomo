@@ -1,29 +1,56 @@
 package onestonetwobirds.capstonuitest3.privateHouseKeeping;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
-import com.rey.material.widget.Spinner;
+import com.rey.material.widget.SnackBar;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
 
-public class WidgetFragment extends Fragment {
+public class WidgetFragment extends Fragment  implements View.OnClickListener {
 
     Button NewWidgetButton;
-    Spinner NewWidgetSpinner;
 
-    String cate;
+    View v;
+    private Cursor cursor;
+
+    MyDatabase myDB2;
+    SQLiteDatabase db2;
+
+    int checkID;
+
+    private String title;
+    private int goal, acc;
+
+    SnackBar mSnackBar;
+
+    public static String t = "";
+    public static int g = 0, c = 0;
+
 
     public static WidgetFragment newInstance() {
         WidgetFragment fragment = new WidgetFragment();
@@ -33,70 +60,30 @@ public class WidgetFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_widget, container, false);
+        v = inflater.inflate(R.layout.fragment_widget, container, false);
 
         NewWidgetButton = (Button) v.findViewById(R.id.new_widget_btn);
-        NewWidgetSpinner = (Spinner) v.findViewById(R.id.spinner_insert);
-
-        final String[] items = new String[6];
-
-        items[0] = "총액";
-        items[1] = "식비";
-        items[2] = "여가비";
-        items[3] = "주거비";
-        items[4] = "교통비";
-        items[5] = "저축비";
-
-        cate = items[0];
 
 
-
-        NewWidgetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(getActivity().getApplicationContext(), "클릭~!", Toast.LENGTH_LONG).show();
-                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight){
-
-                    @Override
-                    protected void onBuildDone(Dialog dialog) {
-                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.row_spn, items);
-                        adapter.setDropDownViewResource(R.layout.row_spn_dropdown);
-                        NewWidgetSpinner.setAdapter(adapter);
-
-                        NewWidgetSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(Spinner spinner, View view, int i, long l) {
-                                cate = items[i];
-                            }
-                        });
+        mSnackBar = ((MainActivity)getActivity()).getSnackBar();
 
 
-                    }
-
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment) {
-                        super.onPositiveActionClicked(fragment);
-                    }
-
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment) {
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                ((SimpleDialog.Builder)builder).title("새로운 Widget 추가").positiveAction("OK").negativeAction("CANCEL");
-
-                FragmentManager fm = getFragmentManager();
-                DialogFragment diaFM = DialogFragment.newInstance(builder);
-                diaFM.show(fm, null);
-            }
-        });
-
+        NewWidgetButton.setOnClickListener(this);
 
 
         return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        //Dialog.Builder builder = null;
+
+        switch (v.getId()) {
+            case R.id.new_widget_btn:
+                //Toast.makeText(getActivity().getApplicationContext(), "클릭~!", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity().getApplicationContext(), NewWidgetActivity.class);
+                startActivity(intent);
+        }
     }
 
     @Override
@@ -107,6 +94,113 @@ public class WidgetFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        MyDatabase myDB = new MyDatabase(getActivity());
+        final SQLiteDatabase db = myDB.getWritableDatabase();
+
+        ListView listView = (ListView) v.findViewById(R.id.WidgetList);
+
+        String sql = "SELECT rowid _id, * FROM checkamount";
+        cursor = db.rawQuery(sql,null);
+
+
+        if(cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            String[] from = new String[]{"title", "goal", "acc"};
+            int[] to = new int[]{ R.id.lf_tv_title, R.id.lf_tv_goal, R.id.lf_tv_acc};
+            final SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                    listView.getContext(), R.layout.widget_list, cursor, from, to);
+
+            listView.setAdapter(adapter);
+        } else mSnackBar.applyStyle(R.style.SnackBarSingleLine).text("등록된 내용이 없습니다.").duration(2000).show();
+
+        db.close();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position,
+                                    long id) {
+
+                /*
+                if (id != 0)
+                    Toast.makeText(getActivity().getApplicationContext(), (int) id + "", Toast.LENGTH_LONG).show();
+                else Toast.makeText(getActivity().getApplicationContext(), "No id", Toast.LENGTH_LONG).show();
+                */
+                checkID = (int) id;
+                DialogSimple();
+
+            }
+        });
+
     }
+
+    private void DialogSimple(){
+
+        Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight){
+
+            @Override
+            protected void onBuildDone(Dialog dialog) {
+                dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                myDB2 = new MyDatabase(getActivity());
+                db2 = myDB2.getWritableDatabase();
+
+
+                String sql = "select * from checkamount where number like ?";
+                Cursor cursor = db2.rawQuery(sql, new String[]{String.valueOf(checkID)});
+
+                int recordCount = cursor.getCount();
+
+                int titleCol = cursor.getColumnIndex("title");
+                int goalCol = cursor.getColumnIndex("goal");
+                int accCol = cursor.getColumnIndex("acc");
+
+                while (cursor.moveToNext()) {
+                    title = cursor.getString(titleCol);
+                    goal = cursor.getInt(goalCol);
+                    acc = cursor.getInt(accCol);
+                }
+
+            }
+
+            // 수정 구현 아직 안함.
+
+            @Override
+            public void onPositiveActionClicked(DialogFragment fragment) {
+                super.onPositiveActionClicked(fragment);
+
+                db2.execSQL("UPDATE checkamount SET isWidget = 0 ;");
+                db2.execSQL("UPDATE checkamount SET isWidget = 1 WHERE title = '"+title+"';");
+                getContent(title, goal, acc);
+            }
+
+            @Override
+            public void onNegativeActionClicked(DialogFragment fragment) {
+                super.onNegativeActionClicked(fragment);
+                db2.execSQL("delete from checkamount where number = " + checkID + ";");
+                //db.execSQL("delete from checkamount ;");
+                db2.close();
+                onResume();
+            }
+        };
+
+        ((SimpleDialog.Builder)builder).title("새로운 Widget 추가").positiveAction("SELECT").negativeAction("DELETE");
+
+        FragmentManager fm = getFragmentManager();
+        DialogFragment diaFM = DialogFragment.newInstance(builder);
+        diaFM.show(fm, null);
+
+    }
+
+    public void getContent(String tt, int gg, int cc) {
+        t = tt;
+        g = gg;
+        c = cc;
+        /*
+        System.out.println("OKCheck1 ===> t : "+WidgetFragment.t+"  g : "+WidgetFragment.g+"  c : "+WidgetFragment.c);
+        System.out.println("OKCheck1 ===> tt : "+tt+"  gg : "+gg+"  cc : "+cc);
+        */
+    }
+
 
 }

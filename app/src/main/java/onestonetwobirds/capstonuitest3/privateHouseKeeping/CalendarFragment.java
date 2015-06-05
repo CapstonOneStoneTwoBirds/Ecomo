@@ -49,8 +49,6 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
     ViewGroup contain;
 
     ArrayList<String> resultArr;
-    //String names[];
-    String names[] ={"A","B","C","D"};
 
     public static CalendarFragment newInstance() {
         CalendarFragment fragment = new CalendarFragment();

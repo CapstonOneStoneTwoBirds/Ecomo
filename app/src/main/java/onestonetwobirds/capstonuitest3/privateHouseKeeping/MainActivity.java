@@ -185,7 +185,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         PRIVATEINFO("개인 정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
-        CURRENTCONDITION("CURRE"),
+        CURRENTCONDITION("CURRENT STATE"),
         CALENDAR("CALENDAR"),
         WIDGET("WIDGET");
 
@@ -363,7 +363,6 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
 
                     @Override // 취소 or 뒤로가기 누르면 다시 원이 회전하도록 만드셈
                     public void onNegativeActionClicked(DialogFragment fragment) {
-                        Toast.makeText(getApplicationContext(), "Cancelled", Toast.LENGTH_SHORT).show();
                         super.onNegativeActionClicked(fragment);
                     }
                 };

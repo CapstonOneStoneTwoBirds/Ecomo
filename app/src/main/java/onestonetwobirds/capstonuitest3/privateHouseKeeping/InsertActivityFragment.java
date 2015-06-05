@@ -37,6 +37,7 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     String year, month, date, AMPM, time, minute;
     String cate;
     int total, food, play, house, traffic, saving;
+    int accCheck;
 
     Button InsertBtnDay, InsertBtnTime, InsertOK, InsertCancel;
     TextView IsertTextDay, IsertTextTime;
@@ -87,23 +88,11 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         });
 
 
-        InsertBtnDay.setOnClickListener(this);
-        InsertBtnTime.setOnClickListener(this);
-        InsertOK.setOnClickListener(this);
-        InsertCancel.setOnClickListener(this);
-
-        mSnackBar = ((InsertActivity)getActivity()).getSnackBar();
-
-        return v;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Dialog.Builder builder = null;
-
-        switch (v.getId()){
-            case R.id.insert_btn_day:
-                builder = new DatePickerDialog.Builder() {
+        InsertBtnDay.setOnClickListener(new View.OnClickListener() {
+            Dialog.Builder builder = null;
+            @Override
+            public void onClick(View v) {
+                 builder = new DatePickerDialog.Builder() {
                     @Override
                     public void onPositiveActionClicked(DialogFragment fragment) {
                         DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
@@ -121,9 +110,14 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
                 builder.positiveAction("OK")
                         .negativeAction("CANCEL");
 
-                builder.contentView(R.layout.insert_main);
-                break;
-            case R.id.insert_btn_time:
+                DialogFragment fragment = DialogFragment.newInstance(builder);
+                fragment.show(getFragmentManager(), null);
+            }
+        });
+        InsertBtnTime.setOnClickListener(new View.OnClickListener() {
+            Dialog.Builder builder = null;
+            @Override
+            public void onClick(View v) {
                 builder = new TimePickerDialog.Builder(6, 00){
                     @Override
                     public void onPositiveActionClicked(DialogFragment fragment) {
@@ -142,7 +136,29 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
                 builder.positiveAction("OK")
                         .negativeAction("CANCEL");
-                break;
+
+                DialogFragment fragment = DialogFragment.newInstance(builder);
+                fragment.show(getFragmentManager(), null);
+            }
+        });
+        InsertOK.setOnClickListener(this);
+        InsertCancel.setOnClickListener(this);
+
+        mSnackBar = ((InsertActivity)getActivity()).getSnackBar();
+
+        return v;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
             case R.id.insert_OK:
 
                 MyDatabase myDB = new MyDatabase(getActivity());
@@ -156,11 +172,19 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                             .text("금액을 입력해주세요.")
                             .duration(2000).show();
-                else if (Integer.valueOf(InsertMoney.getText().toString()) <= 0) {
+                else if (Integer.valueOf(InsertMoney.getText().toString()) <= 0)
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                             .text("잘못된 금액을 입력하셨습니다.")
                             .duration(2000).show();
-                } else { // 가계 내역 입력 갱신
+                else if(year == null)
+                    mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                            .text("날짜를 입력해주세요.")
+                            .duration(2000).show();
+                else if(AMPM == null)
+                    mSnackBar.applyStyle(R.style.SnackBarSingleLine)
+                            .text("시간을 입력해주세요.")
+                            .duration(2000).show();
+                else { // 가계 내역 입력 갱신
                     ContentValues values = new ContentValues();
                     values.put("year", year);
                     values.put("month", month);
@@ -205,40 +229,42 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
                     if (cate.equals("식비")) {
                         db.execSQL("UPDATE moneybook SET food = food + " + InsertMoney.getText().toString());
-                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'food';");
+                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '식비';");
                     } else if (cate.equals("여가비")) {
                         db.execSQL("UPDATE moneybook SET play = play + " + InsertMoney.getText().toString());
-                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'play';");
+                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '여가비';");
                     } else if (cate.equals("주거비")) {
                         db.execSQL("UPDATE moneybook SET house = house + " + InsertMoney.getText().toString());
-                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'house';");
+                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '주거비';");
                     } else if (cate.equals("교통비")) {
                         db.execSQL("UPDATE moneybook SET traffic = traffic + " + InsertMoney.getText().toString());
-                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'traffic';");
+                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '교통비';");
                     } else if (cate.equals("저축비")) {
                         db.execSQL("UPDATE moneybook SET saving = saving + " + InsertMoney.getText().toString());
-                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'saving';");
+                        db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '저축비';");
                     }
 
                     db.execSQL("UPDATE moneybook SET total = total + " + InsertMoney.getText().toString());
-                    db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = 'total';");
+                    db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '총액';");
 
-
-                /* -- 위젯 관련 --
                 try {
                     sql = "SELECT * FROM checkamount WHERE title LIKE ? ";
                     cursor = db.rawQuery(sql, new String[]{MyCustomWidget.titleWidget});
 
                     int accCol = cursor.getColumnIndex("acc");
+
+                    //System.out.println("OKCheck1 ===> amount : "+cursor.getCount());
+
                     while (cursor.moveToNext()) {
                         accCheck = cursor.getInt(accCol);
+
                         getContent(MyCustomWidget.titleWidget, MyCustomWidget.goalWidget, accCheck);
                     }
-                } catch (IllegalArgumentException e) { }
-
-*/
-
+                } catch (IllegalArgumentException e) {
+                    System.out.println("OK : IllegalArgumentException");
+                }
                     db.close();
+                    //if(fragment != null) fragment.dismiss();
                     getActivity().finish();
                 }
 
@@ -246,14 +272,18 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.insert_Cancel:
+                //if(fragment != null) fragment.dismiss();
                 getActivity().finish();
                 break;
 
 
         }
 
+/*
         DialogFragment fragment = DialogFragment.newInstance(builder);
         fragment.show(getFragmentManager(), null);
+*/
+
 
     }
 
@@ -309,6 +339,13 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             }
         }
 
+
+    }
+
+    public void getContent(String tt, int gg, int cc) {
+        WidgetFragment.t = tt;
+        WidgetFragment.g = gg;
+        WidgetFragment.c = cc;
 
     }
 
