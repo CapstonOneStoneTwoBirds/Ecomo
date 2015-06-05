@@ -1,23 +1,12 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.view.Window;
-import com.rey.material.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import com.rey.material.app.DialogFragment;
 
-import com.rey.material.app.DatePickerDialog;
-import com.rey.material.app.Dialog;
-import com.rey.material.app.TimePickerDialog;
-import com.rey.material.widget.Button;
 import com.rey.material.widget.SnackBar;
-
-import java.text.SimpleDateFormat;
 
 import onestonetwobirds.capstonuitest3.R;
 

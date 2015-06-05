@@ -13,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
-        <receiver android:name=".privateHouseKeeping.MyCustomWidget" android:label="Ecomo widget">
+        <receiver android:name=".privateHouseKeeping.Widget.MyCustomWidget" android:label="Ecomo widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -23,7 +23,7 @@
         </receiver>
 
         <activity
-            android:name=".privateHouseKeeping.MainActivity"
+            android:name=".privateHouseKeeping.Main.MainActivity"
             android:label="개인 가계부" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,11 +36,11 @@
             android:label="그룹 가계부" >
         </activity>
         <activity
-            android:name=".privateHouseKeeping.InsertActivity"
+            android:name=".privateHouseKeeping.Insert.InsertActivity"
             android:label="가계부 입력" >
         </activity>
         <activity
-            android:name=".privateHouseKeeping.NewWidgetActivity"
+            android:name=".privateHouseKeeping.Widget.NewWidgetActivity"
             android:label="위젯 입력" >
         </activity>
     </application>

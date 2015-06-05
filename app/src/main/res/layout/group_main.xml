@@ -22,7 +22,7 @@
                 android:minHeight="?attr/actionBarSize"
                 app:theme="@style/AppBar" />
 
-            <onestonetwobirds.capstonuitest3.privateHouseKeeping.CustomViewPager
+            <onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager
                 android:id="@+id/group_vp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

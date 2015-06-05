@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget;
 
 import android.app.Activity;
 import android.content.ContentValues;

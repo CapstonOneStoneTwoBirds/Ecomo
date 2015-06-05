@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -92,8 +92,6 @@ public class MyCustomWidget extends AppWidgetProvider
     {
         getContent();
         String content = titleWidget + " / 최대 : " + goalWidget + " / 현재 : " + accWidget;
-        System.out.println("Confirm1 -------> " + content);
-        System.out.println("Confirm2 -------> " + WidgetFragment.t + " / " + WidgetFragment.g + " / " + WidgetFragment.c);
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.my_custom_widget);
         updateViews.setTextViewText(R.id.widgettext, content);
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);
@@ -113,8 +111,6 @@ public class MyCustomWidget extends AppWidgetProvider
         titleWidget = WidgetFragment.t;
         goalWidget = WidgetFragment.g;
         accWidget = WidgetFragment.c;
-        System.out.println("OKCheck2 ===> t : "+WidgetFragment.t+"  g : "+WidgetFragment.g+"  c : "+WidgetFragment.c);
-        System.out.println("OKCheck2 ===> titleWidget : "+titleWidget+"  goalWidget : "+goalWidget+"  accWidget : "+accWidget);
     }
 
 

@@ -1,9 +1,6 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget;
 
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,16 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
@@ -30,6 +23,7 @@ import com.rey.material.widget.SnackBar;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.MainActivity;
 
 public class WidgetFragment extends Fragment  implements View.OnClickListener {
 

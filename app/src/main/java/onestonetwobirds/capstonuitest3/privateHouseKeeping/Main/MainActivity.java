@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +38,10 @@ import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.GroupActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
 
 public class MainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 

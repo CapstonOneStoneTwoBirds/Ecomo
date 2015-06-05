@@ -5,252 +5,250 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:scrollbarStyle="outsideOverlay">
-    
-    <LinearLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
-        android:padding="8dp">
-	            
-	    <TextView 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:textSize="@dimen/title_text"
-	        android:padding="8dp"
-	        android:textColor="#FF000000"
-	        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-	        android:text="Circular"/>
-	    
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp"
-	        android:orientation="horizontal"
-	        android:weightSum="2.0"
-	        android:baselineAligned="false">
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/CircularProgressDrawableStyle"
-			        app:pv_progressMode="indeterminate"/>
-	            
-	        </FrameLayout>
-	        
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular_colors"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/ColorsCircularProgressDrawableStyle"
-			        app:pv_progressMode="indeterminate"/>
-	            
-	        </FrameLayout>
-	        
-	    </LinearLayout>
-	    
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp"
-	        android:orientation="horizontal"
-	        android:weightSum="2.0"
-	        android:baselineAligned="false">
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular_inout"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/InOutCircularProgressDrawableStyle"
-			        app:pv_progressMode="indeterminate"/>
-	            
-	        </FrameLayout>
-	        
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular_inout_colors"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/InOutColorsCircularProgressDrawableStyle"
-			        app:pv_progressMode="indeterminate"/>
-	            
-	        </FrameLayout>
-	        
-	    </LinearLayout>
-	    
-	    <LinearLayout 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp"
-	        android:orientation="horizontal"
-	        android:weightSum="2.0"
-	        android:baselineAligned="false">
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular_determinate_in_out"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/DeterminateInOutCircularProgressDrawableStyle"
-			        app:pv_progressMode="determinate"/>
-	            
-	        </FrameLayout>
-	        
-	        <FrameLayout 
-	            android:layout_width="0dp"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0">
-	            
-	            <com.rey.material.widget.ProgressView
-	                android:id="@+id/progress_pv_circular_determinate"
-			        android:layout_width="32dp"
-			        android:layout_height="32dp"
-			        android:layout_gravity="center"
-			        app:pv_autostart = "false"
-			        app:pv_circular="true"
-			        app:pv_progressStyle="@style/DeterminateCircularProgressDrawableStyle"
-			        app:pv_progressMode="determinate"/>
-	            
-	        </FrameLayout>
-	        	        
-	    </LinearLayout>
-	    
-	    <TextView 
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:textSize="@dimen/title_text"
-	        android:padding="8dp"
-	        android:textColor="#FF000000"
-	        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-	        android:text="Linear"/>	   
-	        
-	    <FrameLayout 
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp">
-	            
-	        <com.rey.material.widget.ProgressView
-	        	android:id="@+id/progress_pv_linear"
-			    android:layout_width="match_parent"
-			    android:layout_height="4dp"
-			    android:layout_gravity="center"
-			    app:pv_autostart = "false"
-			    app:pv_circular="false"
-			    app:pv_progressStyle="@style/LinearProgressDrawableStyle"
-			    app:pv_progressMode="indeterminate"/>
-	            
-	    </FrameLayout>
-	    
-	    <FrameLayout 
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp">
-	            
-	        <com.rey.material.widget.ProgressView
-	        	android:id="@+id/progress_pv_linear_colors"
-			    android:layout_width="match_parent"
-			    android:layout_height="4dp"
-			    android:layout_gravity="center"
-			    app:pv_autostart = "false"
-			    app:pv_circular="false"
-			    app:pv_progressStyle="@style/ColorsLinearProgressDrawableStyle"
-			    app:pv_progressMode="indeterminate"/>
-	            
-	    </FrameLayout>
-	    
-	    <FrameLayout 
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp">
-	            
-	        <com.rey.material.widget.ProgressView
-	        	android:id="@+id/progress_pv_linear_determinate"
-			    android:layout_width="match_parent"
-			    android:layout_height="4dp"
-			    android:layout_gravity="center"
-			    app:pv_autostart = "false"
-			    app:pv_circular="false"
-			    app:pv_progressStyle="@style/DeterminateLinearProgressDrawableStyle"
-			    app:pv_progressMode="determinate"/>
-	            
-	    </FrameLayout>
-	    
-	    <FrameLayout 
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp">
-	            
-	        <com.rey.material.widget.ProgressView
-	        	android:id="@+id/progress_pv_linear_query"
-			    android:layout_width="match_parent"
-			    android:layout_height="4dp"
-			    android:layout_gravity="center"
-			    app:pv_autostart = "false"
-			    app:pv_circular="false"
-			    app:pv_progressStyle="@style/QueryLinearProgressDrawableStyle"
-			    app:pv_progressMode="query"/>
-	            
-	    </FrameLayout>
-	    
-	    <FrameLayout 
-	    	android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:padding="16dp">
-	            
-	        <com.rey.material.widget.ProgressView
-	        	android:id="@+id/progress_pv_linear_buffer"
-			    android:layout_width="match_parent"
-			    android:layout_height="4dp"
-			    android:layout_gravity="center"
-			    app:pv_autostart = "false"
-			    app:pv_circular="false"
-			    app:pv_progressStyle="@style/BufferLinearProgressDrawableStyle"
-			    app:pv_progressMode="buffer"/>
-	            
-	    </FrameLayout>
-	        
-	</LinearLayout>
-	    
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:layout_marginTop="20sp"
+            android:id="@+id/chart1"
+            android:layout_width="350sp"
+            android:layout_height="350sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="40sp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="총액 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="식비 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="여가비 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="주거비 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="교통비 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_traffic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="13sp"
+                    android:text="저축비 : "
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"/>
+
+                <TextView
+                    android:id="@+id/confirm_saving"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:textSize="13sp"
+                    android:text="Total"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginBottom="10sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"/>
+
+            </TableRow>
+
+
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
 </ScrollView>
 

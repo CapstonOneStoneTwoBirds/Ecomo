@@ -1,7 +1,6 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping;
+package onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
@@ -28,6 +26,8 @@ import java.util.StringTokenizer;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.MyCustomWidget;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
 
 /**
  * Created by YeomJi on 15. 6. 2..

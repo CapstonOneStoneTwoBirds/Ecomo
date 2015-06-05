@@ -27,11 +27,11 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.CalendarFragment;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentConditionFragment;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.CustomViewPager;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.MainActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.WidgetFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.MainActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
 
 /**
  * Created by YeomJi on 15. 5. 29..
