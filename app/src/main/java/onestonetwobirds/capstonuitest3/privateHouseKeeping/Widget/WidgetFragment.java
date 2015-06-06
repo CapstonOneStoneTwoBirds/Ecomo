@@ -23,7 +23,7 @@ import com.rey.material.widget.SnackBar;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.MainActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 
 public class WidgetFragment extends Fragment  implements View.OnClickListener {
 
@@ -59,7 +59,7 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
         NewWidgetButton = (Button) v.findViewById(R.id.new_widget_btn);
 
 
-        mSnackBar = ((MainActivity)getActivity()).getSnackBar();
+        mSnackBar = ((PrivateMainActivity)getActivity()).getSnackBar();
 
 
         NewWidgetButton.setOnClickListener(this);
@@ -77,6 +77,7 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
                 //Toast.makeText(getActivity().getApplicationContext(), "클릭~!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity().getApplicationContext(), NewWidgetActivity.class);
                 startActivity(intent);
+                break;
         }
     }
 

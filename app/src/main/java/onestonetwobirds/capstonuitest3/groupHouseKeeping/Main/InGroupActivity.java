@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.privateHouseKeeping.Main;
+package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,13 +37,14 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
-import onestonetwobirds.capstonuitest3.groupHouseKeeping.GroupActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFragment;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce.GroupAnnounceFragment;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupCalendarFragment;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Member.GroupMemberFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
 
-public class MainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
+public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
     // 기터브 커밋 ㅎㅎ
 
@@ -60,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
-    private Tab[] mItems = new Tab[]{Tab.CURRENTCONDITION, Tab.CALENDAR, Tab.WIDGET};
+    private Tab[] mItems = new Tab[]{Tab.ANNOUNCE, Tab.CALENDAR, Tab.MEMBER};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
 
     final private static int DIALOG_INSERT = 1;
@@ -70,7 +71,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.private_activity_main);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.main_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.main_fl_drawer);
@@ -149,7 +150,7 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        mToolbarManager.createMenu(R.menu.menu_main_private);
+        mToolbarManager.createMenu(R.menu.menu_main_group);
         return true;
     }
 
@@ -163,13 +164,13 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
     public boolean onOptionsItemSelected(MenuItem item) {       // 툴바 아이콘 눌렀을 때 이벤트
         switch (item.getItemId()) {
             case R.id.tb_group:
-                Intent intent = new Intent(getApplicationContext(), GroupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GroupMainActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fade, R.anim.hold);
                 break;
             case R.id.tb_new:                                 // 새로 고침
-                //mToolbarManager.setCurrentGroup(0);
+                mToolbarManager.setCurrentGroup(0);
                 break;
         }
         return true;
@@ -186,12 +187,14 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
 
-        PRIVATEINFO("개인 정보 수정"),
+        PRIVATEINFO("개인정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
-        CURRENTCONDITION("CURRENT STATE"),
+        ANNOUNCE("ANNOUNCE"),
         CALENDAR("CALENDAR"),
-        WIDGET("WIDGET");
+        MEMBER("MEMBER");
+
+
 
         private final String name;
 
@@ -209,13 +212,14 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
 
     }
 
+
     class DrawerAdapter extends BaseAdapter implements View.OnClickListener {
 
         private Tab mSelectedTab;
 
-        public void setSelected(Tab tab) {                  // 탭 or 우측의 리스트가 눌린 위치로 값을 설정한다.
-            if (tab != mSelectedTab) {
-                mSelectedTab = tab;
+        public void setSelected(Tab tab2) {                  // 탭 or 우측의 리스트가 눌린 위치로 값을 설정한다.
+            if (tab2 != mSelectedTab) {
+                mSelectedTab = tab2;
                 notifyDataSetInvalidated();
             }
         }
@@ -243,30 +247,61 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
             if (v == null) {        // 클릭된 값이 없을 경우
-                v = LayoutInflater.from(MainActivity.this).inflate(R.layout.row_drawer, null);
+                v = LayoutInflater.from(InGroupActivity.this).inflate(R.layout.row_drawer, null);
                 v.setOnClickListener(this);
             }
 
             v.setTag(position);
+
             Tab tab = (Tab) getItem(position);
+
             ((TextView) v).setText(tab.toString());
 
             if (tab == mSelectedTab) {           // 한개의 내용만 tab과 일치하여 if에 들어가고 나머지는 else (클릭된 리스트 내용)
-                v.setBackgroundColor(ThemeUtil.colorPrimary(MainActivity.this, 0));
+                v.setBackgroundColor(ThemeUtil.colorPrimary(InGroupActivity.this, 0));
                 ((TextView) v).setTextColor(0xFFFFFFFF);
             } else {
                 v.setBackgroundResource(0);
                 ((TextView) v).setTextColor(0xFF000000);
             }
 
+
             return v;
         }
 
+
         @Override
-        public void onClick(View v) {
+        public void onClick(View v) { // 텝이 클릭되었을 때
             int position = (Integer) v.getTag();
-            vp.setCurrentItem(position);
-            dl_navigator.closeDrawer(fl_drawer);
+            switch (position) {
+                case 0:
+                    Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.rightin, R.anim.rightout);
+                    break;
+                case 1:
+                    Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                        @Override
+                        protected void onBuildDone(Dialog dialog) {
+                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        }
+
+                        @Override // 취소 or 뒤로가기 누르면 다시 원이 회전하도록 만드셈
+                        public void onNegativeActionClicked(DialogFragment fragment) {
+                            super.onNegativeActionClicked(fragment);
+                        }
+                    };
+
+                    ((SimpleDialog.Builder)builder).message("Produce by Ecomo Company").negativeAction("OK");
+
+                    FragmentManager fm = getSupportFragmentManager();
+                    DialogFragment diaFM = DialogFragment.newInstance(builder);
+                    diaFM.show(fm, null);
+                    break;
+                case 2:
+                    break;
+            }
         }
     }
 
@@ -301,12 +336,12 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                 ArrayList<Fragment> mActive = (ArrayList<Fragment>) sActiveField.get(fm); // 프레그먼트들을 arraylist에 넣음
                 if (mActive != null) {
                     for (Fragment fragment : mActive) {
-                        if (fragment instanceof CurrentConditionFragment)
-                            setFragment(Tab.CURRENTCONDITION, fragment);
-                        else if (fragment instanceof CalendarFragment)
+                        if (fragment instanceof GroupAnnounceFragment)
+                            setFragment(Tab.ANNOUNCE, fragment);
+                        else if (fragment instanceof GroupCalendarFragment)
                             setFragment(Tab.CALENDAR, fragment);
-                        else if (fragment instanceof WidgetFragment)
-                            setFragment(Tab.WIDGET, fragment);
+                        else if (fragment instanceof GroupMemberFragment)
+                            setFragment(Tab.MEMBER, fragment);
                     }
                 }
             } catch (Exception e) {
@@ -321,25 +356,33 @@ public class MainActivity extends ActionBarActivity implements ToolbarManager.On
                     break;
                 }
         }
+/*
+        @Override
+        public Fragment getItem(int position) {
+
+            return mFragments[position];
+        }
+*/
 
         @Override
         public Fragment getItem(int position) {
             if (mFragments[position] == null) {
                 switch (mTabs[position]) {
-                    case CURRENTCONDITION:
-                        mFragments[position] = CurrentConditionFragment.newInstance();
+                    case ANNOUNCE:
+                        mFragments[position] = GroupAnnounceFragment.newInstance();
                         break;
                     case CALENDAR:
-                        mFragments[position] = CalendarFragment.newInstance();
+                        mFragments[position] = GroupCalendarFragment.newInstance();
                         break;
-                    case WIDGET:
-                        mFragments[position] = WidgetFragment.newInstance();
+                    case MEMBER:
+                        mFragments[position] = GroupMemberFragment.newInstance();
                         break;
                 }
             }
 
             return mFragments[position];
         }
+
 
         @Override
         public CharSequence getPageTitle(int position) {
