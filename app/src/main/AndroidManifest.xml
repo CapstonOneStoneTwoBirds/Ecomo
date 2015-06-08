@@ -80,7 +80,7 @@
             android:label="위젯 입력" >
         </activity>
         <activity
-            android:name=".privateHouseKeeping.ModifyInformation.ModifyInfoActivity"
+            android:name=".user.MyInformation.MyInfoActivity"
             android:label="개인정보 수정" >
         </activity>
         <activity

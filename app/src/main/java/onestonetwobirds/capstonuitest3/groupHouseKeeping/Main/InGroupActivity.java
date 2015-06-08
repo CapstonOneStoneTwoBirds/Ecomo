@@ -44,7 +44,6 @@ import onestonetwobirds.capstonuitest3.groupHouseKeeping.Member.GroupMemberFragm
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
 
 public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -191,7 +190,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
 
-        PRIVATEINFO("개인정보 수정"),
+        PRIVATEINFO("개인 정보"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
         ANNOUNCE("ANNOUNCE"),

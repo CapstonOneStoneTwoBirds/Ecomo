@@ -24,17 +24,15 @@ import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.app.ToolbarManager;
 import com.rey.material.util.ThemeUtil;
-import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
-import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.InGroupActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
+import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
 
 /**
  * Created by YeomJi on 15. 6. 8..
@@ -142,7 +140,7 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
         INSERTCONTENT("INSERTCONTENT"),
-        PRIVATEINFO("개인 정보 수정"),
+        PRIVATEINFO("개인 정보"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃");
         private final String name;
@@ -219,7 +217,7 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
             int position = (Integer) v.getTag();
             switch (position) {
                 case 0:
-                    Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     break;

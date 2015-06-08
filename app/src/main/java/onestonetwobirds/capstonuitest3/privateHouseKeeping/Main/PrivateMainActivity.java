@@ -46,9 +46,9 @@ import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.GroupMainActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.OCR.abbyy.ocrsdk.android.OCRResultsActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
+import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
 
 public class PrivateMainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -192,7 +192,7 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
 
-        PRIVATEINFO("개인정보 수정"),
+        PRIVATEINFO("개인정보"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃"),
         CURRENTCONDITION("CURRENT STATE"),
@@ -280,7 +280,7 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
             int position = (Integer) v.getTag();
             switch (position) {
                 case 0:
-                    Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     break;

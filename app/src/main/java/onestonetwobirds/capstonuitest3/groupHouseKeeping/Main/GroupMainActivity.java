@@ -31,10 +31,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
-import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupInsertContentFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
+import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
 
 /**
  * Created by YeomJi on 15. 5. 29..
@@ -237,7 +236,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
             int position = (Integer) v.getTag();
             switch (position) {
                 case 0:
-                    Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     break;

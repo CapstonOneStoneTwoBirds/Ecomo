@@ -11,12 +11,12 @@ import onestonetwobirds.capstonuitest3.R;
 
 public class StartActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.start_page_main);
-        Button button1 = (Button) findViewById(R.id.button_bt_start);
-        Button button2 = (Button) findViewById(R.id.button_bt_main_sign_in);
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.start_page_main);
+                Button button1 = (Button) findViewById(R.id.button_bt_start);
+                Button button2 = (Button) findViewById(R.id.button_bt_main_sign_in);
         Button button3 = (Button) findViewById(R.id.button_bt_main_find_pwd);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
