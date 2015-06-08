@@ -285,6 +285,7 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     break;
                 case 1:
+                    /*  제작자 정보
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
 
                         @Override
@@ -303,6 +304,37 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                     FragmentManager fm = getSupportFragmentManager();
                     DialogFragment diaFM = DialogFragment.newInstance(builder);
                     diaFM.show(fm, null);
+                    */
+
+                    /*  그룹 가계부 멤버 정보
+                    Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                        @Override
+                        protected void onBuildDone(Dialog dialog) {
+                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        }
+
+                        @Override
+                        public void onPositiveActionClicked(DialogFragment fragment) {
+
+                            onResume();
+                            super.onPositiveActionClicked(fragment);
+                        }
+
+                        @Override
+                        public void onNegativeActionClicked(DialogFragment fragment) {
+                            super.onNegativeActionClicked(fragment);
+                        }
+                    };
+
+                    builder.title("멤버 정보")
+                            .positiveAction("OK")
+                            .contentView(R.layout.member_confirm_dialog);
+
+                    FragmentManager fm = getSupportFragmentManager();
+                    DialogFragment diaFM = DialogFragment.newInstance(builder);
+                    diaFM.show(fm, null);
+                    */
                     break;
                 case 2:
                     break;
