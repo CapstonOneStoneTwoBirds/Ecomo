@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -159,6 +160,8 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                 final String account[] = new String[recordCount];
                 final int money[] = new int[recordCount];
 
+                //String year[], month[], AMPM[], time[], minute[], account[], money[];
+
                 //cursor.moveToFirst();
                 System.out.println("TestCheck : " + cursor.getCount());
 
@@ -210,7 +213,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                     }
                 });
 
-                */
+ */
 
                 break;
         }

@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideOverlay">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="member"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <com.rey.material.widget.Button
+                android:id="@+id/new_member_btn"
+                style="@style/RaiseColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bt_height"
+                android:layout_weight="0.4"
+                android:text="NEW Member"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:textColor="#FFFFFFFF"
+                android:layout_margin="20sp"
+                app:rd_delayClick="afterRelease" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내 프로필"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <ListView
+            android:id="@+id/group_member_me"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp">
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="멤버"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+
+        <ListView
+            android:id="@+id/group_member_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp" >
+        </ListView>
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+    

@@ -33,45 +33,61 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:layout_gravity="center"
             android:layout_marginTop="10sp"
             android:layout_marginBottom="20sp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <TableRow
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="분류"/>
+                android:gravity="center" >
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="한계 금액"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#00bfff"
+                    android:padding="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="15sp"
+                    android:layout_marginRight="3sp"
+                    android:text="분류"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="현재 금액"/>
-        </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#afeeee"
+                    android:padding="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="3sp"
+                    android:text="한계 금액"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:background="#afe55f"
+                    android:padding="5sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginBottom="5sp"
+                    android:layout_marginLeft="3sp"
+                    android:layout_marginRight="15sp"
+                    android:text="현재 금액"/>
+            </TableRow>
+        </TableLayout>
 
         <ListView
             android:id="@+id/WidgetList"

@@ -1,6 +1,8 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar;
 
 import android.annotation.TargetApi;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -28,6 +30,7 @@ import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.CalendarDay;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.OnDateChangedListener;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.InGroupActivity;
 
 /**
  * Created by YeomJi on 15. 6. 7..
@@ -81,6 +84,8 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
         listViewInsert = (ListView) convertView.findViewById(R.id.insertList);
         resultArr = new ArrayList<String>();
 
+        ((InGroupActivity)getActivity()).getSnackBar();
+
 
         return v;
     }
@@ -105,6 +110,16 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
                 adapterInsert = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,resultArr);
                 if(convertView.getParent() != null) ((ViewGroup) convertView.getParent()).removeView(convertView);
                 dialog.setContentView(convertView);
+
+                /*
+                android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                //int c = contain.getId();
+                //System.out.println("OK : "+c);
+                fragmentTransaction.replace(2131427508, null);
+                fragmentTransaction.commit();
+                */
+
 
             }
 

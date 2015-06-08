@@ -1,6 +1,7 @@
 package onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
     SnackBar mSnackBar;
 
+    Bundle bundle;
+
     private final String tag = "InsertActivity";
 
     @Override
@@ -64,6 +67,9 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         InsertSpinner = (Spinner) v.findViewById(R.id.spinner_insert);
         InsertOK = (Button) v.findViewById(R.id.insert_OK);
         InsertCancel = (Button) v.findViewById(R.id.insert_Cancel);
+
+        Intent intent = getActivity().getIntent();
+        bundle = intent.getExtras();
 
 
         final String[] items = new String[5];
@@ -143,6 +149,32 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         });
         InsertOK.setOnClickListener(this);
         InsertCancel.setOnClickListener(this);
+
+        if (!(bundle == null)) {
+            if (bundle.containsKey("year")) year = bundle.getString("year");
+            else year = "0000";
+            if (bundle.containsKey("month")) month = bundle.getString("month");
+            else month = "00";
+            if (bundle.containsKey("date")) date = bundle.getString("date");
+            else date = "00";
+            if (bundle.containsKey("store")) InsertTitle.setText(bundle.getString("store"));
+            if (bundle.containsKey("cost")) InsertMoney.setText(bundle.getString("cost"));
+            if (bundle.containsKey("product")) {
+                switch (bundle.getString("product")) {
+                    case "의류": InsertSpinner.setSelection(1); break;
+                    case "주거": InsertSpinner.setSelection(2); break;
+                    case "여가": InsertSpinner.setSelection(3); break;
+                    case "교통": InsertSpinner.setSelection(4); break;
+                    case "저축": InsertSpinner.setSelection(5); break;
+                    case "기타": InsertSpinner.setSelection(5); break;
+                    default: break;
+                }
+            }
+            if (bundle.containsKey("content")) InsertContent.setText(bundle.getString("content"));
+        }
+
+        String setDate = year+". "+month+". "+date+". ";
+        IsertTextDay.setText(setDate);
 
         mSnackBar = ((InsertActivity)getActivity()).getSnackBar();
 

@@ -1,8 +1,10 @@
-package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
+package onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,15 +27,19 @@ import com.rey.material.util.ThemeUtil;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.InGroupActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
 
 /**
- * Created by YeomJi on 15. 5. 29..
+ * Created by YeomJi on 15. 6. 8..
  */
-public class GroupMainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
+public class GroupInsertContentActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
     private DrawerLayout dl_navigator;
     private FrameLayout fl_drawer;
@@ -41,18 +47,20 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     private CustomViewPager vp;
 
     private DrawerAdapter mDrawerAdapter;
+    private PagerAdapter mPagerAdapter;
 
     private Toolbar mToolbar;
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
+    private Tab[] mItems = new Tab[]{Tab.INSERTCONTENT};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.group_activity_main);
+        setContentView(R.layout.group_insert_content_main);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.group_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.group_fl_drawer);
@@ -62,22 +70,6 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         mSnackBar = (SnackBar) findViewById(R.id.group_sn);
 
         FloatingActionButton InsertBtn = (FloatingActionButton)findViewById(R.id.new_group_btn);
-
-        InsertBtn.setOnClickListener(new View.OnClickListener() { // 우선 원 버튼 눌렀을 때 그룹 액티비티 가는걸로 대체
-            @Override
-            public void onClick(View v) {
-                if (v instanceof FloatingActionButton) {
-                    FloatingActionButton bt = (FloatingActionButton) v;
-                    bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
-                }
-
-                Intent intent = new Intent(getApplicationContext(), InGroupActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.rightin, R.anim.rightout);
-                finish();
-
-            }
-        });
 
 
         mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
@@ -103,12 +95,15 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         });
         mToolbarManager.registerOnToolbarGroupChangedListener(this);
 
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
+        vp.setAdapter(mPagerAdapter);
+        //tpi.setViewPager(vp);
         mDrawerAdapter = new DrawerAdapter();
         lv_drawer.setAdapter(mDrawerAdapter);                       // DrawerLayout 보여줘
 
 
         mDrawerAdapter.setSelected(Tab.PRIVATEINFO);           // 디폴트 값 progress로 설정
-        vp.setCurrentItem(0);
+
     }
 
     @Override
@@ -149,6 +144,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     }
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
+        INSERTCONTENT("INSERTCONTENT"),
         PRIVATEINFO("개인 정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃");
@@ -202,7 +198,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         public View getView(int position, View convertView, ViewGroup parent) {
             View v = convertView;
             if (v == null) {        // 클릭된 값이 없을 경우
-                v = LayoutInflater.from(GroupMainActivity.this).inflate(R.layout.row_drawer, null);
+                v = LayoutInflater.from(GroupInsertContentActivity.this).inflate(R.layout.row_drawer, null);
                 v.setOnClickListener(this);
             }
 
@@ -211,7 +207,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
             ((TextView) v).setText(tab.toString());
 
             if (tab == mSelectedTab) {           // 한개의 내용만 tab과 일치하여 if에 들어가고 나머지는 else (클릭된 리스트 내용)
-                v.setBackgroundColor(ThemeUtil.colorPrimary(GroupMainActivity.this, 0));
+                v.setBackgroundColor(ThemeUtil.colorPrimary(GroupInsertContentActivity.this, 0));
                 ((TextView) v).setTextColor(0xFFFFFFFF);
             } else {
                 v.setBackgroundResource(0);
@@ -253,6 +249,80 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                 case 2:
                     break;
             }
+        }
+    }
+
+
+    private static class PagerAdapter extends FragmentStatePagerAdapter {
+
+        Fragment[] mFragments;
+        Tab[] mTabs;
+
+        private static final Field sActiveField;
+
+        static {
+            Field f = null;
+            try {                           // 처음 실행 할 떼
+                Class<?> c = Class.forName("android.support.v4.app.FragmentManagerImpl");
+                f = c.getDeclaredField("mActive");
+                f.setAccessible(true);
+                System.out.println("PagerAdapter Class");
+            } catch (Exception e) {
+            }
+
+            sActiveField = f;
+        }
+
+
+        public PagerAdapter(FragmentManager fm, Tab[] tabs) {   // 각각의 프레그먼트들을 화면에 뿌려줌
+            super(fm);
+            mTabs = tabs;
+            mFragments = new Fragment[mTabs.length];
+
+
+            //dirty way to get reference of cached fragment
+            try {
+                ArrayList<Fragment> mActive = (ArrayList<Fragment>) sActiveField.get(fm); // 프레그먼트들을 arraylist에 넣음
+                if (mActive != null) {
+                    for (Fragment fragment : mActive) {
+                        if (fragment instanceof GroupInsertContentFragment)
+                            setFragment(Tab.INSERTCONTENT, fragment);
+
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        private void setFragment(Tab tab, Fragment f) {
+            for (int i = 0; i < mTabs.length; i++)
+                if (mTabs[i] == tab) {
+                    mFragments[i] = f;
+                    System.out.println("PagerAdapter setFragment for if");
+                    break;
+                }
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if (mFragments[position] == null) {
+                switch (mTabs[position]) {
+                    case INSERTCONTENT:
+                        mFragments[position] = GroupInsertContentFragment.newInstance();
+                        break;
+                }
+            }
+            return mFragments[position];
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabs[position].toString().toUpperCase();
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.length;
         }
     }
 }

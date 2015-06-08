@@ -39,9 +39,11 @@ import java.util.ArrayList;
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce.GroupAnnounceFragment;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupCalendarFragment;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupInsertContentActivity;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Member.GroupMemberFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
 
 public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
@@ -71,7 +73,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.private_activity_main);
+        setContentView(R.layout.in_group_main);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.main_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.main_fl_drawer);
@@ -130,7 +132,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
             @Override
             public void onPageSelected(int position) {
-                mDrawerAdapter.setSelected(mItemsS[position]);
+                mDrawerAdapter.setSelected(mItems[position]);
                 mSnackBar.dismiss();
             }
 
@@ -163,14 +165,14 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {       // 툴바 아이콘 눌렀을 때 이벤트
         switch (item.getItemId()) {
-            case R.id.tb_group:
-                Intent intent = new Intent(getApplicationContext(), GroupMainActivity.class);
+            case R.id.tb_private:
+                Intent intent = new Intent(getApplicationContext(), PrivateMainActivity.class);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.fade, R.anim.hold);
                 break;
             case R.id.tb_new:                                 // 새로 고침
-                mToolbarManager.setCurrentGroup(0);
+                //mToolbarManager.setCurrentGroup(0);
                 break;
         }
         return true;
@@ -184,6 +186,8 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
     public SnackBar getSnackBar() {
         return mSnackBar;
     }
+
+
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
 
@@ -275,9 +279,13 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
             int position = (Integer) v.getTag();
             switch (position) {
                 case 0:
+                    /*
                     Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
+                    */
+                    Intent intent = new Intent(getApplicationContext(), GroupInsertContentActivity.class);
+                    startActivity(intent);
                     break;
                 case 1:
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
@@ -325,6 +333,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
             sActiveField = f;
         }
 
+
         public PagerAdapter(FragmentManager fm, Tab[] tabs) {   // 각각의 프레그먼트들을 화면에 뿌려줌
             super(fm);
             mTabs = tabs;
@@ -342,6 +351,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                             setFragment(Tab.CALENDAR, fragment);
                         else if (fragment instanceof GroupMemberFragment)
                             setFragment(Tab.MEMBER, fragment);
+
                     }
                 }
             } catch (Exception e) {
@@ -356,13 +366,6 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                     break;
                 }
         }
-/*
-        @Override
-        public Fragment getItem(int position) {
-
-            return mFragments[position];
-        }
-*/
 
         @Override
         public Fragment getItem(int position) {
@@ -459,6 +462,8 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
                 break;
         }
+
     }
+
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.rey.material.widget.EditText
+        style="@style/Material.Widget.EditText"
+        android:id="@+id/new_announce_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:et_supportMode="charCounter"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:textColorHint="@color/abc_secondary_text_material_dark"
+        android:hint="추가하고 싶은 USER 입력"
+        android:textDirection="locale"
+        android:paddingTop="8dp"
+        android:inputType="textPassword"/>
+
+</LinearLayout>

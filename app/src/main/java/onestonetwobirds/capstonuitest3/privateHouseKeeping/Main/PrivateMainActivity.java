@@ -1,8 +1,12 @@
 package onestonetwobirds.capstonuitest3.privateHouseKeeping.Main;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -33,6 +37,7 @@ import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -42,11 +47,11 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFrag
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.OCR.abbyy.ocrsdk.android.OCRResultsActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
 
 public class PrivateMainActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
-    // 기터브 커밋 ㅎㅎ
 
     private DrawerLayout dl_navigator;      // 우측에 리스트 화면 뜨는 거
     private FrameLayout fl_drawer;          // 프레임 레이아웃
@@ -436,7 +441,11 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                 InsertOCRBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "OCR", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                        Uri fileUri = getOutputMediaFileUri(); // create a file to save the image
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+                        startActivityForResult(intent, 0);
                     }
                 });
                 InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {
@@ -461,4 +470,45 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
         }
     }
 
+    // 여기 아래부터는 OCR을 위한 method
+
+    private static Uri getOutputMediaFileUri(){
+        return Uri.fromFile(getOutputMediaFile());
+    }
+
+    private static File getOutputMediaFile(){
+
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "ABBYY Cloud OCR SDK Demo App");
+        if (! mediaStorageDir.exists()){
+            if (! mediaStorageDir.mkdirs()){
+                return null;
+            }
+        }
+
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator + "image.jpg" );
+
+        return mediaFile;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != Activity.RESULT_OK)
+            return;
+
+        String imageFilePath = null;
+
+        switch (requestCode) {
+            case 0:
+                imageFilePath = getOutputMediaFileUri().getPath();
+            break;
+        }
+        deleteFile("result.txt");
+
+        Intent results = new Intent( this, OCRResultsActivity.class);
+        results.putExtra("IMAGE_PATH", imageFilePath);
+        results.putExtra("RESULT_PATH", "result.txt");
+        startActivity(results);
+    }
 }

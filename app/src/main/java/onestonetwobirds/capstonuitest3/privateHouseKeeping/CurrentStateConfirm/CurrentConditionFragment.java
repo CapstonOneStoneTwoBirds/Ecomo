@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.content.ContextWrapper;
+import android.widget.Toast;
 
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -25,11 +26,14 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.rey.material.widget.SnackBar;
 
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 
 public class CurrentConditionFragment extends Fragment implements OnChartValueSelectedListener {
 
@@ -37,6 +41,8 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
 
     private PieChart mChart;
     private Typeface tf;
+
+    SnackBar mSnackBar;
 
 
     protected String[] mParties = new String[] {"식비", "여가비", "주거비", "교통비", "저축비"};
@@ -58,75 +64,87 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
         CTraffic = (TextView) v.findViewById(R.id.confirm_traffic);
         CSaving = (TextView) v.findViewById(R.id.confirm_saving);
 
+        mSnackBar = ((PrivateMainActivity)getActivity()).getSnackBar();
+
         mChart = (PieChart) v.findViewById(R.id.chart1);
 
-        MyDatabase myDB = new MyDatabase(getActivity());
-        final SQLiteDatabase db = myDB.getWritableDatabase();
+        try {
 
-        String sql = "SELECT * FROM moneybook";
-        Cursor cursor = db.rawQuery(sql, null);
+            MyDatabase myDB = new MyDatabase(getActivity());
+            final SQLiteDatabase db = myDB.getWritableDatabase();
 
-        int totalCol = cursor.getColumnIndex("total");
-        int foodCol = cursor.getColumnIndex("food");
-        int playCol = cursor.getColumnIndex("play");
-        int houseCol = cursor.getColumnIndex("house");
-        int trafficCol = cursor.getColumnIndex("traffic");
-        int savingCol = cursor.getColumnIndex("saving");
+            String sql = "SELECT * FROM moneybook";
+            Cursor cursor = db.rawQuery(sql, null);
+
+            int totalCol = cursor.getColumnIndex("total");
+            int foodCol = cursor.getColumnIndex("food");
+            int playCol = cursor.getColumnIndex("play");
+            int houseCol = cursor.getColumnIndex("house");
+            int trafficCol = cursor.getColumnIndex("traffic");
+            int savingCol = cursor.getColumnIndex("saving");
 
 
-        while (cursor.moveToNext()) {
+            while (cursor.moveToNext()) {
 
-            CTotal.setText(cursor.getString(totalCol));
-            CFood.setText(cursor.getString(foodCol));
-            CPlay.setText(cursor.getString(playCol));
-            CHouse.setText(cursor.getString(houseCol));
-            CTraffic.setText(cursor.getString(trafficCol));
-            CSaving.setText(cursor.getString(savingCol));
+                CTotal.setText(cursor.getString(totalCol));
+                CFood.setText(cursor.getString(foodCol));
+                CPlay.setText(cursor.getString(playCol));
+                CHouse.setText(cursor.getString(houseCol));
+                CTraffic.setText(cursor.getString(trafficCol));
+                CSaving.setText(cursor.getString(savingCol));
 
+            }
+
+            cursor.close();
+            db.close();
+
+            mChart.setUsePercentValues(true); // 퍼센트 나타내기
+            mChart.setDescription("");
+
+            mChart.setDragDecelerationFrictionCoef(0.95f);
+
+            //tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
+
+            //mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf"));
+            mChart.setDrawHoleEnabled(true); // 원 가운데 구멍 나타내기
+            mChart.setHoleColorTransparent(true);
+
+            mChart.setTransparentCircleColor(Color.WHITE);
+
+            mChart.setHoleRadius(58f);
+            mChart.setTransparentCircleRadius(61f);
+
+            mChart.setDrawCenterText(true); // 가운데 글자 나타내기
+
+            mChart.setRotationAngle(0);
+            // enable rotation of the chart by touch
+            mChart.setRotationEnabled(true); // 원이 회전할수 있게 하기
+
+            // mChart.setUnit(" €");
+            // mChart.setDrawUnitsInChart(true);
+
+            // add a selection listener
+            mChart.setOnChartValueSelectedListener(this);
+
+
+            mChart.setCenterText("총 소비금액\n" + CTotal.getText() + "원"); // 차트 가운데 총액 적는거
+
+            mChart.animateXY(1800, 1800);
+
+            setData(4, 100);
+
+            Legend l = mChart.getLegend();
+            //l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART); --> 범례인듯
+            l.setXEntrySpace(7f);
+            l.setYEntrySpace(5f);
+
+            onResume();
+
+        } catch (SQLiteAssetHelper.SQLiteAssetException e) {
+
+            mSnackBar.applyStyle(R.style.Material_Widget_SnackBar_Tablet_MultiLine).
+                    text("입력된 가계부가 없습니다.").duration(3000).show();
         }
-
-        cursor.close();
-        db.close();
-
-        mChart.setUsePercentValues(true); // 퍼센트 나타내기
-        mChart.setDescription("");
-
-        mChart.setDragDecelerationFrictionCoef(0.95f);
-
-        //tf = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
-
-        //mChart.setCenterTextTypeface(Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf"));
-        mChart.setDrawHoleEnabled(true); // 원 가운데 구멍 나타내기
-        mChart.setHoleColorTransparent(true);
-
-        mChart.setTransparentCircleColor(Color.WHITE);
-
-        mChart.setHoleRadius(58f);
-        mChart.setTransparentCircleRadius(61f);
-
-        mChart.setDrawCenterText(true); // 가운데 글자 나타내기
-
-        mChart.setRotationAngle(0);
-        // enable rotation of the chart by touch
-        mChart.setRotationEnabled(true); // 원이 회전할수 있게 하기
-
-        // mChart.setUnit(" €");
-        // mChart.setDrawUnitsInChart(true);
-
-        // add a selection listener
-        mChart.setOnChartValueSelectedListener(this);
-
-
-        mChart.setCenterText("총 소비금액\n"+CTotal.getText()+"원"); // 차트 가운데 총액 적는거
-
-        mChart.animateXY(1800, 1800);
-
-        setData(4, 100);
-
-        Legend l = mChart.getLegend();
-        //l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART); --> 범례인듯
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(5f);
 
 
 

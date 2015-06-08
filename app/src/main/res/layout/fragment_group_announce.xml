@@ -1,10 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideOverlay">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="announce"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <com.rey.material.widget.Button
+                android:id="@+id/new_announce_btn"
+                style="@style/RaiseColorButtonRippleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bt_height"
+                android:layout_weight="0.4"
+                android:text="NEW Announce"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+                android:textColor="#FFFFFFFF"
+                android:layout_margin="20sp"
+                app:rd_delayClick="afterRelease" />
+
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="20sp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" >
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="#00bfff"
+                android:padding="5sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="3sp"
+                android:text="제목"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:background="#afeeee"
+                android:padding="5sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="3sp"
+                android:text="장소"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="2"
+                android:background="#afe55f"
+                android:padding="5sp"
+                android:layout_marginTop="10sp"
+                android:layout_marginBottom="5sp"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="15sp"
+                android:text="내용"/>
+            </TableRow>
+        </TableLayout>
+
+
+        <ListView
+            android:id="@+id/group_announce_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+    

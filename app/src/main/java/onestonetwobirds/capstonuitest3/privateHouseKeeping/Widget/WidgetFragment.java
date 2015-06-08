@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
@@ -25,7 +26,7 @@ import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 
-public class WidgetFragment extends Fragment  implements View.OnClickListener {
+public class WidgetFragment extends Fragment implements View.OnClickListener {
 
     Button NewWidgetButton;
 
@@ -59,7 +60,7 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
         NewWidgetButton = (Button) v.findViewById(R.id.new_widget_btn);
 
 
-        mSnackBar = ((PrivateMainActivity)getActivity()).getSnackBar();
+        mSnackBar = ((PrivateMainActivity) getActivity()).getSnackBar();
 
 
         NewWidgetButton.setOnClickListener(this);
@@ -74,7 +75,6 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.new_widget_btn:
-                //Toast.makeText(getActivity().getApplicationContext(), "클릭~!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getActivity().getApplicationContext(), NewWidgetActivity.class);
                 startActivity(intent);
                 break;
@@ -90,48 +90,54 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 
-        MyDatabase myDB = new MyDatabase(getActivity());
-        final SQLiteDatabase db = myDB.getWritableDatabase();
+        try {
 
-        ListView listView = (ListView) v.findViewById(R.id.WidgetList);
-
-        String sql = "SELECT rowid _id, * FROM checkamount";
-        cursor = db.rawQuery(sql,null);
+            MyDatabase myDB = new MyDatabase(getActivity());
+            final SQLiteDatabase db = myDB.getWritableDatabase();
 
 
-        if(cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            String[] from = new String[]{"title", "goal", "acc"};
-            int[] to = new int[]{ R.id.lf_tv_title, R.id.lf_tv_goal, R.id.lf_tv_acc};
-            final SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                    listView.getContext(), R.layout.widget_list, cursor, from, to);
+            ListView listView = (ListView) v.findViewById(R.id.WidgetList);
 
-            listView.setAdapter(adapter);
-        } else mSnackBar.applyStyle(R.style.SnackBarSingleLine).text("등록된 내용이 없습니다.").duration(2000).show();
+            String sql = "SELECT rowid _id, * FROM checkamount";
+            cursor = db.rawQuery(sql, null);
 
-        db.close();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position,
-                                    long id) {
+            if (cursor.getCount() != 0) {
+                cursor.moveToFirst();
+                String[] from = new String[]{"title", "goal", "acc"};
+                int[] to = new int[]{R.id.lf_tv_title, R.id.lf_tv_goal, R.id.lf_tv_acc};
+                final SimpleCursorAdapter adapter = new SimpleCursorAdapter(
+                        listView.getContext(), R.layout.widget_list, cursor, from, to);
+
+                listView.setAdapter(adapter);
+            } else
+                mSnackBar.applyStyle(R.style.SnackBarSingleLine).text("등록된 내용이 없습니다.").duration(2000).show();
+
+            db.close();
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View v, int position,
+                                        long id) {
 
                 /*
                 if (id != 0)
                     Toast.makeText(getActivity().getApplicationContext(), (int) id + "", Toast.LENGTH_LONG).show();
                 else Toast.makeText(getActivity().getApplicationContext(), "No id", Toast.LENGTH_LONG).show();
                 */
-                checkID = (int) id;
-                DialogSimple();
+                    checkID = (int) id;
+                    DialogSimple();
 
-            }
-        });
+                }
+            });
+        } catch (SQLiteAssetHelper.SQLiteAssetException e) {
+        }
 
     }
 
-    private void DialogSimple(){
+    private void DialogSimple() {
 
-        Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight){
+        Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight) {
 
             @Override
             protected void onBuildDone(Dialog dialog) {
@@ -165,7 +171,7 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
                 super.onPositiveActionClicked(fragment);
 
                 db2.execSQL("UPDATE checkamount SET isWidget = 0 ;");
-                db2.execSQL("UPDATE checkamount SET isWidget = 1 WHERE title = '"+title+"';");
+                db2.execSQL("UPDATE checkamount SET isWidget = 1 WHERE title = '" + title + "';");
                 getContent(title, goal, acc);
             }
 
@@ -179,7 +185,7 @@ public class WidgetFragment extends Fragment  implements View.OnClickListener {
             }
         };
 
-        ((SimpleDialog.Builder)builder).title("새로운 Widget 추가").positiveAction("SELECT").negativeAction("DELETE");
+        ((SimpleDialog.Builder) builder).title("새로운 Widget 추가").positiveAction("SELECT").negativeAction("DELETE");
 
         FragmentManager fm = getFragmentManager();
         DialogFragment diaFM = DialogFragment.newInstance(builder);
