@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/maron1">
+    android:background="@drawable/maron1"
+    >
 
     <TextView
     android:layout_width="wrap_content"
@@ -22,10 +23,10 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="45sp"
-        android:id="@+id/input_id_sign_in"
+        android:id="@+id/email_sign_in"
         android:inputType="text"
         android:alpha="0.5"
-        android:hint="아이디를 입력해주세요"
+        android:hint="E-mail을 입력해주세요"
         android:layout_margin="10sp"
         android:textColorHint="#ffffff"
         android:gravity="center"
@@ -34,7 +35,7 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="45sp"
-        android:id="@+id/input_pwd_sign_in"
+        android:id="@+id/pwd1_sign_in"
         android:inputType="textPassword"
         android:alpha="0.5"
         android:hint="password를 입력해주세요"
@@ -46,10 +47,10 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="45sp"
-        android:id="@+id/input_name_sign_in"
+        android:id="@+id/pwd2_sign_in"
         android:inputType="text"
         android:alpha="0.5"
-        android:hint="이름을 입력해주세요"
+        android:hint="password를 입력해주세요"
         android:layout_margin="10sp"
         android:textColorHint="#ffffff"
         android:gravity="center"
@@ -58,10 +59,10 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="45sp"
-        android:id="@+id/input_email_sign_in"
+        android:id="@+id/name_sign_in"
         android:inputType="textEmailAddress"
         android:alpha="0.5"
-        android:hint="E-mail을 입력해주세요"
+        android:hint="이름을 입력해주세요"
         android:layout_margin="10sp"
         android:textColorHint="#ffffff"
         android:gravity="center"
@@ -69,7 +70,7 @@
     <EditText
         android:layout_width="300sp"
         android:layout_height="45sp"
-        android:id="@+id/input_phone_sign_in"
+        android:id="@+id/phone_sign_in"
         android:inputType="textEmailAddress"
         android:alpha="0.5"
         android:hint="핸드폰 번호를 입력해주세요"
@@ -80,7 +81,7 @@
 
     <com.rey.material.widget.Button
         style="@style/FlatButtonRippleStyle"
-        android:id="@+id/button_bt_sign_in"
+        android:id="@+id/bt_sign_in"
         android:layout_width="120sp"
         android:layout_height="@dimen/bt_height"
         android:layout_marginTop="20dp"

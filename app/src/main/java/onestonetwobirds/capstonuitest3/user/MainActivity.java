@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
                 finish();
 
             }
-        }, 1500); //1.5초뒤에 다른 엑티비티로...
+        }, 2500); //1.5초뒤에 다른 엑티비티로...
     }
 }
 
