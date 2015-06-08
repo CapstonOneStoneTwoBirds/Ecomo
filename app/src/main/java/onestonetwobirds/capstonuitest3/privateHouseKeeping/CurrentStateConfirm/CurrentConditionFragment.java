@@ -115,6 +115,7 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
             mChart.setTransparentCircleRadius(61f);
 
             mChart.setDrawCenterText(true); // 가운데 글자 나타내기
+            mChart.setCenterTextSize(20);
 
             mChart.setRotationAngle(0);
             // enable rotation of the chart by touch
@@ -172,17 +173,19 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
 
         for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
             colors.add(c);
 
         for (int c : ColorTemplate.COLORFUL_COLORS)
             colors.add(c);
 
-        for (int c : ColorTemplate.LIBERTY_COLORS)
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
+
 
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);

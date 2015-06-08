@@ -2,7 +2,9 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +27,11 @@ import com.rey.material.util.ThemeUtil;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupInsertContentFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.ModifyInformation.ModifyInfoActivity;
@@ -41,11 +47,13 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     private CustomViewPager vp;
 
     private DrawerAdapter mDrawerAdapter;
+    private PagerAdapter mPagerAdapter;
 
     private Toolbar mToolbar;
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
+    private Tab[] mItems = new Tab[]{Tab.INSERTCONTENT};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
 
     @Override
@@ -103,6 +111,8 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         });
         mToolbarManager.registerOnToolbarGroupChangedListener(this);
 
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
+        vp.setAdapter(mPagerAdapter);
         mDrawerAdapter = new DrawerAdapter();
         lv_drawer.setAdapter(mDrawerAdapter);                       // DrawerLayout 보여줘
 
@@ -149,6 +159,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     }
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
+        INSERTCONTENT("INSERTCONTENT"),
         PRIVATEINFO("개인 정보 수정"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃");
@@ -253,6 +264,79 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                 case 2:
                     break;
             }
+        }
+    }
+
+    private static class PagerAdapter extends FragmentStatePagerAdapter {
+
+        Fragment[] mFragments;
+        Tab[] mTabs;
+
+        private static final Field sActiveField;
+
+        static {
+            Field f = null;
+            try {                           // 처음 실행 할 떼
+                Class<?> c = Class.forName("android.support.v4.app.FragmentManagerImpl");
+                f = c.getDeclaredField("mActive");
+                f.setAccessible(true);
+                System.out.println("PagerAdapter Class");
+            } catch (Exception e) {
+            }
+
+            sActiveField = f;
+        }
+
+
+        public PagerAdapter(FragmentManager fm, Tab[] tabs) {   // 각각의 프레그먼트들을 화면에 뿌려줌
+            super(fm);
+            mTabs = tabs;
+            mFragments = new Fragment[mTabs.length];
+
+
+            //dirty way to get reference of cached fragment
+            try {
+                ArrayList<Fragment> mActive = (ArrayList<Fragment>) sActiveField.get(fm); // 프레그먼트들을 arraylist에 넣음
+                if (mActive != null) {
+                    for (Fragment fragment : mActive) {
+                        if (fragment instanceof GroupMainFragment)
+                            setFragment(Tab.INSERTCONTENT, fragment);
+
+                    }
+                }
+            } catch (Exception e) {
+            }
+        }
+
+        private void setFragment(Tab tab, Fragment f) {
+            for (int i = 0; i < mTabs.length; i++)
+                if (mTabs[i] == tab) {
+                    mFragments[i] = f;
+                    System.out.println("PagerAdapter setFragment for if");
+                    break;
+                }
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if (mFragments[position] == null) {
+                switch (mTabs[position]) {
+                    case INSERTCONTENT:
+                        mFragments[position] = GroupMainFragment.newInstance();
+                        break;
+                }
+            }
+            return mFragments[position];
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabs[position].toString().toUpperCase();
+        }
+
+        @Override
+        public int getCount() {
+            return mFragments.length;
         }
     }
 }

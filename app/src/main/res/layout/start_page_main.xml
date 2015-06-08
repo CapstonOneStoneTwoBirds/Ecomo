@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/maron1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:text="ECOMO" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:text="ECOMO를 통하여 편하게 그룹가계부를 사용하세요." />
+
+
+    <EditText
+        android:id="@+id/login_id"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginTop="40sp"
+        android:inputType="textEmailAddress"
+        android:hint="아이디를 입력하시오"
+        android:textColorHint="#d3d3d3"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:alpha="0.7"
+        />
+    <EditText
+        android:id="@+id/login_pwd"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:layout_marginBottom="30sp"
+        android:inputType="textPassword"
+        android:hint="패스워드를 입력하시오"
+        android:textColorHint="#d3d3d3"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:alpha="0.7"
+        />
+    <com.rey.material.widget.Button
+        style="@style/FlatButtonRippleStyle"
+        android:id="@+id/button_bt_start"
+        android:layout_width="120sp"
+        android:layout_height="@dimen/bt_height"
+        android:textColor="#000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:text="로그인"/>
+
+    <LinearLayout
+        android:layout_width="400sp"
+        android:layout_height="40sp"
+        android:layout_margin="15sp"
+        android:gravity="center">
+    <com.rey.material.widget.Button
+        style="@style/FlatButtonRippleStyle"
+        android:id="@+id/button_bt_main_sign_in"
+        android:layout_marginRight="15sp"
+        android:layout_width="120sp"
+        android:layout_height="@dimen/bt_height"
+        android:textColor="#000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:text="회원가입"/>
+
+    <com.rey.material.widget.Button
+        style="@style/FlatButtonRippleStyle"
+        android:id="@+id/button_bt_main_find_pwd"
+        android:layout_width="120sp"
+        android:layout_height="@dimen/bt_height"
+        android:textColor="#000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:text="비밀번호찾기"/>
+    </LinearLayout>
+</LinearLayout>

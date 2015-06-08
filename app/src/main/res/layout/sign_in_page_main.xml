@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/maron1">
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/header"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:singleLine="true"
+    android:textColor="#ffffff"
+    android:text="회원가입" />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_id_sign_in"
+        android:inputType="text"
+        android:alpha="0.5"
+        android:hint="아이디를 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_pwd_sign_in"
+        android:inputType="textPassword"
+        android:alpha="0.5"
+        android:hint="password를 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_name_sign_in"
+        android:inputType="text"
+        android:alpha="0.5"
+        android:hint="이름을 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_email_sign_in"
+        android:inputType="textEmailAddress"
+        android:alpha="0.5"
+        android:hint="E-mail을 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_phone_sign_in"
+        android:inputType="textEmailAddress"
+        android:alpha="0.5"
+        android:hint="핸드폰 번호를 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <com.rey.material.widget.Button
+        style="@style/FlatButtonRippleStyle"
+        android:id="@+id/button_bt_sign_in"
+        android:layout_width="120sp"
+        android:layout_height="@dimen/bt_height"
+        android:layout_marginTop="20dp"
+        android:textColor="#FF000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:text="ECOMO 시작하기"/>
+
+</LinearLayout>

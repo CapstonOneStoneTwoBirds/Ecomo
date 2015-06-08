@@ -284,6 +284,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     */
+                    //아래는 그룹 캘린더에서 리스트 클릭하면 뜨는 화면
                     Intent intent = new Intent(getApplicationContext(), GroupInsertContentActivity.class);
                     startActivity(intent);
                     break;

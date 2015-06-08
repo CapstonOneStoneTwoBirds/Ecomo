@@ -69,9 +69,6 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
         vp = (CustomViewPager) findViewById(R.id.group_vp);
         mSnackBar = (SnackBar) findViewById(R.id.group_sn);
 
-        FloatingActionButton InsertBtn = (FloatingActionButton)findViewById(R.id.new_group_btn);
-
-
         mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.BaseNavigationManager(R.style.NavigationDrawerDrawable, this, mToolbar, dl_navigator) {
             @Override

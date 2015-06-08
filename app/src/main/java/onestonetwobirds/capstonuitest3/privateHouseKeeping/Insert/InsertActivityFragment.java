@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.rey.material.app.DatePickerDialog;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
@@ -44,6 +45,9 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     TextView IsertTextDay, IsertTextTime;
     EditText InsertTitle, InsertMoney, InsertContent;
     Spinner InsertSpinner;
+
+    MyDatabase myDB;
+    SQLiteDatabase db;
 
     SnackBar mSnackBar;
 
@@ -96,9 +100,10 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
         InsertBtnDay.setOnClickListener(new View.OnClickListener() {
             Dialog.Builder builder = null;
+
             @Override
             public void onClick(View v) {
-                 builder = new DatePickerDialog.Builder() {
+                builder = new DatePickerDialog.Builder() {
                     @Override
                     public void onPositiveActionClicked(DialogFragment fragment) {
                         DatePickerDialog dialog = (DatePickerDialog) fragment.getDialog();
@@ -122,12 +127,13 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         });
         InsertBtnTime.setOnClickListener(new View.OnClickListener() {
             Dialog.Builder builder = null;
+
             @Override
             public void onClick(View v) {
-                builder = new TimePickerDialog.Builder(6, 00){
+                builder = new TimePickerDialog.Builder(6, 00) {
                     @Override
                     public void onPositiveActionClicked(DialogFragment fragment) {
-                        TimePickerDialog dialog = (TimePickerDialog)fragment.getDialog();
+                        TimePickerDialog dialog = (TimePickerDialog) fragment.getDialog();
                         String time = dialog.getFormattedTime(SimpleDateFormat.getTimeInstance());
                         IsertTextTime.setText(time);
                         makeTime(time);
@@ -161,22 +167,37 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             if (bundle.containsKey("cost")) InsertMoney.setText(bundle.getString("cost"));
             if (bundle.containsKey("product")) {
                 switch (bundle.getString("product")) {
-                    case "의류": InsertSpinner.setSelection(1); break;
-                    case "주거": InsertSpinner.setSelection(2); break;
-                    case "여가": InsertSpinner.setSelection(3); break;
-                    case "교통": InsertSpinner.setSelection(4); break;
-                    case "저축": InsertSpinner.setSelection(5); break;
-                    case "기타": InsertSpinner.setSelection(5); break;
-                    default: break;
+                    case "의류":
+                        InsertSpinner.setSelection(1);
+                        break;
+                    case "주거":
+                        InsertSpinner.setSelection(2);
+                        break;
+                    case "여가":
+                        InsertSpinner.setSelection(3);
+                        break;
+                    case "교통":
+                        InsertSpinner.setSelection(4);
+                        break;
+                    case "저축":
+                        InsertSpinner.setSelection(5);
+                        break;
+                    case "기타":
+                        InsertSpinner.setSelection(5);
+                        break;
+                    default:
+                        break;
                 }
             }
             if (bundle.containsKey("content")) InsertContent.setText(bundle.getString("content"));
         }
 
-        String setDate = year+". "+month+". "+date+". ";
-        IsertTextDay.setText(setDate);
+        if (year != null) {
+            String setDate = year + ". " + month + ". " + date + ". ";
+            IsertTextDay.setText(setDate);
+        }
 
-        mSnackBar = ((InsertActivity)getActivity()).getSnackBar();
+        mSnackBar = ((InsertActivity) getActivity()).getSnackBar();
 
         return v;
     }
@@ -190,11 +211,12 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.insert_OK:
 
-                MyDatabase myDB = new MyDatabase(getActivity());
-                final SQLiteDatabase db = myDB.getWritableDatabase();
+
+                myDB = new MyDatabase(getActivity());
+                db = myDB.getWritableDatabase();
 
                 if (InsertTitle.getText().toString().equals("")) // 누르면 이상한거 트는 문제 해결하셈
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
@@ -208,11 +230,11 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                             .text("잘못된 금액을 입력하셨습니다.")
                             .duration(2000).show();
-                else if(year == null)
+                else if (year == null)
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                             .text("날짜를 입력해주세요.")
                             .duration(2000).show();
-                else if(AMPM == null)
+                else if (AMPM == null)
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)
                             .text("시간을 입력해주세요.")
                             .duration(2000).show();
@@ -231,9 +253,9 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
                     db.insert("daymoney", null, values);
 
-                    System.out.println("TestOK : " + year+" / "+month+" / "+date+" / "+AMPM+" / "+time+" / "+minute+
-                            " / "+InsertTitle.getText().toString()+" / "+cate+" / "+InsertMoney.getText().toString()+
-                            " / "+InsertContent.getText().toString());
+                    System.out.println("TestOK : " + year + " / " + month + " / " + date + " / " + AMPM + " / " + time + " / " + minute +
+                            " / " + InsertTitle.getText().toString() + " / " + cate + " / " + InsertMoney.getText().toString() +
+                            " / " + InsertContent.getText().toString());
 
                     String sql = "SELECT * FROM moneybook";
                     Cursor cursor = db.rawQuery(sql, null);
@@ -279,22 +301,22 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
                     db.execSQL("UPDATE moneybook SET total = total + " + InsertMoney.getText().toString());
                     db.execSQL("UPDATE checkamount SET acc = acc + " + InsertMoney.getText().toString() + " WHERE title = '총액';");
 
-                try {
-                    sql = "SELECT * FROM checkamount WHERE title LIKE ? ";
-                    cursor = db.rawQuery(sql, new String[]{MyCustomWidget.titleWidget});
+                    try {
+                        sql = "SELECT * FROM checkamount WHERE title LIKE ? ";
+                        cursor = db.rawQuery(sql, new String[]{MyCustomWidget.titleWidget});
 
-                    int accCol = cursor.getColumnIndex("acc");
+                        int accCol = cursor.getColumnIndex("acc");
 
-                    //System.out.println("OKCheck1 ===> amount : "+cursor.getCount());
+                        //System.out.println("OKCheck1 ===> amount : "+cursor.getCount());
 
-                    while (cursor.moveToNext()) {
-                        accCheck = cursor.getInt(accCol);
+                        while (cursor.moveToNext()) {
+                            accCheck = cursor.getInt(accCol);
 
-                        getContent(MyCustomWidget.titleWidget, MyCustomWidget.goalWidget, accCheck);
+                            getContent(MyCustomWidget.titleWidget, MyCustomWidget.goalWidget, accCheck);
+                        }
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("OK : IllegalArgumentException");
                     }
-                } catch (IllegalArgumentException e) {
-                    System.out.println("OK : IllegalArgumentException");
-                }
                     db.close();
                     //if(fragment != null) fragment.dismiss();
                     getActivity().finish();
@@ -328,7 +350,7 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         while (st.hasMoreTokens()) {
 
             token = st.nextToken();
-            if(token.endsWith(".")) token = token.replace(".","");
+            if (token.endsWith(".")) token = token.replace(".", "");
             switch (position) {
                 case 0:
                     year = token;
@@ -355,17 +377,16 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         while (st.hasMoreTokens()) {
 
             token = st.nextToken();
-            if(token.endsWith(".")) token = token.replace(".","");
+            if (token.endsWith(".")) token = token.replace(".", "");
             if (position == 0) {
                 AMPM = token;
                 position++;
-            }
-            else {
-                StringTokenizer st2 = new StringTokenizer(token,":");
+            } else {
+                StringTokenizer st2 = new StringTokenizer(token, ":");
                 while (st2.hasMoreTokens()) {
                     token2 = st2.nextToken();
                     if (position == 1) time = token2;
-                    else if(position == 2) minute = token2;
+                    else if (position == 2) minute = token2;
                     position++;
                 }
             }
