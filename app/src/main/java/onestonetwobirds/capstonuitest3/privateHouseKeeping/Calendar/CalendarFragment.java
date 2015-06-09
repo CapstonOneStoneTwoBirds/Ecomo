@@ -2,6 +2,7 @@ package onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar;
 
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -30,6 +31,7 @@ import onestonetwobirds.capstonuitest3.control.database.MyDatabase;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.CalendarDay;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.OnDateChangedListener;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertConfrimActivity;
 
 
 public class CalendarFragment extends Fragment implements OnDateChangedListener {
@@ -46,6 +48,10 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
 
     int TokenYear, TokenMonth, TokenDay;
     String result;
+
+    String year[], month[], date[], AMPM[], time[], minute[], account[], content[];
+    int money[];
+
     LayoutInflater infla;
     ViewGroup contain;
 
@@ -146,35 +152,42 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
 
                 int yearCol = cursor.getColumnIndex("year");
                 int monthCol = cursor.getColumnIndex("month");
+                int dateCol = cursor.getColumnIndex("date");
                 int AMPMCol = cursor.getColumnIndex("AMPM");
                 int timeCol = cursor.getColumnIndex("time");
                 int minuteCol = cursor.getColumnIndex("minute");
                 int accountCol = cursor.getColumnIndex("account");
                 int moneyCol = cursor.getColumnIndex("money");
+                int contentCol = cursor.getColumnIndex("content");
 
-                final String year[] = new String[recordCount];
-                final String month[] = new String[recordCount];
-                final String AMPM[] = new String[recordCount];
-                final String time[] = new String[recordCount];
-                final String minute[] = new String[recordCount];
-                final String account[] = new String[recordCount];
-                final int money[] = new int[recordCount];
+                year = new String[recordCount];
+                month = new String[recordCount];
+                date = new String[recordCount];
+                AMPM = new String[recordCount];
+                time = new String[recordCount];
+                minute = new String[recordCount];
+                account = new String[recordCount];
+                money = new int[recordCount];
+                content = new String[recordCount];
 
-                //String year[], month[], AMPM[], time[], minute[], account[], money[];
+
+                //System.out.println("OK : "+cursor.getPosition());
 
                 //cursor.moveToFirst();
-                System.out.println("TestCheck : " + cursor.getCount());
+                //System.out.println("TestCheck : " + cursor.getCount());
 
                 while (cursor.moveToNext()) {
                     // 0->1->2->......
                     if (cursor.getString(yearCol).equals(String.valueOf(TokenYear)) && cursor.getString(monthCol).equals(String.valueOf(TokenMonth))) {
                         year[cursor.getPosition()] = cursor.getString(yearCol);
                         month[cursor.getPosition()] = cursor.getString(monthCol);
+                        date[cursor.getPosition()] = cursor.getString(dateCol);
                         AMPM[cursor.getPosition()] = cursor.getString(AMPMCol);
                         time[cursor.getPosition()] = cursor.getString(timeCol);
                         minute[cursor.getPosition()] = cursor.getString(minuteCol);
                         account[cursor.getPosition()] = cursor.getString(accountCol);
                         money[cursor.getPosition()] = cursor.getInt(moneyCol);
+                        content[cursor.getPosition()] = cursor.getString(contentCol);
 
                         result = AMPM[cursor.getPosition()] + "/" + time[cursor.getPosition()] + "/" +
                                 minute[cursor.getPosition()] + "  " + account[cursor.getPosition()] + " " +
@@ -190,30 +203,36 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
 
 
 
-/*
+
                 listViewInsert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //position == id
+
                         //System.out.println("cursor ----> "+account[position]+" / "+category[position]+" / "+money[position]+" / "+content[position]);
 
                         Bundle bundle = new Bundle();
-                        bundle.putString("date", subDate);
-                        bundle.putString("account", account[position]);
-                        bundle.putString("category", category[position]);
-                        //bundle.putInt("money", money[position]);
-                        bundle.putString("money", String.valueOf(money[position]));
-                        bundle.putString("content", content[position]);
+                        bundle.putString("year", year[(int) id]);
+                        bundle.putString("month", month[(int) id]);
+                        bundle.putString("date", date[(int)id]);
+                        bundle.putString("AMPM", AMPM[(int)id]);
+                        bundle.putString("time", time[(int)id]);
+                        bundle.putString("minute", minute[(int)id]);
+                        bundle.putString("account", minute[(int)id]);
+                        bundle.putString("category", minute[(int) id]);
+                        bundle.putInt("money", money[(int) id]);
+                        //bundle.putString("money", String.valueOf(money[position]));
+                        bundle.putString("content", content[(int)id]);
 
                         // Intent로 새 액티비티 띄우기
-                        Intent intent = new Intent(getActivity(), InsertResultActivity.class);
+                        Intent intent = new Intent(getActivity(), InsertConfrimActivity.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+
 
                     }
                 });
 
- */
+
 
                 break;
         }
