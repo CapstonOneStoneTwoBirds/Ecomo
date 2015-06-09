@@ -2,18 +2,24 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ImageButton;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
-import com.rey.material.widget.EditText;
 
 import onestonetwobirds.capstonuitest3.R;
 
 /**
  * Created by YeomJi on 15. 6. 9..
  */
-public class CreateCroupActivity extends Activity {
+public class CreateCroupActivity extends FragmentActivity implements View.OnClickListener {
 
     EditText CreateGroupTitle;
     Button GreateGroupImage;
@@ -31,6 +37,49 @@ public class CreateCroupActivity extends Activity {
         setGroupImg3 = (ImageView)findViewById(R.id.set_group_image3);
         setGroupImg4 = (ImageView)findViewById(R.id.set_group_image4);
         setGroupImg5 = (ImageView)findViewById(R.id.set_group_image5);
+
+
+        setGroupImg1.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.set_group_image1:
+                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                    @Override
+                    protected void onBuildDone(Dialog dialog) {
+                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        setGroupImg1.setBackgroundResource(R.drawable.ic_user);
+                    }
+
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) {
+
+                        // 여기에다 코딩
+
+                        onResume();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                    @Override
+                    public void onNegativeActionClicked(DialogFragment fragment) {
+                        super.onNegativeActionClicked(fragment);
+                    }
+                };
+
+                builder.title("그룹 사진 설정")
+                        .positiveAction("OK")
+                        .negativeAction("CANCEL")
+                        .contentView(R.layout.create_group_select_img_dialog);
+
+                DialogFragment fragment = DialogFragment.newInstance(builder);
+                fragment.show(getSupportFragmentManager(), null);
+
+                break;
+        }
 
     }
 }
