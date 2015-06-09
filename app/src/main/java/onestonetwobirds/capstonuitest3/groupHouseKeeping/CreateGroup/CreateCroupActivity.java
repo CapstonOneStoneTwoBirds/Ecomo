@@ -1,6 +1,8 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -51,8 +53,12 @@ public class CreateCroupActivity extends FragmentActivity implements View.OnClic
 
                     @Override
                     protected void onBuildDone(Dialog dialog) {
+
+                        // 이미지 띄우는 거 수정 필요
                         dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         setGroupImg1.setBackgroundResource(R.drawable.ic_user);
+                        setGroupImg1.setImageResource(R.drawable.ocr);
+
                     }
 
                     @Override
