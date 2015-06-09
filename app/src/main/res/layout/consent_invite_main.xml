@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/ecomo_back2_50"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:gravity="center"
+        android:text="그룹 멤버 초대"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.05sp" />
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="40sp"
+                android:layout_marginRight="3sp"
+                android:text="그룹 명"/>
+
+
+            <TextView
+                android:id="@+id/consent_invite_group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="40sp"
+                android:text="그룹 명 내용"/>
+        </TableRow>
+    </TableLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="40sp"
+                android:layout_marginRight="3sp"
+                android:text="그룹 짱"/>
+
+
+            <TextView
+                android:id="@+id/consent_invite_group_king"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="40sp"
+                android:text="그룹  내용"/>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="40sp"
+                android:layout_marginRight="3sp"
+                android:text="개설 일"/>
+
+
+            <TextView
+                android:id="@+id/consent_invite_group_create_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="40sp"
+                android:text="개설 일 내용"/>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+
+            <TextView
+                android:layout_width="120sp"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="40sp"
+                android:layout_marginRight="3sp"
+                android:text="그룹 인원"/>
+
+
+            <TextView
+                android:id="@+id/consent_invite_group_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="3sp"
+                android:layout_marginRight="40sp"
+                android:text="그룹 인원 내용"/>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.05sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40sp"
+        android:layout_marginLeft="35sp"
+        android:layout_marginRight="35sp"
+        android:layout_marginTop="13sp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/invite_OK"
+            style="@style/RaiseWaveButtonRippleStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10sp"
+            android:layout_weight="0.4"
+            android:text="승낙"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#000000"
+            app:rd_delayClick="afterRelease" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.1" />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/invite_NO"
+            style="@style/RaiseWaveButtonRippleStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="10sp"
+            android:layout_weight="0.4"
+            android:text="거절"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#000000"
+            app:rd_delayClick="afterRelease" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+
+

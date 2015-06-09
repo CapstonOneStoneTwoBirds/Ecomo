@@ -1,7 +1,6 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,10 +31,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup.CreateCroupActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
-import onestonetwobirds.capstonuitest3.user.StartActivity;
 
 /**
  * Created by YeomJi on 15. 5. 29..
@@ -80,10 +79,9 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                     bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
                 }
 
-                Intent intent = new Intent(getApplicationContext(), InGroupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CreateCroupActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.rightin, R.anim.rightout);
-                finish();
 
             }
         });
@@ -263,40 +261,6 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                     diaFM.show(fm, null);
                     break;
                 case 2:
-                    Dialog.Builder builder1 = new SimpleDialog.Builder(R.style.SimpleDialog) {
-
-                        @Override
-                        protected void onBuildDone(Dialog dialog) {
-                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        }
-
-                        @Override
-                        public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
-                            // 여기에다 코딩
-                            SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = mPreference.edit();
-                            editor.clear();
-                            editor.commit();
-                            startActivity(new Intent(getApplicationContext(), StartActivity.class));
-
-                            onResume();
-                            super.onPositiveActionClicked(fragment);
-                        }
-
-                        @Override
-                        public void onNegativeActionClicked(DialogFragment fragment) {
-                            super.onNegativeActionClicked(fragment);
-                        }
-                    };
-
-                    builder1.title("로그아웃")
-                            .positiveAction("OK")
-                            .negativeAction("CANCEL")
-                            .contentView(R.layout.logout_dialog);
-
-                    FragmentManager fm1 = getSupportFragmentManager();
-                    DialogFragment diaFM1 = DialogFragment.newInstance(builder1);
-                    diaFM1.show(fm1, null);
                     break;
             }
         }
