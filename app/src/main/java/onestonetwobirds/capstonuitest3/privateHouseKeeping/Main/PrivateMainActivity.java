@@ -47,6 +47,7 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFrag
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.OCR.abbyy.ocrsdk.android.OCRResultsActivity;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Speech.SpeechActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Widget.WidgetFragment;
 import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
 
@@ -487,7 +488,10 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                 InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Speech", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), SpeechActivity.class);
+                        startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.fade, R.anim.hold);
                     }
                 });
                 InsertHandBtn.setOnClickListener(new View.OnClickListener() {

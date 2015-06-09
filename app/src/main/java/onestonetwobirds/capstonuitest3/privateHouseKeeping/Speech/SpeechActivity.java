@@ -23,7 +23,7 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity
 /**
  * Created by YeomJi on 15. 4. 30..
  */
-public class SpeechTestActivity extends Activity {
+public class SpeechActivity extends Activity {
 
     Vector<Integer> vectorCost = new Vector<Integer>();
     Vector<String> vectorProduct = new Vector<String>();
@@ -39,7 +39,7 @@ public class SpeechTestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.speech_test_main);
+        setContentView(R.layout.speech_main);
 
         result = (TextView) findViewById(R.id.speechResult);
 

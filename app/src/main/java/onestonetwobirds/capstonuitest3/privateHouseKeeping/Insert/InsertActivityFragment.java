@@ -24,6 +24,7 @@ import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import onestonetwobirds.capstonuitest3.R;
@@ -40,6 +41,7 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     String cate;
     int total, food, play, house, traffic, saving;
     int accCheck;
+    String[] resultDateTime;
 
     Button InsertBtnDay, InsertBtnTime, InsertOK, InsertCancel;
     TextView IsertTextDay, IsertTextTime;
@@ -92,6 +94,11 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             }
         });
 
+
+        long timeL = System.currentTimeMillis();
+        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss");
+        String str = dayTime.format(new Date(timeL));
+        resultDateTime = str.split("-");
 
         InsertBtnDay.setOnClickListener(new View.OnClickListener() {
             Dialog.Builder builder = null;
@@ -153,14 +160,17 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
         if (!(bundle == null)) {
             if (bundle.containsKey("year")) year = bundle.getString("year");
-            else year = "0000";
+            else year = resultDateTime[0];
             if (bundle.containsKey("month")) month = bundle.getString("month");
-            else month = "00";
+            else month = resultDateTime[1];
             if (bundle.containsKey("date")) date = bundle.getString("date");
-            else date = "00";
+            else date = resultDateTime[2];
             if (bundle.containsKey("AMPM")) AMPM = bundle.getString("AMPM");
+            else AMPM = resultDateTime[3];
             if (bundle.containsKey("time")) time = bundle.getString("time");
+            else time = resultDateTime[4];
             if (bundle.containsKey("minute")) minute = bundle.getString("minute");
+            else minute = resultDateTime[5];
             if (bundle.containsKey("account")) InsertTitle.setText(bundle.getString("account"));
             if (bundle.containsKey("money")) InsertMoney.setText(bundle.getString("money"));
             if (bundle.containsKey("product")) {
