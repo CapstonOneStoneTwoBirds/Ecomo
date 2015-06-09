@@ -128,7 +128,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
             HttpClient.post(this, "login/", entity, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                    if (new String(bytes).equals("Wrong access")) {
+                    if (new String(bytes).equals("null")) {
                         SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
                         SharedPreferences.Editor editor = mPreference.edit();
                         editor.clear();
@@ -143,9 +143,24 @@ public class StartActivity extends Activity implements View.OnClickListener{
                         editor.putString("email", email);
                         editor.putString("pw", pw);
                         editor.commit();
+                        String code="";
+                        try {
+                            JSONObject obj = new JSONObject(new String(bytes));
+                            code = obj.get("key_existed").toString();
+                        }catch(JSONException e){}
 
-                        startActivity(new Intent(StartActivity.this, AfterLoginActivity.class));
-                        overridePendingTransition(R.anim.fade, R.anim.hold);
+                        if(code.equals("1")){
+                            Intent intent = new Intent(StartActivity.this, KeyCheckActivity.class);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fade, R.anim.hold);
+                        }
+                        else{
+                            Intent intent = new Intent(StartActivity.this, KeySetActivity.class);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fade, R.anim.hold);
+                        }
                     }
                 }
 

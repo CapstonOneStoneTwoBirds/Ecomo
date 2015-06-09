@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -313,6 +314,37 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                 case 2: // 그룹 탈퇴
                     break;
                 case 3: // 로그아웃
+                    Log.e("InGroupActivirty", "LOGOUT");
+                    Dialog.Builder builder1 = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                        @Override
+                        protected void onBuildDone(Dialog dialog) {
+                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        }
+
+                        @Override
+                        public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+
+                            // 여기에다 코딩
+
+                            onResume();
+                            super.onPositiveActionClicked(fragment);
+                        }
+
+                        @Override
+                        public void onNegativeActionClicked(DialogFragment fragment) {
+                            super.onNegativeActionClicked(fragment);
+                        }
+                    };
+
+                    builder1.title("로그아웃")
+                            .positiveAction("OK")
+                            .negativeAction("CANCEL")
+                            .contentView(R.layout.logout_dialog);
+
+                    FragmentManager fm1 = getSupportFragmentManager();
+                    DialogFragment diaFM1 = DialogFragment.newInstance(builder1);
+                    diaFM1.show(fm1, null);
                     break;
             }
         }

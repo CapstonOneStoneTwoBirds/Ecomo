@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/maron1"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/header1"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:singleLine="true"
+        android:textColor="#ffffff"
+        android:text="ECOMO" />
+
+    <TextView
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_id_find_pwd"
+        android:inputType="text"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="비밀번호찾기"
+        android:layout_margin="10sp"
+        android:textColor="#ffffff"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:inputType="text"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text="입력하신 이메일로 새 비밀번호가 전송됩니다."
+        android:layout_margin="10sp"
+        android:textColor="#ffffff"
+        android:gravity="center" />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_email_find_pwd"
+        android:inputType="textEmailAddress"
+        android:alpha="0.5"
+        android:hint="E-mail을 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <EditText
+        android:layout_width="300sp"
+        android:layout_height="45sp"
+        android:id="@+id/input_name_find_pwd"
+        android:inputType="text"
+        android:alpha="0.5"
+        android:hint="이름을 입력해주세요"
+        android:layout_margin="10sp"
+        android:textColorHint="#ffffff"
+        android:gravity="center"
+        />
+
+    <com.rey.material.widget.Button
+        style="@style/FlatButtonRippleStyle"
+        android:id="@+id/button_bt_get_password"
+        android:layout_width="120sp"
+        android:layout_height="@dimen/bt_height"
+        android:layout_marginTop="20dp"
+        android:textColor="#FF000000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+        android:text="비밀번호 찾기"/>
+</LinearLayout>
