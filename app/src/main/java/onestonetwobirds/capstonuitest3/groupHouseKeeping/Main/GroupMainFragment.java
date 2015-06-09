@@ -30,12 +30,8 @@ public class GroupMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_group_main, container, false);
 
-
         list = (ListView) v.findViewById(R.id.Group_main_List);
         adapter = new IconTextListAdapterGroup(getActivity());
-
-
-
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -44,7 +40,6 @@ public class GroupMainFragment extends Fragment {
 
             }
         });
-
 
         return v;
     }
