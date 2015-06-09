@@ -17,7 +17,7 @@ public class CreateCroupActivity extends Activity {
 
     EditText CreateGroupTitle;
     Button GreateGroupImage;
-    ImageButton d;
+    ImageView setGroupImg1, setGroupImg2, setGroupImg3, setGroupImg4, setGroupImg5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,5 +26,11 @@ public class CreateCroupActivity extends Activity {
 
         CreateGroupTitle = (EditText)findViewById(R.id.create_group_title);
         GreateGroupImage = (Button)findViewById(R.id.create_group_image_btn);
+        setGroupImg1 = (ImageView)findViewById(R.id.set_group_image1);
+        setGroupImg2 = (ImageView)findViewById(R.id.set_group_image2);
+        setGroupImg3 = (ImageView)findViewById(R.id.set_group_image3);
+        setGroupImg4 = (ImageView)findViewById(R.id.set_group_image4);
+        setGroupImg5 = (ImageView)findViewById(R.id.set_group_image5);
+
     }
 }

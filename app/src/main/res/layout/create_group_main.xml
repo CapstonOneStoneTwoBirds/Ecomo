@@ -116,7 +116,7 @@
             android:layout_height="wrap_content" >
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_group_image1"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
@@ -125,7 +125,7 @@
                 android:layout_margin="5sp"
                 android:text="개설 일"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_group_image2"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
@@ -134,7 +134,7 @@
                 android:layout_margin="5sp"
                 android:text="개설 일"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_group_image3"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
@@ -143,7 +143,7 @@
                 android:layout_margin="5sp"
                 android:text="개설 일"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_group_image4"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
@@ -152,7 +152,7 @@
                 android:layout_margin="5sp"
                 android:text="개설 일"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_group_image5"
                 android:src="@drawable/ic_user"
                 android:layout_weight="1"
