@@ -44,6 +44,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".user.KeySetActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".user.KeyCheckActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".user.AfterLoginActivity"
             android:label="@string/app_name" >
         </activity>
