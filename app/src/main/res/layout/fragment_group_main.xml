@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
-    <TextView
+    <ListView
+        android:id="@+id/Group_main_List"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="group main fragment"/>
+        android:layout_height="wrap_content">
+    </ListView>
 
 </LinearLayout>

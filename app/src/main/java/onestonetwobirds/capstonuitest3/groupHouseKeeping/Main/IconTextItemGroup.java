@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
+package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.graphics.drawable.Drawable;
 
@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 /**
  * Created by YeomJi on 2014. 12. 1..
  */
-public class IconTextItemMember {
+public class IconTextItemGroup {
 
     /**
      * Icon
@@ -29,22 +29,9 @@ public class IconTextItemMember {
      * @param icon
      * @param obj
      */
-    public IconTextItemMember(Drawable icon, String[] obj) {
+    public IconTextItemGroup(Drawable icon, String[] obj) {
         mIcon = icon;
         mData = obj;
-    }
-
-    /**
-     * Initialize with icon and strings
-     *
-     * @param icon
-     * @param obj01
-     */
-    public IconTextItemMember(Drawable icon, String obj01, String obj02, String obj03) {
-        mIcon = icon;
-
-        mData = new String[3];
-        mData[0] = obj01;
     }
 
     /**
@@ -55,11 +42,31 @@ public class IconTextItemMember {
      * @param obj02
      * @param obj03
      */
-    public IconTextItemMember(Drawable icon, String obj01, String obj02, String obj03, String obj04) {
+    public IconTextItemGroup(Drawable icon, String obj01, String obj02, String obj03) {
+        mIcon = icon;
+
+        mData = new String[3];
+        mData[0] = obj01;
+        mData[1] = obj02;
+        mData[2] = obj03;
+    }
+
+    /**
+     * Initialize with icon and strings
+     *
+     * @param icon
+     * @param obj01
+     * @param obj02
+     * @param obj03
+     */
+    public IconTextItemGroup(Drawable icon, String obj01, String obj02, String obj03, String obj04) {
         mIcon = icon;
 
         mData = new String[4];
         mData[0] = obj01;
+        mData[1] = obj02;
+        mData[2] = obj03;
+        mData[3] = obj04;
     }
 
     /**
@@ -129,7 +136,7 @@ public class IconTextItemMember {
      * @param other
      * @return
      */
-    public int compareTo(IconTextItemMember other) {
+    public int compareTo(IconTextItemGroup other) {
         if (mData != null) {
             String[] otherData = other.getData();
             if (mData.length == otherData.length) {

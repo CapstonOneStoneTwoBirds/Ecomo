@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
@@ -24,6 +26,9 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
     SnackBar mSnackBar;
 
+    ListView listMember, listMe, listKing;
+    IconTextListAdapterMember adapterMember, adapterMe, adapterKing;
+
 
     public static GroupMemberFragment newInstance() {
         GroupMemberFragment fragment = new GroupMemberFragment();
@@ -37,6 +42,46 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
 
             Button NewMemberButton = (Button) v.findViewById(R.id.new_member_btn);
+
+
+        // 그룹 멤버 리스트
+        listMember = (ListView) v.findViewById(R.id.group_member_list);
+        adapterMember = new IconTextListAdapterMember(getActivity());
+
+        // 내 리스트
+        listMe = (ListView) v.findViewById(R.id.group_member_me);
+        adapterMe = new IconTextListAdapterMember(getActivity());
+
+        // 총무 리스트
+        listKing = (ListView) v.findViewById(R.id.group_member_king);
+        adapterKing = new IconTextListAdapterMember(getActivity());
+
+
+
+
+        listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMember.getItem(position);
+
+            }
+        });
+
+        listMe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMe.getItem(position);
+
+            }
+        });
+
+        listKing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterKing.getItem(position);
+
+            }
+        });
 
 
             mSnackBar = ((InGroupActivity) getActivity()).getSnackBar();

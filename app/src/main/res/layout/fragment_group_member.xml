@@ -74,6 +74,37 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="총무"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <ListView
+            android:id="@+id/group_member_king"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp">
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="멤버"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5sp"

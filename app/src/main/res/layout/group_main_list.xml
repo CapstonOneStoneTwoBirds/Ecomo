@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iconItemGroup"
+        android:src="@drawable/picture"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:layout_margin="15sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dataItem01Group"
+            android:text="그룹이름"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_margin="5sp"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/dataItem02Group"
+                android:text="총무 이름"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_margin="5sp"
+                android:textColor="#0000ff" />
+
+            <TextView
+                android:id="@+id/dataItem03Group"
+                android:text="회원 수"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:layout_margin="5sp"
+                android:textColor="#0000ff" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

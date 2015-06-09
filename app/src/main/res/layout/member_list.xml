@@ -10,12 +10,13 @@
         android:src="@drawable/person"
         android:layout_width="60sp"
         android:layout_height="60sp"
-        android:layout_margin="7sp"/>
+        android:layout_margin="10sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_margin="10sp">
 
         <TextView
             android:id="@+id/dataItem01Member"
@@ -26,15 +27,6 @@
             android:layout_margin="5sp"
             android:textSize="16dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/dataItem02Member"
-            android:text="Content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="4dp"
-            android:layout_margin="5sp"
-            android:textColor="#0000ff" />
     </LinearLayout>
 
     <Space
@@ -46,6 +38,6 @@
         android:src="@drawable/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="7sp" />
+        android:layout_margin="15sp" />
 
 </LinearLayout>

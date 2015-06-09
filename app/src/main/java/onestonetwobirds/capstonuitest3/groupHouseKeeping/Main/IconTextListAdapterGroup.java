@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
+package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Context;
 import android.view.View;
@@ -11,21 +11,21 @@ import java.util.List;
 /**
  * Created by YeomJi on 2014. 12. 1..
  */
-public class IconTextListAdapterMember extends BaseAdapter {
+public class IconTextListAdapterGroup extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemMember> mItems = new ArrayList<IconTextItemMember>();
+    private List<IconTextItemGroup> mItems = new ArrayList<IconTextItemGroup>();
 
-    public IconTextListAdapterMember(Context context) {
+    public IconTextListAdapterGroup(Context context) {
         mContext = context;
     }
 
-    public void addItem(IconTextItemMember it) {
+    public void addItem(IconTextItemGroup it) {
         mItems.add(it);
     }
 
-    public void setListItems(List<IconTextItemMember> lit) {
+    public void setListItems(List<IconTextItemGroup> lit) {
         mItems = lit;
     }
 
@@ -54,14 +54,16 @@ public class IconTextListAdapterMember extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        IconTextViewMember itemView;
+        IconTextViewGroup itemView;
         if (convertView == null) {
-            itemView = new IconTextViewMember(mContext, mItems.get(position));
+            itemView = new IconTextViewGroup(mContext, mItems.get(position));
         } else {
-            itemView = (IconTextViewMember) convertView;
+            itemView = (IconTextViewGroup) convertView;
 
             itemView.setIcon(mItems.get(position).getIcon());
             itemView.setText(0, mItems.get(position).getData(0));
+            itemView.setText(1, mItems.get(position).getData(1));
+            itemView.setText(1, mItems.get(position).getData(2));
         }
 
         return itemView;
