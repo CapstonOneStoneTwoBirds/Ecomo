@@ -95,12 +95,12 @@ public class StartActivity extends Activity implements View.OnClickListener{
             HttpClient.post("addGcmAddress/", param, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    Log.i("MainActivity ::::: ", "onSuccess");
+                    Log.i("StartActivity ::::: ", "onSuccess");
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Log.i("MainActivity ::::: ", error.toString());
+                    Log.i("StartActivity ::::: ", error.toString());
                 }
             });
 
@@ -109,7 +109,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         }
         else
         {
-            Log.i("MainActivity.java | onCreate", "|No valid Google Play Services APK found.|");
+            Log.i("StartActivity.java | onCreate", "|No valid Google Play Services APK found.|");
         }
 
         /////////////////////// GCM End
@@ -134,7 +134,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
                         editor.clear();
                         editor.commit();
 
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), StartActivity.class));
                         overridePendingTransition(R.anim.fade, R.anim.hold);
                     } else {
                         System.out.println("Login Success");
@@ -146,10 +146,10 @@ public class StartActivity extends Activity implements View.OnClickListener{
                         String code="";
                         try {
                             JSONObject obj = new JSONObject(new String(bytes));
-                            code = obj.get("key_existed").toString();
+                            code = obj.get("key").toString();
                         }catch(JSONException e){}
 
-                        if(code.equals("1")){
+                        if(code.length()==4){
                             Intent intent = new Intent(StartActivity.this, KeyCheckActivity.class);
                             intent.putExtra("email", email);
                             startActivity(intent);

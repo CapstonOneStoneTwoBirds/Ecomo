@@ -2,6 +2,7 @@ package onestonetwobirds.capstonuitest3.user;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import onestonetwobirds.capstonuitest3.R;
 
@@ -13,5 +14,6 @@ public class KeyCheckActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.key_check);
+        Log.e("KeyCheckActivity", "Here");
     }
 }

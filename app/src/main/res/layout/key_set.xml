@@ -93,7 +93,7 @@
 
     <com.rey.material.widget.Button
         style="@style/FlatButtonRippleStyle"
-        android:id="@+id/button_bt_get_password"
+        android:id="@+id/key_set_btn"
         android:layout_width="120sp"
         android:layout_height="@dimen/bt_height"
         android:layout_marginTop="20dp"
