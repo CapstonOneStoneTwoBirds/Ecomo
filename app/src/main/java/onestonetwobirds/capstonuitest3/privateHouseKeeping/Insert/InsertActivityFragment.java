@@ -24,6 +24,7 @@ import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.Spinner;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -95,10 +96,10 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         });
 
 
-        long timeL = System.currentTimeMillis();
-        SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-mm-dd-hh-mm-ss");
-        String str = dayTime.format(new Date(timeL));
-        resultDateTime = str.split("-");
+        Calendar calendar = Calendar.getInstance();
+        Date dateL = calendar.getTime();
+        String str = new SimpleDateFormat("yyyy MM dd HH mm ss").format(dateL);
+        resultDateTime = str.split(" ");
 
         InsertBtnDay.setOnClickListener(new View.OnClickListener() {
             Dialog.Builder builder = null;
@@ -166,11 +167,11 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             if (bundle.containsKey("date")) date = bundle.getString("date");
             else date = resultDateTime[2];
             if (bundle.containsKey("AMPM")) AMPM = bundle.getString("AMPM");
-            else AMPM = resultDateTime[3];
+            else AMPM = "";
             if (bundle.containsKey("time")) time = bundle.getString("time");
-            else time = resultDateTime[4];
+            else time = resultDateTime[3];
             if (bundle.containsKey("minute")) minute = bundle.getString("minute");
-            else minute = resultDateTime[5];
+            else minute = resultDateTime[4];
             if (bundle.containsKey("account")) InsertTitle.setText(bundle.getString("account"));
             if (bundle.containsKey("money")) InsertMoney.setText(bundle.getString("money"));
             if (bundle.containsKey("product")) {

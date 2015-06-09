@@ -30,7 +30,6 @@ public class SpeechActivity extends Activity {
 
     LinkedList queue = new LinkedList();
 
-    private TextView result;
     private final int SPEAK_ACT = 1;
     private String store, product;
     private String str, token;
@@ -41,15 +40,7 @@ public class SpeechActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.speech_main);
 
-        result = (TextView) findViewById(R.id.speechResult);
-
-        findViewById(R.id.speechButton).setOnClickListener(new Button.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                voiceRecoder();
-            }
-        });
+        voiceRecoder();
     }
 
     public void voiceRecoder() {
@@ -97,13 +88,9 @@ public class SpeechActivity extends Activity {
                             CostToken(token);
 
 
+                        System.out.println("vectorCost1");
                     }
                     InsertCostInvectorCost(cost);
-
-/*
-
-*/
-
 
                 }
 
@@ -117,6 +104,7 @@ public class SpeechActivity extends Activity {
                                 ++resultCost1[h];
                             }
                         }
+                        System.out.println("vectorCost2");
                         if (resultCost1[5] < resultCost1[h]) {
                             resultCost1[5] = resultCost1[h];
                             trueResultCost = vectorCost.elementAt(h);
@@ -124,6 +112,7 @@ public class SpeechActivity extends Activity {
                     }
 
 
+                    System.out.println("vectorCost3");
 
                     if (!vectorProduct.isEmpty()) {
                         int[] resultProduct = new int[]{0, 0, 0, 0, 0, 0};
@@ -194,68 +183,130 @@ public class SpeechActivity extends Activity {
 
     public void CostToken(String costN) { //ASCII ---> 실제 숫자 + 48v
 
-        if (costN.endsWith("원")) costN = costN.replace("원", "");
+        try {
 
-        if (costN.isEmpty()) return;
-        else if ((costN.charAt(0) == '1') || (costN.charAt(0) == '2') || (costN.charAt(0) == '3') ||
-                (costN.charAt(0) == '4') || (costN.charAt(0) == '5') || (costN.charAt(0) == '6') ||
-                (costN.charAt(0) == '7') || (costN.charAt(0) == '8') || (costN.charAt(0) == '9')) {
-            if (costN.contains("만") || costN.contains("천") || costN.contains("백")) {
-                if (costN.endsWith("원")) costN = costN.replace("원", "");
-                switch (costN.charAt(1)) { // 십만 이상 고려 X 십원 단위 이하 고려 X
+            if (costN.endsWith("원")) costN = costN.replace("원", "");
+
+            if (costN.isEmpty()) return;
+            else if ((costN.charAt(0) == '1') || (costN.charAt(0) == '2') || (costN.charAt(0) == '3') ||
+                    (costN.charAt(0) == '4') || (costN.charAt(0) == '5') || (costN.charAt(0) == '6') ||
+                    (costN.charAt(0) == '7') || (costN.charAt(0) == '8') || (costN.charAt(0) == '9')) {
+                if (costN.contains("만") || costN.contains("천") || costN.contains("백")) {
+                    if (costN.endsWith("원")) costN = costN.replace("원", "");
+                    switch (costN.charAt(1)) { // 십만 이상 고려 X 십원 단위 이하 고려 X
+                        case '만':
+                            cost += ((int) costN.charAt(0) - 48) * 10000;
+                            break;
+                        case '천':
+                            cost += ((int) costN.charAt(0) - 48) * 1000;
+                            break;
+                        case '백':
+                            cost += ((int) costN.charAt(0) - 48) * 100;
+                            break;
+                        default:
+                            return;
+                    }
+                } else cost += Integer.valueOf(costN);
+                // 첫 글자가 문자인 경우
+            } else if (costN.contains("만")) {
+                switch (costN.charAt(0)) {
                     case '만':
-                        cost += ((int) costN.charAt(0) - 48) * 10000;
+                        cost += 10000;
                         break;
-                    case '천':
-                        cost += ((int) costN.charAt(0) - 48) * 1000;
+                    case '이':
+                        cost += 20000;
                         break;
-                    case '백':
-                        cost += ((int) costN.charAt(0) - 48) * 100;
+                    case '삼':
+                        cost += 30000;
+                        break;
+                    case '사':
+                        cost += 40000;
+                        break;
+                    case '오':
+                        cost += 50000;
+                        break;
+                    case '육':
+                        cost += 60000;
+                        break;
+                    case '칠':
+                        cost += 70000;
+                        break;
+                    case '팔':
+                        cost += 80000;
+                        break;
+                    case '구':
+                        cost += 90000;
                         break;
                     default:
-                        return;
+                        break;
                 }
-            } else cost += Integer.valueOf(costN);
-            // 첫 글자가 문자인 경우
-        } else if (costN.contains("만")) {
-            switch (costN.charAt(0)) {
-                case '만': cost += 10000; break;
-                case '이': cost += 20000; break;
-                case '삼': cost += 30000; break;
-                case '사': cost += 40000; break;
-                case '오': cost += 50000; break;
-                case '육': cost += 60000; break;
-                case '칠': cost += 70000; break;
-                case '팔': cost += 80000; break;
-                case '구': cost += 90000; break;
-                default: break;
+            } else if (costN.contains("천")) {
+                switch (costN.charAt(0)) {
+                    case '천':
+                        cost += 1000;
+                        break;
+                    case '이':
+                        cost += 2000;
+                        break;
+                    case '삼':
+                        cost += 3000;
+                        break;
+                    case '사':
+                        cost += 4000;
+                        break;
+                    case '오':
+                        cost += 5000;
+                        break;
+                    case '육':
+                        cost += 6000;
+                        break;
+                    case '칠':
+                        cost += 7000;
+                        break;
+                    case '팔':
+                        cost += 8000;
+                        break;
+                    case '구':
+                        cost += 9000;
+                        break;
+                    default:
+                        break;
+                }
+            } else if (costN.contains("백")) {
+                switch (costN.charAt(0)) {
+                    case '백':
+                        cost += 100;
+                        break;
+                    case '이':
+                        cost += 200;
+                        break;
+                    case '삼':
+                        cost += 300;
+                        break;
+                    case '사':
+                        cost += 400;
+                        break;
+                    case '오':
+                        cost += 500;
+                        break;
+                    case '육':
+                        cost += 600;
+                        break;
+                    case '칠':
+                        cost += 700;
+                        break;
+                    case '팔':
+                        cost += 800;
+                        break;
+                    case '구':
+                        cost += 900;
+                        break;
+                    default:
+                        break;
+                }
             }
-        } else if (costN.contains("천")) {
-            switch (costN.charAt(0)) {
-                case '천': cost += 1000; break;
-                case '이': cost += 2000; break;
-                case '삼': cost += 3000; break;
-                case '사': cost += 4000; break;
-                case '오': cost += 5000; break;
-                case '육': cost += 6000; break;
-                case '칠': cost += 7000; break;
-                case '팔': cost += 8000; break;
-                case '구': cost += 9000; break;
-                default: break;
-            }
-        } else if (costN.contains("백")) {
-            switch (costN.charAt(0)) {
-                case '백': cost += 100; break;
-                case '이': cost += 200; break;
-                case '삼': cost += 300; break;
-                case '사': cost += 400; break;
-                case '오': cost += 500; break;
-                case '육': cost += 600; break;
-                case '칠': cost += 700; break;
-                case '팔': cost += 800; break;
-                case '구': cost += 900; break;
-                default: break;
-            }
+        }catch(NumberFormatException e) {
+
         }
     }
 

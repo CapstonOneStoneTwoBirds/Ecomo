@@ -488,9 +488,9 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                 InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         Intent intent = new Intent(getApplicationContext(), SpeechActivity.class);
                         startActivity(intent);
-                        finish();
                         overridePendingTransition(R.anim.fade, R.anim.hold);
                     }
                 });
