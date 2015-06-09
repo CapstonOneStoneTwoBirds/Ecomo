@@ -95,6 +95,10 @@
             android:name=".privateHouseKeeping.OCR.abbyy.ocrsdk.android.OCRResultsActivity"
             android:label="영수증 스캔" >
         </activity>
+        <activity
+            android:name=".privateHouseKeeping.Speech.SpeechTestActivity"
+            android:label="음성 인식" >
+        </activity>
     </application>
 
 </manifest>
