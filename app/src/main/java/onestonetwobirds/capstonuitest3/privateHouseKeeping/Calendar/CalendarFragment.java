@@ -49,7 +49,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
     int TokenYear, TokenMonth, TokenDay;
     String result;
 
-    String year[], month[], date[], AMPM[], time[], minute[], account[], content[];
+    String year[], month[], date[], AMPM[], time[], minute[], account[], category[], content[];
     int money[];
 
     LayoutInflater infla;
@@ -157,6 +157,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                 int timeCol = cursor.getColumnIndex("time");
                 int minuteCol = cursor.getColumnIndex("minute");
                 int accountCol = cursor.getColumnIndex("account");
+                int categroyCol = cursor.getColumnIndex("category");
                 int moneyCol = cursor.getColumnIndex("money");
                 int contentCol = cursor.getColumnIndex("content");
 
@@ -167,6 +168,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                 time = new String[recordCount];
                 minute = new String[recordCount];
                 account = new String[recordCount];
+                category = new String[recordCount];
                 money = new int[recordCount];
                 content = new String[recordCount];
 
@@ -186,6 +188,7 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                         time[cursor.getPosition()] = cursor.getString(timeCol);
                         minute[cursor.getPosition()] = cursor.getString(minuteCol);
                         account[cursor.getPosition()] = cursor.getString(accountCol);
+                        category[cursor.getPosition()] = cursor.getString(categroyCol);
                         money[cursor.getPosition()] = cursor.getInt(moneyCol);
                         content[cursor.getPosition()] = cursor.getString(contentCol);
 
@@ -210,6 +213,8 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
 
                         //System.out.println("cursor ----> "+account[position]+" / "+category[position]+" / "+money[position]+" / "+content[position]);
 
+
+
                         Bundle bundle = new Bundle();
                         bundle.putString("year", year[(int) id]);
                         bundle.putString("month", month[(int) id]);
@@ -217,10 +222,9 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                         bundle.putString("AMPM", AMPM[(int)id]);
                         bundle.putString("time", time[(int)id]);
                         bundle.putString("minute", minute[(int)id]);
-                        bundle.putString("account", minute[(int)id]);
-                        bundle.putString("category", minute[(int) id]);
+                        bundle.putString("account", account[(int)id]);
+                        bundle.putString("category", category[(int) id]);
                         bundle.putInt("money", money[(int) id]);
-                        //bundle.putString("money", String.valueOf(money[position]));
                         bundle.putString("content", content[(int)id]);
 
                         // Intent로 새 액티비티 띄우기

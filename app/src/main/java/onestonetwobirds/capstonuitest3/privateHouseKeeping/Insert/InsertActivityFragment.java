@@ -46,9 +46,6 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     EditText InsertTitle, InsertMoney, InsertContent;
     Spinner InsertSpinner;
 
-    MyDatabase myDB;
-    SQLiteDatabase db;
-
     SnackBar mSnackBar;
 
     Bundle bundle;
@@ -56,8 +53,7 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
     private final String tag = "InsertActivity";
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.insert_main, container, false);
 
@@ -74,7 +70,6 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
 
         Intent intent = getActivity().getIntent();
         bundle = intent.getExtras();
-
 
         final String[] items = new String[5];
 
@@ -163,10 +158,13 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             else month = "00";
             if (bundle.containsKey("date")) date = bundle.getString("date");
             else date = "00";
-            if (bundle.containsKey("store")) InsertTitle.setText(bundle.getString("store"));
-            if (bundle.containsKey("cost")) InsertMoney.setText(bundle.getString("cost"));
+            if (bundle.containsKey("AMPM")) AMPM = bundle.getString("AMPM");
+            if (bundle.containsKey("time")) time = bundle.getString("time");
+            if (bundle.containsKey("minute")) minute = bundle.getString("minute");
+            if (bundle.containsKey("account")) InsertTitle.setText(bundle.getString("account"));
+            if (bundle.containsKey("money")) InsertMoney.setText(bundle.getString("money"));
             if (bundle.containsKey("product")) {
-                switch (bundle.getString("product")) {
+                switch (bundle.getString("category")) {
                     case "의류":
                         InsertSpinner.setSelection(1);
                         break;
@@ -197,6 +195,11 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             IsertTextDay.setText(setDate);
         }
 
+        if (AMPM != null) {
+            String setDate = AMPM + ""  + time + ":" + minute+":00";
+            IsertTextTime.setText(setDate);
+        }
+
         mSnackBar = ((InsertActivity) getActivity()).getSnackBar();
 
         return v;
@@ -214,9 +217,8 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             case R.id.insert_OK:
 
-
-                myDB = new MyDatabase(getActivity());
-                db = myDB.getWritableDatabase();
+                MyDatabase myDB = new MyDatabase(getActivity());
+                SQLiteDatabase db = myDB.getWritableDatabase();
 
                 if (InsertTitle.getText().toString().equals("")) // 누르면 이상한거 트는 문제 해결하셈
                     mSnackBar.applyStyle(R.style.SnackBarSingleLine)

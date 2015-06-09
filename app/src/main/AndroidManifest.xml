@@ -80,6 +80,10 @@
             android:label="가계부 입력" >
         </activity>
         <activity
+            android:name=".privateHouseKeeping.Insert.InsertConfrimActivity"
+            android:label="가계부 입력 확인" >
+        </activity>
+        <activity
             android:name=".privateHouseKeeping.Widget.NewWidgetActivity"
             android:label="위젯 입력" >
         </activity>

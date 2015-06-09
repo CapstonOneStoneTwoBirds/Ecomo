@@ -60,17 +60,35 @@ public class InsertConfrimActivity extends Activity {
 
         InsertConfirmMoney.setText(String.valueOf(MoneyB));
 
-        InsertConfrimOK.setOnClickListener(new View.OnClickListener() {
+
+        //System.out.println("cursor ----> " + AccountB + " / " + CategroyB + " / " + ContentB);
+
+
+        insesrtConfirmModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("year", YearB);
+                bundle.putString("month", MonthB);
+                bundle.putString("date", DateB);
+                bundle.putString("AMPM", AMPMB);
+                bundle.putString("time", TimeB);
+                bundle.putString("minute", MinuteB);
+                bundle.putString("account", AccountB);
+                bundle.putString("category", CategroyB);
+                bundle.putString("money", String.valueOf(MoneyB));
+                bundle.putString("content", ContentB);
+
                 Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
 
             }
         });
 
-        insesrtConfirmModify.setOnClickListener(new View.OnClickListener() {
+        InsertConfrimOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { finish(); }
         });
