@@ -43,19 +43,19 @@ public class IconTextViewGroup extends LinearLayout {
         inflater.inflate(R.layout.group_main_list, this, true);
 
         // Set Icon
-        mIcon = (ImageView) findViewById(R.id.iconItemBoBroom);
+        mIcon = (ImageView) findViewById(R.id.iconItemGroup);
         mIcon.setImageDrawable(aItem.getIcon());
 
         // Set Text 01
-        mText01 = (TextView) findViewById(R.id.dataItem01BoBroom);
+        mText01 = (TextView) findViewById(R.id.dataItem01Group);
         mText01.setText(aItem.getData(0));
 
         // Set Text 02
-        mText02 = (TextView) findViewById(R.id.dataItem02BoBroom);
+        mText02 = (TextView) findViewById(R.id.dataItem02Group);
         mText02.setText(aItem.getData(1));
 
         // Set Text 02
-        mText03 = (TextView) findViewById(R.id.dataItem03BoBroom);
+        mText03 = (TextView) findViewById(R.id.dataItem03Group);
         mText03.setText(aItem.getData(2));
 
     }
