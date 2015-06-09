@@ -1,8 +1,10 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -63,7 +65,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
     private SnackBar mSnackBar;
 
     private Tab[] mItems = new Tab[]{Tab.ANNOUNCE, Tab.CALENDAR, Tab.MEMBER};
-    private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
+    private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.GROUPOUT, Tab.LOGOUT};
 
     final private static int DIALOG_INSERT = 1;
 
@@ -192,6 +194,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
         PRIVATEINFO("개인 정보"),
         MANUFACTURERS("만든 이"),
+        GROUPOUT("그룹 탈퇴"),
         LOGOUT("로그아웃"),
         ANNOUNCE("ANNOUNCE"),
         CALENDAR("CALENDAR"),
@@ -307,7 +310,9 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                     DialogFragment diaFM = DialogFragment.newInstance(builder);
                     diaFM.show(fm, null);
                     break;
-                case 2:
+                case 2: // 그룹 탈퇴
+                    break;
+                case 3: // 로그아웃
                     break;
             }
         }
@@ -439,7 +444,11 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                 InsertOCRBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "OCR", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+                        Uri fileUri = PrivateMainActivity.getOutputMediaFileUri(); // create a file to save the image
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+                        startActivityForResult(intent, 0);
                     }
                 });
                 InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {

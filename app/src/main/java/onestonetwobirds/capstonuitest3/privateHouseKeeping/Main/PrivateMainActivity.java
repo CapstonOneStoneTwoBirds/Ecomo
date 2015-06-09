@@ -508,11 +508,11 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
 
     // 여기 아래부터는 OCR을 위한 method
 
-    private static Uri getOutputMediaFileUri(){
+    public static Uri getOutputMediaFileUri(){
         return Uri.fromFile(getOutputMediaFile());
     }
 
-    private static File getOutputMediaFile(){
+    public static File getOutputMediaFile(){
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_PICTURES), "ABBYY Cloud OCR SDK Demo App");

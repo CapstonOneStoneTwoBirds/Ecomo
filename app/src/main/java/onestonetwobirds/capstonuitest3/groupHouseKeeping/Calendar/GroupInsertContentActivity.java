@@ -52,7 +52,7 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
     private SnackBar mSnackBar;
 
     private Tab[] mItems = new Tab[]{Tab.INSERTCONTENT};
-    private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
+    private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.GROUPOUT, Tab.LOGOUT};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +142,7 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
         INSERTCONTENT("INSERTCONTENT"),
         PRIVATEINFO("개인 정보"),
         MANUFACTURERS("만든 이"),
+        GROUPOUT("그룹 탈퇴"),
         LOGOUT("로그아웃");
         private final String name;
 
@@ -241,7 +242,9 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
                     DialogFragment diaFM = DialogFragment.newInstance(builder);
                     diaFM.show(fm, null);
                     break;
-                case 2:
+                case 2: // 그룹 탈퇴
+                    break;
+                case 3: // 로그아웃
                     break;
             }
         }
