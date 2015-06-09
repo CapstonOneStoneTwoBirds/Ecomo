@@ -73,7 +73,9 @@ public class SignInActivity extends Activity {
                                     // success
                                     case "2":
                                         System.out.println("2 called");
-                                        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), KeySetActivity.class);
+                                        intent.putExtra("email", email.getText().toString());
+                                        finish();
                                         startActivity(intent);
                                 }
                             }

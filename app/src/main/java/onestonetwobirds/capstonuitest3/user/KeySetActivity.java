@@ -72,9 +72,10 @@ public class KeySetActivity extends Activity implements View.OnClickListener{
                                         "KEY 설정 완료", Toast.LENGTH_LONG);
                                 toastView.setGravity(Gravity.CENTER, 40, 25);
                                 toastView.show();
-
+                                finish();
                                 Intent intent = new Intent(getApplicationContext(), AfterLoginActivity.class);
                                 startActivity(intent);
+                                overridePendingTransition(R.anim.fade, R.anim.hold);
                             }
                         }
 
