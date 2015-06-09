@@ -285,6 +285,8 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
                     break;
                 case 1:
+
+
                     /*  제작자 정보
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
 
@@ -306,6 +308,8 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                     diaFM.show(fm, null);
                     */
 
+
+                    
                     /*  그룹 가계부 멤버 정보
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
 

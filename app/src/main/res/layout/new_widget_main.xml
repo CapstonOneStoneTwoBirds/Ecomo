@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/bt_5"
+    android:background="@drawable/ecomo_back2_50"
     android:orientation="vertical">
 
     <TextView
@@ -22,21 +22,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
-        android:background="#c0c0c0"
-        android:orientation="horizontal"
-        android:padding="0.2sp" />
 
     <com.rey.material.widget.Spinner
         android:id="@+id/spinner_widget"
@@ -54,14 +45,15 @@
         app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
         app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
         app:spn_arrowSwitchMode="true"
+        app:spn_labelTextColor="#FFFFFF"
         app:spn_label="카테고리"
         app:spn_labelEnable="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
@@ -76,6 +68,7 @@
         android:layout_marginTop="13sp"
         android:ems="10"
         android:hint="한계 금액"
+        android:textColorHint="#808080"
         android:inputType="textShortMessage"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
@@ -84,8 +77,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
@@ -102,7 +95,7 @@
 
         <com.rey.material.widget.Button
             android:id="@+id/Nwidget_OK"
-            style="@style/RaiseColorButtonRippleStyle"
+            style="@style/RaiseWaveButtonRippleStyle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10sp"
@@ -119,7 +112,7 @@
 
         <com.rey.material.widget.Button
             android:id="@+id/Nwidget_Cancel"
-            style="@style/RaiseColorButtonRippleStyle"
+            style="@style/RaiseWaveButtonRippleStyle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginRight="10sp"

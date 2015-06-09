@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bt_5"
+    android:background="@drawable/ecomo_back_50"
     android:orientation="vertical">
 
     <TextView
@@ -15,15 +15,15 @@
         android:layout_marginRight="40sp"
         android:layout_marginTop="40sp"
         android:gravity="center"
-        android:text="가계부 내용 확인"
+        android:text="가계부 입력 확인"
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
@@ -42,11 +42,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
+            android:layout_marginTop="5sp"
             android:layout_weight="0.4"
             android:gravity="center"
-            android:text="날짜"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="10sp"
+            android:text="날짜"
             android:textSize="15sp" />
 
         <View
@@ -57,13 +57,14 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="5sp"
             android:layout_weight="0.4"
             android:gravity="center"
-            android:text="시간"
             android:textColor="#FFFFFF"
-            android:layout_marginTop="10sp"
+            android:text="시간"
             android:textSize="15sp" />
+
 
     </LinearLayout>
 
@@ -78,7 +79,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/insert_confrim_text_day"
+            android:id="@+id/insert_confirm_text_day"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
@@ -93,7 +94,7 @@
             android:layout_weight="0.1" />
 
         <TextView
-            android:id="@+id/insert_confrim_text_time"
+            android:id="@+id/insert_confirm_text_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10sp"
@@ -107,87 +108,104 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
 
     <TextView
-        android:id="@+id/insert_confrim_title"
+        android:id="@+id/insert_confirm_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13sp"
         android:layout_marginLeft="40sp"
         android:layout_marginRight="40sp"
         android:layout_marginTop="13sp"
+        android:ems="10"
+        android:hint="지출 물건"
+        android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
 
     <TextView
-        android:id="@+id/insert_confrim_categroy"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10sp"
-        android:layout_weight="0.4"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
-        android:background="#c0c0c0"
-        android:orientation="horizontal"
-        android:padding="0.2sp" />
-
-    <TextView
-        android:id="@+id/insert_confrim_money"
+        android:id="@+id/insert_confirm_categroy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13sp"
         android:layout_marginLeft="40sp"
         android:layout_marginRight="40sp"
         android:layout_marginTop="13sp"
+        android:ems="10"
+        android:hint="지출 물건"
+        android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
 
     <TextView
-        android:id="@+id/insert_confrim_content"
+        android:id="@+id/insert_confirm_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="13sp"
         android:layout_marginLeft="40sp"
         android:layout_marginRight="40sp"
         android:layout_marginTop="13sp"
+        android:ems="10"
+        android:hint="금액"
+        android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <TextView
+        android:id="@+id/insert_confirm_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="13sp"
+        android:ems="100"
+        android:hint="상세 내역"
+        android:inputType="textShortMessage"
+        android:textColorHint="#808080"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
@@ -203,13 +221,13 @@
         android:orientation="horizontal">
 
         <com.rey.material.widget.Button
-            android:id="@+id/insert_confrim_OK"
+            android:id="@+id/insert_confirm_OK"
             style="@style/RaiseWaveButtonRippleStyle"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginLeft="10sp"
             android:layout_weight="0.4"
-            android:text="입력"
+            android:text="확인"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
             android:textColor="#000000"
             app:rd_delayClick="afterRelease" />
@@ -226,7 +244,7 @@
             android:layout_height="40dp"
             android:layout_marginRight="10sp"
             android:layout_weight="0.4"
-            android:text="취소"
+            android:text="수정"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
             android:textColor="#000000"
             app:rd_delayClick="afterRelease" />

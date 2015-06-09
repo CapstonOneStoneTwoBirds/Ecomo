@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bt_5"
+    android:background="@drawable/ecomo_back_50"
     android:orientation="vertical">
 
     <TextView
@@ -22,8 +22,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
@@ -109,8 +109,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
@@ -126,14 +126,15 @@
         android:ems="10"
         android:hint="지출 물건"
         android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
@@ -154,14 +155,15 @@
         app:spn_arrowAnimDuration="@android:integer/config_shortAnimTime"
         app:spn_arrowInterpolator="@android:anim/decelerate_interpolator"
         app:spn_arrowSwitchMode="true"
+        app:spn_labelTextColor="#FFFFFF"
         app:spn_label="지출 종류"
         app:spn_labelEnable="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
@@ -177,14 +179,15 @@
         android:ems="10"
         android:hint="금액"
         android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.2sp" />
@@ -200,14 +203,15 @@
         android:ems="100"
         android:hint="상세 내역"
         android:inputType="textShortMessage"
+        android:textColorHint="#808080"
         android:textColor="#FFFFFF"
         android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24sp"
-        android:layout_marginRight="24sp"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
         android:background="#c0c0c0"
         android:orientation="horizontal"
         android:padding="0.05sp" />
