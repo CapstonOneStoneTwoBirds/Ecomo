@@ -127,35 +127,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                                     @Override
                                     public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
                                         // 여기에다 코딩
-                                        RequestParams param = new RequestParams();
-                                        param.put("groupid", group_id);
-                                        param.put("email", email_edt.getText().toString());
 
-                                        // email에 초대를 날리는거 gcm으로. 작성하자.
-                                        HttpClient.post("inviteMember/", param, new AsyncHttpResponseHandler() {
-                                            @Override
-                                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                Log.e("WriteMemberActivity |||| ", new String(responseBody));
-                                                if (new String(responseBody).equals("all done")) {
-
-                                                } else if (new String(responseBody).equals("already existed member")) {
-                                                    Toast toastView = Toast.makeText(getActivity(),
-                                                            new String(responseBody), Toast.LENGTH_LONG);
-                                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                                    toastView.show();
-                                                } else if (new String(responseBody).equals("non-existed email")) {
-                                                    Toast toastView = Toast.makeText(getActivity(),
-                                                            new String(responseBody), Toast.LENGTH_LONG);
-                                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                                    toastView.show();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                System.out.println("Invite GCM send error");
-                                            }
-                                        });
 
                                         onResume();
                                         super.onPositiveActionClicked(fragment);
@@ -234,7 +206,35 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(멤버 추가)
 
                         // 여기에다 코딩
+                        RequestParams param = new RequestParams();
+                        param.put("groupid", group_id);
+                        param.put("email", email_edt.getText().toString());
 
+                        // email에 초대를 날리는거 gcm으로. 작성하자.
+                        HttpClient.post("inviteMember/", param, new AsyncHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                Log.e("WriteMemberActivity |||| ", new String(responseBody));
+                                if (new String(responseBody).equals("all done")) {
+
+                                } else if (new String(responseBody).equals("already existed member")) {
+                                    Toast toastView = Toast.makeText(getActivity(),
+                                            new String(responseBody), Toast.LENGTH_LONG);
+                                    toastView.setGravity(Gravity.CENTER, 40, 25);
+                                    toastView.show();
+                                } else if (new String(responseBody).equals("non-existed email")) {
+                                    Toast toastView = Toast.makeText(getActivity(),
+                                            new String(responseBody), Toast.LENGTH_LONG);
+                                    toastView.setGravity(Gravity.CENTER, 40, 25);
+                                    toastView.show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                System.out.println("Invite GCM send error");
+                            }
+                        });
                         onResume();
                         super.onPositiveActionClicked(fragment);
                     }

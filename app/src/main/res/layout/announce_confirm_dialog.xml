@@ -6,28 +6,61 @@
     android:layout_margin="10sp"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="70sp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="10sp"
+            android:text="title"/>
+        <TextView
         android:id="@+id/announce_confirm_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#ffffff"
-        android:layout_margin="10sp"
-        android:text="title"/>
+        android:layout_margin="10sp"/>
 
-    <TextView
-        android:id="@+id/announce_confirm_place"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:layout_margin="10sp"
-        android:text="place"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/announce_confirm_content"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
-        android:layout_margin="10sp"
-        android:text="content"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="70sp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="10sp"
+            android:text="title"/>
+        <TextView
+            android:id="@+id/announce_confirm_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="10sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="70sp"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_margin="10sp"
+            android:text="title"/>
+        <TextView
+            android:id="@+id/announce_confirm_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#ffffff"
+            android:layout_margin="10sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
