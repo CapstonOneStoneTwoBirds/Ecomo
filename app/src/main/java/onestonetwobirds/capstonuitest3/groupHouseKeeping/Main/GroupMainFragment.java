@@ -93,9 +93,12 @@ public class GroupMainFragment extends Fragment {
                                     Intent intent = new Intent(v.getContext(), InGroupActivity.class);
                                     intent.putExtra("group_id", obj.get("_id").toString());
                                     startActivity(intent);
-                                }catch(JSONException e){}
+                                } catch (JSONException e) {
+                                }
                             }
                         });
+
+                        lv_main.setAdapter(adapter);                       // DrawerLayout ������
                     }
                 } catch (JSONException e) {
                     System.out.println(e);
@@ -108,7 +111,6 @@ public class GroupMainFragment extends Fragment {
             }
         });
 
-        lv_main.setAdapter(adapter);                       // DrawerLayout ������
         return v;
     }
 

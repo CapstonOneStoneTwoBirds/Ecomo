@@ -84,6 +84,10 @@
             android:label="그룹 가계부" >
         </activity>
         <activity
+            android:name=".groupHouseKeeping.Announce.WriteAnnounceActivity"
+            android:label="그룹 가계부" >
+        </activity>
+        <activity
             android:name=".groupHouseKeeping.Calendar.GroupInsertContentActivity"
             android:label="그룹 가계부" >
         </activity>

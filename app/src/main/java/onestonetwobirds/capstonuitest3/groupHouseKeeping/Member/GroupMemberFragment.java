@@ -99,7 +99,10 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                             adapterMember.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
                         }
                     }
-                    //listMember.setAdapter(adapterMember);
+
+                    listMember.setAdapter(adapterMember);
+                    listMe.setAdapter(adapterMe);
+                    listKing.setAdapter(adapterKing);
 
                     listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -107,7 +110,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                             try {
                                 JSONObject obj = new JSONObject(member.get(position).toString());
 
-                                System.out.println("members Click OK " );
+                                System.out.println("members Click OK ");
 
                                 // 누르면 다이얼로그 뜨는게 좋을듯.
                                 /*
@@ -117,6 +120,22 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                                 */
                             } catch (JSONException e) {
                             }
+                        }
+                    });
+
+                    listMe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                            final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMe.getItem(position);
+
+                        }
+                    });
+
+                    listKing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                            final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterKing.getItem(position);
+
                         }
                     });
 
@@ -140,36 +159,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                 System.out.println("error message 1 : " + error);
             }
         });
-
-        listMember.setAdapter(adapterMember);
-        listMe.setAdapter(adapterMe);
-        listKing.setAdapter(adapterKing);
-
-        listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMember.getItem(position);
-
-            }
-        });
-
-        listMe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMe.getItem(position);
-
-            }
-        });
-
-        listKing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterKing.getItem(position);
-
-            }
-        });
-
-
         mSnackBar = ((InGroupActivity) getActivity()).getSnackBar();
 
         NewMemberButton.setOnClickListener(this);
