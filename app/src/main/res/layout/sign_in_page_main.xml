@@ -91,7 +91,7 @@
 
     <com.rey.material.widget.Button
         android:id="@+id/bt_sign_in"
-        style="@style/FlatButtonRippleStyle"
+        style="@style/FlatWaveColorButtonRippleStyle"
         android:layout_width="120sp"
         android:layout_height="@dimen/bt_height"
         android:layout_marginTop="20dp"

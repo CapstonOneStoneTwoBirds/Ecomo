@@ -92,7 +92,7 @@
 
 
     <com.rey.material.widget.Button
-        style="@style/FlatButtonRippleStyle"
+        style="@style/FlatWaveColorButtonRippleStyle"
         android:id="@+id/key_set_btn"
         android:layout_width="120sp"
         android:layout_height="@dimen/bt_height"

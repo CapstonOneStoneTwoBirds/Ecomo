@@ -294,7 +294,6 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                 case 1:
 
 
-                    /*  제작자 정보
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
 
                         @Override
@@ -313,7 +312,7 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
                     FragmentManager fm = getSupportFragmentManager();
                     DialogFragment diaFM = DialogFragment.newInstance(builder);
                     diaFM.show(fm, null);
-                    */
+
 
 
                     
