@@ -19,6 +19,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.rey.material.widget.SnackBar;
 
 import org.apache.http.Header;
 import org.apache.http.entity.StringEntity;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.control.BackPressCloseHandler;
 import onestonetwobirds.capstonuitest3.gcm.PreferenceUtil;
 import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
@@ -47,9 +49,15 @@ public class StartActivity extends Activity implements View.OnClickListener{
     Button button1, button2, button3, button4;
     EditText email;
     EditText pw;
+
+    private BackPressCloseHandler backPressCloseHandler;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         SharedPreferences mPreference;
         mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
@@ -81,7 +89,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
 
         /////////////////////// GCM Start
 
-        // google play service°¡ »ç¿ë°¡´ÉÇÑ°¡
+        // google play serviceï¿½ï¿½ ï¿½ï¿½ë°¡ï¿½ï¿½ï¿½Ñ°ï¿½
         if (checkPlayServices())
         {
             _gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
@@ -150,6 +158,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
                         }catch(JSONException e){}
 
                         if(code.length()==4){
+
                             Intent intent = new Intent(StartActivity.this, KeyCheckActivity.class);
                             intent.putExtra("email", email);
                             startActivity(intent);
@@ -173,10 +182,8 @@ public class StartActivity extends Activity implements View.OnClickListener{
         } catch (UnsupportedEncodingException e) { }
     }
     @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.fade, R.anim.hold);
-    }
+    public void onBackPressed() { backPressCloseHandler.onBackPressed(); }
+
     @Override
     protected void onNewIntent(Intent intent)
     {
@@ -187,7 +194,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         Log.i("MainActivity.java | onNewIntent", "|" + msg + "|");
     }
 
-    // google play service°¡ »ç¿ë°¡´ÉÇÑ°¡
+    // google play serviceï¿½ï¿½ ï¿½ï¿½ë°¡ï¿½ï¿½ï¿½Ñ°ï¿½
     private boolean checkPlayServices()
     {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -207,7 +214,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         return true;
     }
 
-    // registration  id¸¦ °¡Á®¿Â´Ù.
+    // registration  idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
     private String getRegistrationId()
     {
         String registrationId = PreferenceUtil.instance(getApplicationContext()).regId();
@@ -226,7 +233,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         return registrationId;
     }
 
-    // app versionÀ» °¡Á®¿Â´Ù. ¹¹¿¡ ¾²´Â°ÇÁö´Â ¸ð¸£°Ú´Ù.
+    // app versionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ð¸£°Ú´ï¿½.
     private int getAppVersion()
     {
         try
@@ -241,7 +248,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    // gcm ¼­¹ö¿¡ Á¢¼ÓÇØ¼­ registration id¸¦ ¹ß±Þ¹Þ´Â´Ù.
+    // gcm ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ registration idï¿½ï¿½ ï¿½ß±Þ¹Þ´Â´ï¿½.
     private void registerInBackground()
     {
         new AsyncTask<Void, Void, String>()
@@ -287,7 +294,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
         }.execute(null, null, null);
     }
 
-    // registraion id¸¦ preference¿¡ ÀúÀåÇÑ´Ù.
+    // registraion idï¿½ï¿½ preferenceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
     private void storeRegistrationId(String regId)
     {
         int appVersion = getAppVersion();
@@ -327,4 +334,5 @@ public class StartActivity extends Activity implements View.OnClickListener{
                 break;
         }
     }
+
 }

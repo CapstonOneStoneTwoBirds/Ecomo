@@ -41,6 +41,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.control.BackPressCloseHandler;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup.CreateGroupActivity;
 import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
@@ -65,6 +66,8 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     private ToolbarManager mToolbarManager;
     private SnackBar mSnackBar;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
     private Tab[] mItems = new Tab[]{Tab.INSERTCONTENT};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.LOGOUT};
 
@@ -76,6 +79,8 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         email = mPreference.getString("email", "");
 
         setContentView(R.layout.group_activity_main);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.group_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.group_fl_drawer);
@@ -390,4 +395,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
             return mFragments.length;
         }
     }
+
+    @Override
+    public void onBackPressed() { backPressCloseHandler.onBackPressed(); }
 }

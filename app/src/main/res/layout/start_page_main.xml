@@ -103,4 +103,12 @@
         android:text="Jump to Private"
         android:id="@+id/temp_btn"
         android:layout_gravity="center_horizontal" />
+
+
+    <com.rey.material.widget.SnackBar
+        android:id="@+id/start_sn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom"/>
 </LinearLayout>

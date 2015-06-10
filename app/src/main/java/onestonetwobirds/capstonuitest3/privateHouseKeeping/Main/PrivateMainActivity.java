@@ -42,6 +42,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.control.BackPressCloseHandler;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.GroupMainActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Calendar.CalendarFragment;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.CurrentStateConfirm.CurrentConditionFragment;
@@ -73,12 +74,16 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
 
     final private static int DIALOG_INSERT = 1;
 
+    private BackPressCloseHandler backPressCloseHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.private_activity_main);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.main_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.main_fl_drawer);
@@ -586,4 +591,7 @@ public class PrivateMainActivity extends ActionBarActivity implements ToolbarMan
         results.putExtra("RESULT_PATH", "result.txt");
         startActivity(results);
     }
+
+    @Override
+    public void onBackPressed() { backPressCloseHandler.onBackPressed(); }
 }

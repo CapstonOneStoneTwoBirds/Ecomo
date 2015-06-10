@@ -60,6 +60,7 @@ public class KeyCheckActivity extends Activity implements View.OnClickListener{
                     System.out.println("here");
                     startActivity(new Intent(getApplicationContext(), AfterLoginActivity.class));
                     overridePendingTransition(R.anim.fade, R.anim.hold);
+                    finish();
                 }
             }
 
