@@ -60,7 +60,7 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActiv
 public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
     // 기터브 커밋 ㅎㅎ
-
+    private String tag = "InGroupActivity";
     private DrawerLayout dl_navigator;      // 우측에 리스트 화면 뜨는 거
     private FrameLayout fl_drawer;          // 프레임 레이아웃
     private ListView lv_drawer;
@@ -85,6 +85,14 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.in_group_main);
+
+        String group_id = getIntent().getStringExtra("group_id");
+        Log.e(tag, "group_id : " + group_id);
+
+        SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreference.edit();
+        editor.putString("group_id", group_id);
+        editor.commit();
 
         dl_navigator = (DrawerLayout) findViewById(R.id.main_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.main_fl_drawer);

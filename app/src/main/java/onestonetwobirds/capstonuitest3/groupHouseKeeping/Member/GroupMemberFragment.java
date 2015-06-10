@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,12 +37,16 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
  * Created by YeomJi on 15. 6. 7..
  */
 public class GroupMemberFragment extends Fragment implements View.OnClickListener {
-
+    String tag = "GruopMemberFragment";
     SnackBar mSnackBar;
+    String group_id;
+
 
     ListView listMember, listMe, listKing;
     IconTextListAdapterMember adapterMember, adapterMe, adapterKing;
-
+    public void setGroup_id(String _id){
+        group_id = _id;
+    }
 
     public static GroupMemberFragment newInstance() {
         GroupMemberFragment fragment = new GroupMemberFragment();
@@ -56,6 +61,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
         final SharedPreferences mPreference;
         mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
+        String group_id = mPreference.getString("group_id", "");
 
         // 그룹 멤버 리스트
         listMember = (ListView) v.findViewById(R.id.group_member_list);
@@ -70,7 +76,8 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         adapterKing = new IconTextListAdapterMember(getActivity());
 
         RequestParams param = new RequestParams();
-        //param.add("groupid", _id); // 가져와야한다.
+        param.add("groupid", group_id); // 가져와야한다.
+        Log.e(tag, "Test Here T_T");
 
         HttpClient.post("getMemberList/", param, new AsyncHttpResponseHandler() {
             @Override
@@ -81,13 +88,14 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     //arrListInsert.add(result);
                     for (int i = 0; i < member.length(); i++) {
                         JSONObject got = new JSONObject(member.get(i).toString());
-                        if(got.get("ownership").toString().equals("true")){
+                        if (got.get("ownership").toString().equals("true")) {
+                            Log.e(tag, "Here1");
                             adapterKing.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
-                        }
-                        else if(got.get("member").toString().equals(mPreference.getString("email", "") )){
+                        } else if (got.get("member").toString().equals(mPreference.getString("email", "")) && !got.get("ownership").toString().equals("true")) {
                             adapterMe.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
-                        }
-                        else {
+                            Log.e(tag, "Here2");
+                        } else {
+                            Log.e(tag, "Here3");
                             adapterMember.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
                         }
                     }
@@ -131,6 +139,10 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
             }
         });
 
+        listMember.setAdapter(adapterMember);
+        listMe.setAdapter(adapterMe);
+        listKing.setAdapter(adapterKing);
+
         listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -156,9 +168,9 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         });
 
 
-            mSnackBar = ((InGroupActivity) getActivity()).getSnackBar();
+        mSnackBar = ((InGroupActivity) getActivity()).getSnackBar();
 
-            NewMemberButton.setOnClickListener(this);
+        NewMemberButton.setOnClickListener(this);
         return v;
     }
 

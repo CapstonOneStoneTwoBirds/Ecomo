@@ -68,7 +68,7 @@ public class GroupMainFragment extends Fragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
-                    JSONArray jsonarr = new JSONArray(new String(responseBody));
+                    final JSONArray jsonarr = new JSONArray(new String(responseBody));
                     Log.e("GroupMainActivity", "Post count: " + jsonarr.length());
 
                     if (jsonarr.length() != 0) {
@@ -83,6 +83,19 @@ public class GroupMainFragment extends Fragment {
                                 //adaptor.addItem(new IconTextItemGroup(, got.get("groupname").toString()));
                             }
                         }
+
+                        lv_main.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                                final IconTextItemGroup curItem = (IconTextItemGroup) adapter.getItem(position);
+                                try {
+                                    JSONObject obj = new JSONObject(jsonarr.get(position).toString());
+                                    Intent intent = new Intent(v.getContext(), InGroupActivity.class);
+                                    intent.putExtra("group_id", obj.get("_id").toString());
+                                    startActivity(intent);
+                                }catch(JSONException e){}
+                            }
+                        });
                     }
                 } catch (JSONException e) {
                     System.out.println(e);
