@@ -103,13 +103,13 @@ public class GroupAnnounceFragment extends Fragment{
 
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
-                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                try{
+                            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                                try {
                                     final JSONObject jsonobj = new JSONObject(announces.get(position).toString());
                                     RequestParams param = new RequestParams();
-                                    try {
-                                        param.add("announce_id", jsonobj.get("_id").toString());
-                                    }catch(JSONException e){}
+
+                                    param.add("announce_id", jsonobj.get("_id").toString());
+
 
                                     HttpClient.post("getAnnounce/", param, new AsyncHttpResponseHandler() {
                                         @Override
@@ -136,34 +136,33 @@ public class GroupAnnounceFragment extends Fragment{
                                             System.out.println("error message : " + error);
                                         }
                                     });
-
-                                    Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
-
-                                        @Override
-                                        protected void onBuildDone(Dialog dialog) {
-                                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                                        }
-
-                                        @Override
-                                        public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
-                                            // 여기에다 코딩
-
-                                            onResume();
-                                            super.onPositiveActionClicked(fragment);
-                                        }
-
-                                    };
-
-
-                                    builder.title("공지 확인")
-                                            .positiveAction("OK")
-                                            .contentView(R.layout.announce_confirm_dialog);
-
-                                    FragmentManager fm = getFragmentManager();
-                                    DialogFragment diaFM = DialogFragment.newInstance(builder);
-                                    diaFM.show(fm, null);
                                 }catch(JSONException e){}
+
+                                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+                                    @Override
+                                    protected void onBuildDone(Dialog dialog) {
+                                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                    }
+
+                                    @Override
+                                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+                                        // 여기에다 코딩
+
+                                        onResume();
+                                        super.onPositiveActionClicked(fragment);
+                                    }
+
+                                };
+
+
+                                builder.title("공지 확인")
+                                        .positiveAction("OK")
+                                        .contentView(R.layout.announce_confirm_dialog);
+
+                                FragmentManager fm = getFragmentManager();
+                                DialogFragment diaFM = DialogFragment.newInstance(builder);
+                                diaFM.show(fm, null);
                             }
                         });
                     } else {
