@@ -44,7 +44,6 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
     AnnounceListAdapter announceListAdapter;
 
     SnackBar mSnackBar;
-    EditText NAnnounceTitle, NAnnouncePlace, NAnnounceContent;
     TextView CAnnounceTitle, CAnnouncePlace, CAnnounceContent;
 
     public static GroupAnnounceFragment newInstance() {
@@ -60,10 +59,6 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
         Button NewAnnounceButton = (Button) v.findViewById(R.id.new_announce_btn);
         listView = (ListView) v.findViewById(R.id.group_announce_list);
 
-
-        NAnnounceTitle = (EditText) v.findViewById(R.id.new_announce_title);
-        NAnnouncePlace = (EditText) v.findViewById(R.id.new_announce_place);
-        NAnnounceContent = (EditText) v.findViewById(R.id.new_announce_content);
 
         CAnnounceTitle = (TextView) v.findViewById(R.id.announce_confirm_title);
         CAnnouncePlace = (TextView) v.findViewById(R.id.announce_confirm_place);
