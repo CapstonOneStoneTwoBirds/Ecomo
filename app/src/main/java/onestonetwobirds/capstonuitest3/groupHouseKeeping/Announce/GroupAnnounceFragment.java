@@ -8,31 +8,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.EditText;
-import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
-import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.InGroupActivity;
-import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 
 /**
  * Created by YeomJi on 15. 6. 7..
@@ -40,8 +32,12 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 public class GroupAnnounceFragment extends Fragment implements View.OnClickListener {
 
     ListView listView;
+    ArrayList<ExamEntity> announceArrayList;
+    AnnounceListAdapter announceListAdapter;
+
     SnackBar mSnackBar;
     EditText NAnnounceTitle, NAnnouncePlace, NAnnounceContent;
+    TextView CAnnounceTitle, CAnnouncePlace, CAnnounceContent;
 
     public static GroupAnnounceFragment newInstance() {
         GroupAnnounceFragment fragment = new GroupAnnounceFragment();
@@ -60,6 +56,89 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
         NAnnounceTitle = (EditText) v.findViewById(R.id.new_announce_title);
         NAnnouncePlace = (EditText) v.findViewById(R.id.new_announce_place);
         NAnnounceContent = (EditText) v.findViewById(R.id.new_announce_content);
+
+        CAnnounceTitle = (TextView) v.findViewById(R.id.announce_confirm_title);
+        CAnnouncePlace = (TextView) v.findViewById(R.id.announce_confirm_place);
+        CAnnounceContent = (TextView) v.findViewById(R.id.announce_confirm_content);
+
+
+        announceArrayList = new ArrayList<ExamEntity>();
+        announceListAdapter = new AnnounceListAdapter(getActivity().getApplicationContext(),
+                announceArrayList, R.layout.group_announce_list);
+
+        listView.setAdapter(announceListAdapter);
+
+        // 이부분에 데이터 삽입 ----------------------------------------------------
+
+            for (int itemCount = 0; itemCount < 20; itemCount++) {
+                ExamEntity mExamEntity = new ExamEntity();
+
+                mExamEntity.title = "Title : " + itemCount;
+                mExamEntity.title = "Title : " + itemCount;
+                mExamEntity.content = "Content : " + itemCount;
+
+                announceArrayList.add(mExamEntity);
+
+            }
+
+            announceListAdapter.notifyDataSetChanged();
+
+        // --------------------------------------------------------------------
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /*
+                try {
+                    JSONObject obj = new JSONObject(announces.get(position).toString());
+
+                    Intent intent = new Intent(getActivity().getApplicationContext(), GroupAnnounceActivity.class);
+                    intent.putExtra("jsonobject", obj.toString());
+                    startActivity(intent);
+
+                    Toast toastView = Toast.makeText(getApplicationContext(),
+                          obj.get("title").toString(), Toast.LENGTH_LONG);
+                    toastView.setGravity(Gravity.CENTER, 40, 25);
+                    toastView.show();
+
+                } catch (JSONException e) {
+                }
+                */
+                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                    @Override
+                    protected void onBuildDone(Dialog dialog) {
+                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        // 이런식으로...
+                        //CAnnounceTitle.setText(obj.get("title"));
+                    }
+
+                    @Override
+                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+                        // 여기에다 코딩
+
+                        onResume();
+                        super.onPositiveActionClicked(fragment);
+                    }
+
+                };
+
+                builder.title("공지 확인")
+                        .positiveAction("OK")
+                        .contentView(R.layout.announce_confirm_dialog);
+
+                FragmentManager fm = getFragmentManager();
+                DialogFragment diaFM = DialogFragment.newInstance(builder);
+                diaFM.show(fm, null);
+            }
+        });
+
+
+
+        
+        /*
+
 
         _id = getIntent().getStringExtra("groupid");
         System.out.println("_id : " + _id);
@@ -89,12 +168,12 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
                                     Intent intent = new Intent(getApplicationContext(), GroupAnnounceCActivity.class);
                                     intent.putExtra("jsonobject", obj.toString());
                                     startActivity(intent);
-                                    /*
-                                    Toast toastView = Toast.makeText(getApplicationContext(),
-                                            obj.get("title").toString(), Toast.LENGTH_LONG);
-                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                    toastView.show();
-                                    */
+
+                                    //Toast toastView = Toast.makeText(getApplicationContext(),
+                                      //      obj.get("title").toString(), Toast.LENGTH_LONG);
+                                    //toastView.setGravity(Gravity.CENTER, 40, 25);
+                                    //toastView.show();
+
                                 } catch (JSONException e) {
                                 }
                             }
@@ -115,6 +194,8 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
             }
         });
 
+
+*/
 
 
 
@@ -162,6 +243,8 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
         }
 
     }
+
+    
 
     @Override
     public void onPause() { super.onPause(); }

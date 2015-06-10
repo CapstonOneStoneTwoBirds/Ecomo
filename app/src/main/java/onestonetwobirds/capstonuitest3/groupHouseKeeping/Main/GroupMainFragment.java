@@ -95,7 +95,7 @@ public class GroupMainFragment extends Fragment {
             }
         });
 
-        lv_main.setAdapter(adapter);                       // DrawerLayout º¸¿©Áà
+        lv_main.setAdapter(adapter);                       // DrawerLayout ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         return v;
     }
 

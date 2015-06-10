@@ -106,8 +106,7 @@ public class WidgetFragment extends Fragment implements View.OnClickListener {
                 cursor.moveToFirst();
                 String[] from = new String[]{"title", "goal", "acc"};
                 int[] to = new int[]{R.id.lf_tv_title, R.id.lf_tv_goal, R.id.lf_tv_acc};
-                final SimpleCursorAdapter adapter = new SimpleCursorAdapter(
-                        listView.getContext(), R.layout.widget_list, cursor, from, to);
+                final SimpleCursorAdapter adapter = new SimpleCursorAdapter(listView.getContext(), R.layout.widget_list, cursor, from, to);
 
                 listView.setAdapter(adapter);
             } else
