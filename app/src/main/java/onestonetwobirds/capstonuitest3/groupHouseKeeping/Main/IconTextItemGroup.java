@@ -39,6 +39,19 @@ public class IconTextItemGroup {
      *
      * @param icon
      * @param obj01
+     */
+    public IconTextItemGroup(Drawable icon, String obj01) {
+        mIcon = icon;
+
+        mData = new String[1];
+        mData[0] = obj01;
+    }
+
+    /**
+     * Initialize with icon and strings
+     *
+     * @param icon
+     * @param obj01
      * @param obj02
      * @param obj03
      */

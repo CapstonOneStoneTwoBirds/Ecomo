@@ -2,6 +2,7 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,6 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
@@ -28,11 +32,17 @@ import com.rey.material.util.ThemeUtil;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup.CreateGroupActivity;
+import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.user.MyInfoActivity;
@@ -63,7 +73,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         super.onCreate(savedInstanceState);
         SharedPreferences mPreference;
         mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
-        email = mPreference.getString("email","");
+        email = mPreference.getString("email", "");
 
         setContentView(R.layout.group_activity_main);
 
@@ -91,7 +101,6 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
             }
         });
 
-
         mToolbarManager = new ToolbarManager(this, mToolbar, 0, R.style.ToolbarRippleStyle, R.anim.abc_fade_in, R.anim.abc_fade_out);
         mToolbarManager.setNavigationManager(new ToolbarManager.BaseNavigationManager(R.style.NavigationDrawerDrawable, this, mToolbar, dl_navigator) {
             @Override
@@ -114,16 +123,20 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
 
         });
         mToolbarManager.registerOnToolbarGroupChangedListener(this);
-
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
         vp.setAdapter(mPagerAdapter);
+
+
+
         mDrawerAdapter = new DrawerAdapter();
         lv_drawer.setAdapter(mDrawerAdapter);                       // DrawerLayout 보여줘
 
-
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
         mDrawerAdapter.setSelected(Tab.PRIVATEINFO);           // 디폴트 값 progress로 설정
         vp.setCurrentItem(0);
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

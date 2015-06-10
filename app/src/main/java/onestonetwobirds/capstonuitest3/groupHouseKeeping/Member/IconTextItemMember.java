@@ -40,7 +40,7 @@ public class IconTextItemMember {
      * @param icon
      * @param obj01
      */
-    public IconTextItemMember(Drawable icon, String obj01, String obj02, String obj03) {
+    public IconTextItemMember(Drawable icon, String obj01) {
         mIcon = icon;
 
         mData = new String[3];
