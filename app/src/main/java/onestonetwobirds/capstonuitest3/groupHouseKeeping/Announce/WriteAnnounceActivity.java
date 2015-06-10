@@ -3,6 +3,7 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +26,9 @@ public class WriteAnnounceActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_announce_write);
-
-
+        final SharedPreferences mPreference;
+        mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+        final String group_id = mPreference.getString("group_id", "");
 
         Button confirm = (Button)findViewById(R.id.announce_write_btn);
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +40,7 @@ public class WriteAnnounceActivity extends Activity{
                 System.out.println("title 1: " + titleedt.getText().toString());
 
                 RequestParams param = new RequestParams();
-                param.put("groupid", getIntent().getStringExtra("groupid"));
+                param.put("groupid", group_id);
                 param.put("title", titleedt.getText().toString());
                 param.put("content", contentedt.getText().toString());
 

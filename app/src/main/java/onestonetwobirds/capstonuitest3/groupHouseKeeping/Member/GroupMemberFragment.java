@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -39,14 +42,12 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 public class GroupMemberFragment extends Fragment implements View.OnClickListener {
     String tag = "GruopMemberFragment";
     SnackBar mSnackBar;
-    String group_id;
+    String group_id="";
 
+    EditText email_edt;
 
     ListView listMember, listMe, listKing;
     IconTextListAdapterMember adapterMember, adapterMe, adapterKing;
-    public void setGroup_id(String _id){
-        group_id = _id;
-    }
 
     public static GroupMemberFragment newInstance() {
         GroupMemberFragment fragment = new GroupMemberFragment();
@@ -58,10 +59,11 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_group_member, container, false);
         Button NewMemberButton = (Button) v.findViewById(R.id.new_member_btn);
+        email_edt = (EditText)v.findViewById(R.id.new_announce_content);
 
         final SharedPreferences mPreference;
         mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
-        String group_id = mPreference.getString("group_id", "");
+        group_id = mPreference.getString("group_id", "");
 
         // 그룹 멤버 리스트
         listMember = (ListView) v.findViewById(R.id.group_member_list);
@@ -125,6 +127,35 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                                     @Override
                                     public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
                                         // 여기에다 코딩
+                                        RequestParams param = new RequestParams();
+                                        param.put("groupid", group_id);
+                                        param.put("email", email_edt.getText().toString());
+
+                                        // email에 초대를 날리는거 gcm으로. 작성하자.
+                                        HttpClient.post("inviteMember/", param, new AsyncHttpResponseHandler() {
+                                            @Override
+                                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                Log.e("WriteMemberActivity |||| ", new String(responseBody));
+                                                if (new String(responseBody).equals("all done")) {
+
+                                                } else if (new String(responseBody).equals("already existed member")) {
+                                                    Toast toastView = Toast.makeText(getActivity(),
+                                                            new String(responseBody), Toast.LENGTH_LONG);
+                                                    toastView.setGravity(Gravity.CENTER, 40, 25);
+                                                    toastView.show();
+                                                } else if (new String(responseBody).equals("non-existed email")) {
+                                                    Toast toastView = Toast.makeText(getActivity(),
+                                                            new String(responseBody), Toast.LENGTH_LONG);
+                                                    toastView.setGravity(Gravity.CENTER, 40, 25);
+                                                    toastView.show();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                System.out.println("Invite GCM send error");
+                                            }
+                                        });
 
                                         onResume();
                                         super.onPositiveActionClicked(fragment);
