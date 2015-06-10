@@ -61,6 +61,14 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         listMember = (ListView) v.findViewById(R.id.group_member_list);
         adapterMember = new IconTextListAdapterMember(getActivity());
 
+        // 내 리스트
+        listMe = (ListView) v.findViewById(R.id.group_member_me);
+        adapterMe = new IconTextListAdapterMember(getActivity());
+
+        // 총무 리스트
+        listKing = (ListView) v.findViewById(R.id.group_member_king);
+        adapterKing = new IconTextListAdapterMember(getActivity());
+
         RequestParams param = new RequestParams();
         //param.add("groupid", _id); // 가져와야한다.
 
@@ -122,14 +130,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                 System.out.println("error message 1 : " + error);
             }
         });
-
-        // 내 리스트
-        listMe = (ListView) v.findViewById(R.id.group_member_me);
-        adapterMe = new IconTextListAdapterMember(getActivity());
-
-        // 총무 리스트
-        listKing = (ListView) v.findViewById(R.id.group_member_king);
-        adapterKing = new IconTextListAdapterMember(getActivity());
 
         listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
