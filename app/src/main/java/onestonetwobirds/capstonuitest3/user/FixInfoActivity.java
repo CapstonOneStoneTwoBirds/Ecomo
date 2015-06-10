@@ -68,7 +68,7 @@ public class FixInfoActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         TextView email_edt = (TextView)findViewById(R.id.fix_info_email);
         EditText pw0_edt = (EditText)findViewById(R.id.fix_info_oldpw);
-        EditText pw1_edt = (EditText)findViewById(R.id.fix_info_newpw1);
+        final EditText pw1_edt = (EditText)findViewById(R.id.fix_info_newpw1);
         EditText pw2_edt = (EditText)findViewById(R.id.fix_info_newpw2);
         EditText phone_edt = (EditText)findViewById(R.id.fix_info_phone);
         if ( !password.equals(pw0_edt.getText().toString())){
@@ -98,6 +98,10 @@ public class FixInfoActivity extends Activity implements View.OnClickListener {
                                 "Fix Success", Toast.LENGTH_LONG);
                         toastView.setGravity(Gravity.CENTER, 40, 25);
                         toastView.show();
+
+                        SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mPreference.edit();
+                        editor.putString("pw", pw1_edt.getText().toString());
                         finish();
                     }
                 }

@@ -40,22 +40,6 @@ public class GroupMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_group_main, container, false);
 
-        /*
-        list = (ListView) v.findViewById(R.id.Group_main_List);
-        adapter = new IconTextListAdapterGroup(getActivity());
-
-
-
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                final IconTextItemGroup curItem = (IconTextItemGroup) adapter.getItem(position);
-
-            }
-        });
-        */
-
         lv_main = (ListView)v.findViewById(R.id.group_lv_main);
         adapter = new IconTextListAdapterGroup(v.getContext());
 
@@ -78,7 +62,7 @@ public class GroupMainFragment extends Fragment {
                             String num = got.get("img_num").toString();
                             if (!num.equals("0")) {
                                 Log.e("GroupMainActivity", "Here!!");
-                                adapter.addItem(new IconTextItemGroup(getResources().getDrawable(getNumResources(num)), got.get("groupname").toString()));
+                                adapter.addItem(new IconTextItemGroup(getResources().getDrawable(getNumResources(num)), got.get("group_name").toString(), got.get("owner_name").toString(), got.get("member_cnt").toString()));
                             } else {
                                 //adaptor.addItem(new IconTextItemGroup(, got.get("groupname").toString()));
                             }
@@ -87,11 +71,10 @@ public class GroupMainFragment extends Fragment {
                         lv_main.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                                final IconTextItemGroup curItem = (IconTextItemGroup) adapter.getItem(position);
                                 try {
                                     JSONObject obj = new JSONObject(jsonarr.get(position).toString());
                                     Intent intent = new Intent(v.getContext(), InGroupActivity.class);
-                                    intent.putExtra("group_id", obj.get("_id").toString());
+                                    intent.putExtra("group_id", obj.get("group_id").toString());
                                     startActivity(intent);
                                 } catch (JSONException e) {
                                 }

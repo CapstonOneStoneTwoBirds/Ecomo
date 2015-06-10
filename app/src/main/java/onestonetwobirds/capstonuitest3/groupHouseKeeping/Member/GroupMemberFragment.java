@@ -1,7 +1,10 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
+import com.rey.material.widget.EditText;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 
@@ -30,6 +34,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
@@ -43,11 +51,11 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
     String tag = "GruopMemberFragment";
     SnackBar mSnackBar;
     String group_id="";
-
-    EditText email_edt;
+    View view = null;
 
     ListView listMember, listMe, listKing;
     IconTextListAdapterMember adapterMember, adapterMe, adapterKing;
+    Bitmap ret=null;
 
     public static GroupMemberFragment newInstance() {
         GroupMemberFragment fragment = new GroupMemberFragment();
@@ -57,10 +65,8 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_group_member, container, false);
-        final View v1 = inflater.inflate(R.layout.new_member_dialog, container, false);
+        view = inflater.inflate(R.layout.fragment_group_member, container, false);
         Button NewMemberButton = (Button) v.findViewById(R.id.new_member_btn);
-        email_edt = (EditText)v1.findViewById(R.id.new_announce_content);
-        Log.e("GroupMemberFragment", "email_edt : " + email_edt);
 
         final SharedPreferences mPreference;
         mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
@@ -80,7 +86,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
         RequestParams param = new RequestParams();
         param.add("groupid", group_id); // 가져와야한다.
-        Log.e(tag, "Test Here T_T");
 
         HttpClient.post("getMemberList/", param, new AsyncHttpResponseHandler() {
             @Override
@@ -93,13 +98,16 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                         JSONObject got = new JSONObject(member.get(i).toString());
                         if (got.get("ownership").toString().equals("true")) {
                             Log.e(tag, "Here1");
-                            adapterKing.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
+                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                            adapterKing.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
                         } else if (got.get("member").toString().equals(mPreference.getString("email", "")) && !got.get("ownership").toString().equals("true")) {
-                            adapterMe.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
+                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                            adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
                             Log.e(tag, "Here2");
                         } else {
+                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
                             Log.e(tag, "Here3");
-                            adapterMember.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
+                            adapterMember.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
                         }
                     }
 
@@ -160,7 +168,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     listKing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                            final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterKing.getItem(position);
+
 
                         }
                     });
@@ -196,64 +204,8 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
         switch (v.getId()) {
             case R.id.new_member_btn:
-                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
-
-                    @Override
-                    protected void onBuildDone(Dialog dialog) {
-                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    }
-
-                    @Override
-                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(멤버 추가)
-
-                        // 여기에다 코딩
-                        RequestParams param = new RequestParams();
-                        param.put("groupid", group_id);
-                        param.put("email", email_edt.getText().toString());
-
-                        // email에 초대를 날리는거 gcm으로. 작성하자.
-                        HttpClient.post("inviteMember/", param, new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                Log.e("WriteMemberActivity |||| ", new String(responseBody));
-                                if (new String(responseBody).equals("all done")) {
-
-                                } else if (new String(responseBody).equals("already existed member")) {
-                                    Toast toastView = Toast.makeText(getActivity(),
-                                            new String(responseBody), Toast.LENGTH_LONG);
-                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                    toastView.show();
-                                } else if (new String(responseBody).equals("non-existed email")) {
-                                    Toast toastView = Toast.makeText(getActivity(),
-                                            new String(responseBody), Toast.LENGTH_LONG);
-                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                    toastView.show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                System.out.println("Invite GCM send error");
-                            }
-                        });
-                        onResume();
-                        super.onPositiveActionClicked(fragment);
-                    }
-
-                    @Override
-                    public void onNegativeActionClicked(DialogFragment fragment) {
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                builder.title("새로운 멤버 추가")
-                        .positiveAction("OK")
-                        .negativeAction("CANCEL")
-                        .contentView(R.layout.new_member_dialog);
-
-                FragmentManager fm = getFragmentManager();
-                DialogFragment diaFM = DialogFragment.newInstance(builder);
-                diaFM.show(fm, null);
+                Intent intent = new Intent(getActivity(), WriteMemberActivity.class);
+                startActivity(intent);
                 break;
         }
 
@@ -264,5 +216,59 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onResume() { super.onResume(); }
+
+    public Bitmap getMemberProfileImg(final String email){
+        // Get Member Profile Img
+        // If Internal Storage has user's Img, get this one
+        // else get from server.
+        final String filename = email+"_profile.jpg";
+
+        try {
+            FileInputStream fis = view.getContext().openFileInput(filename);
+            Bitmap scaled = BitmapFactory.decodeStream(fis);
+            fis.close();
+
+            //string temp contains all the data of the file.
+            System.out.println("img catch exception");
+            ret = scaled;
+        }catch( FileNotFoundException e){
+            RequestParams param = new RequestParams();
+            param.put("email", email);
+            Log.e(tag, "Error? : " + e);
+            HttpClient.post("getMemberImg/", param, new AsyncHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    if (new String(responseBody).equals("No Image")) {
+                        ret = null;
+                    } else {
+                        Bitmap d = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
+
+                        int nh = (int) (d.getHeight() * (512.0 / d.getWidth()));
+                        Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
+                        ret = scaled;
+
+                        FileOutputStream outputStream;
+                        try {
+                            outputStream = view.getContext().openFileOutput(filename, Context.MODE_PRIVATE);
+                            scaled.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+                            outputStream.close();
+                        } catch (Exception err) {
+                            err.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    System.out.println("error message 1 : " + error);
+                }
+            });
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
 
 }

@@ -43,9 +43,7 @@ public class GroupAnnounceFragment extends Fragment{
     ListView listView;
     ArrayList<ExamEntity> announceArrayList;
     AnnounceListAdapter announceListAdapter;
-
     SnackBar mSnackBar;
-    TextView CAnnounceTitle, CAnnouncePlace, CAnnounceContent;
 
     public void setT(TextView tv, String str){
         tv.setText(str);
@@ -58,13 +56,8 @@ public class GroupAnnounceFragment extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_group_announce, container, false);
-        final View v1 = inflater.inflate(R.layout.announce_confirm_dialog, container, false);
         Button NewAnnounceButton = (Button) v.findViewById(R.id.new_announce_btn);
         listView = (ListView) v.findViewById(R.id.group_announce_list);
-
-        CAnnounceTitle = (TextView) v1.findViewById(R.id.announce_confirm_title);
-        CAnnouncePlace = (TextView) v1.findViewById(R.id.announce_confirm_place);
-        CAnnounceContent = (TextView) v1.findViewById(R.id.announce_confirm_content);
 
         announceArrayList = new ArrayList();
         announceListAdapter = new AnnounceListAdapter(getActivity().getApplicationContext(),
@@ -89,10 +82,17 @@ public class GroupAnnounceFragment extends Fragment{
                         //arrListInsert.add(result);
                         for (int i = 0; i < announces.length(); i++) {
                             JSONObject got = new JSONObject(announces.get(i).toString());
+                            Log.e("GroupAnnounceFragment", "obj : " + got);
                             ExamEntity temp = new ExamEntity();
-                            temp.title = got.get("title").toString();
-                            //temp.place = got.get("place").toString();
-                            temp.content = got.get("content").toString();
+                            try{
+                                temp.title = got.get("title").toString();
+                            }catch(JSONException e){}
+                            try {
+                                temp.place = got.get("place").toString();
+                            }catch(JSONException e){}
+                            try {
+                                temp.content = got.get("content").toString();
+                            }catch(JSONException e){}
 
                             announceArrayList.add(temp);
                         }
@@ -106,63 +106,11 @@ public class GroupAnnounceFragment extends Fragment{
                             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                                 try {
                                     final JSONObject jsonobj = new JSONObject(announces.get(position).toString());
-                                    RequestParams param = new RequestParams();
-
-                                    param.add("announce_id", jsonobj.get("_id").toString());
-
-
-                                    HttpClient.post("getAnnounce/", param, new AsyncHttpResponseHandler() {
-                                        @Override
-                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                            try {
-                                                if (responseBody != null) {
-                                                    final JSONObject obj = new JSONObject(new String(responseBody));
-                                                    Log.e("GroupAnnounceFragment", "obj : " + obj);
-                                                    Log.e("GroupAnnounceFragment", "title : " + obj.get("title").toString());
-
-                                                    CAnnounceTitle.setText(obj.get("title").toString());
-                                                    //CAnnouncePlace.setText(obj.get("place").toString());
-                                                    CAnnounceContent.setText(obj.get("content").toString());
-                                                } else {
-                                                    System.out.println("Here Checker");
-                                                }
-                                            } catch (JSONException e) {
-                                                System.out.println(e);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                            System.out.println("error message : " + error);
-                                        }
-                                    });
+                                    //Log.e("GroupAnnounceGragment Here", jsonobj.toString());
+                                    Intent intent = new Intent(v.getContext(), GroupAnnounceCActivity.class);
+                                    intent.putExtra("jsonobj", jsonobj.toString());
+                                    startActivity(intent);
                                 }catch(JSONException e){}
-
-                                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
-                                    @Override
-                                    protected void onBuildDone(Dialog dialog) {
-                                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                                    }
-
-                                    @Override
-                                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
-                                        // 여기에다 코딩
-
-                                        onResume();
-                                        super.onPositiveActionClicked(fragment);
-                                    }
-
-                                };
-
-
-                                builder.title("공지 확인")
-                                        .positiveAction("OK")
-                                        .contentView(R.layout.announce_confirm_dialog);
-
-                                FragmentManager fm = getFragmentManager();
-                                DialogFragment diaFM = DialogFragment.newInstance(builder);
-                                diaFM.show(fm, null);
                             }
                         });
                     } else {

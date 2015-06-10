@@ -144,6 +144,7 @@
             android:inputType="textShortMessage"
             android:textColorHint="#808080"
             android:textColor="#FFFFFF"
+            android:gravity="center"
             android:layout_gravity="center"
             android:textSize="15sp" />
 

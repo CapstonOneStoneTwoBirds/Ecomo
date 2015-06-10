@@ -4,18 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <com.rey.material.widget.EditText
-        style="@style/Material.Widget.EditText"
-        android:id="@+id/new_announce_content_edt"
+    <!--style="@style/Material.Widget.TextView"-->
+    <com.rey.material.widget.TextView
+        android:id="@+id/temp_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:et_supportMode="charCounter"
         android:textColor="@color/abc_primary_text_material_dark"
         android:textColorHint="@color/abc_secondary_text_material_dark"
-        android:hint="추가하고 싶은 USER 입력"
+        android:text="그룹에서 탈퇴하시겠습니까?"
         android:textDirection="locale"
-        android:paddingTop="8dp"
-        android:inputType="textShortMessage"/>
+        android:paddingTop="8dp"/>
 
 </LinearLayout>

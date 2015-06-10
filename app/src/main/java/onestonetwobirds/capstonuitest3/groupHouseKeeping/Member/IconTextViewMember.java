@@ -1,7 +1,8 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,10 +40,12 @@ public class IconTextViewMember extends LinearLayout {
 
         // Set Icon
         mIcon = (ImageView) findViewById(R.id.iconItemMember);
-        mIcon.setImageDrawable(aItem.getIcon());
+        Log.e("IconTextViewMember", "mIcon : " + mIcon.toString());
+        mIcon.setImageBitmap(aItem.getIcon());
 
         // Set Text 01
         mText01 = (TextView) findViewById(R.id.dataItem01Member);
+        Log.e("IconTextViewMember", "mText01 : " + mText01.toString());
         mText01.setText(aItem.getData(0));
 
     }
@@ -67,7 +70,7 @@ public class IconTextViewMember extends LinearLayout {
      *
      * @param icon
      */
-    public void setIcon(Drawable icon) {
-        mIcon.setImageDrawable(icon);
+    public void setIcon(Bitmap icon) {
+        mIcon.setImageBitmap(icon);
     }
 }

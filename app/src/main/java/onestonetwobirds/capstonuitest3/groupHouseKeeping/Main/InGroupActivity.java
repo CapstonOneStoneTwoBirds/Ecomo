@@ -56,6 +56,7 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
+import onestonetwobirds.capstonuitest3.user.StartActivity;
 
 public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
 
@@ -192,6 +193,8 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                 break;
             case R.id.tb_new:                                 // 새로 고침
                 //mToolbarManager.setCurrentGroup(0);
+                startActivity(getIntent());
+                finish();
                 break;
         }
         return true;
@@ -329,10 +332,8 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                     diaFM.show(fm, null);
                     break;
                 case 2: // 그룹 탈퇴
-                    break;
-                case 3: // 로그아웃
                     Log.e("InGroupActivirty", "LOGOUT");
-                    Dialog.Builder builder1 = new SimpleDialog.Builder(R.style.SimpleDialog) {
+                    Dialog.Builder builder2 = new SimpleDialog.Builder(R.style.SimpleDialog) {
 
                         @Override
                         protected void onBuildDone(Dialog dialog) {
@@ -354,14 +355,52 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                         }
                     };
 
+                    builder2.title("그룹 탈퇴")
+                            .positiveAction("OK")
+                            .negativeAction("CANCEL")
+                            .contentView(R.layout.leave_member_dialog);
+
+                    FragmentManager fm1 = getSupportFragmentManager();
+                    DialogFragment diaFM1 = DialogFragment.newInstance(builder2);
+                    diaFM1.show(fm1, null);
+
+                    break;
+                case 3: // 로그아웃
+                    Log.e("InGroupActivirty", "LOGOUT");
+                    Dialog.Builder builder1 = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                        @Override
+                        protected void onBuildDone(Dialog dialog) {
+                            dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                        }
+
+                        @Override
+                        public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+                            SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = mPreference.edit();
+                            editor.clear();
+                            editor.commit();
+                            startActivity(new Intent(getApplicationContext(), StartActivity.class));
+                            // 여기에다 코딩
+
+                            onResume();
+                            super.onPositiveActionClicked(fragment);
+                        }
+
+                        @Override
+                        public void onNegativeActionClicked(DialogFragment fragment) {
+                            super.onNegativeActionClicked(fragment);
+                        }
+                    };
+
                     builder1.title("로그아웃")
                             .positiveAction("OK")
                             .negativeAction("CANCEL")
                             .contentView(R.layout.logout_dialog);
 
-                    FragmentManager fm1 = getSupportFragmentManager();
-                    DialogFragment diaFM1 = DialogFragment.newInstance(builder1);
-                    diaFM1.show(fm1, null);
+                    FragmentManager fm2 = getSupportFragmentManager();
+                    DialogFragment diaFM2 = DialogFragment.newInstance(builder1);
+                    diaFM2.show(fm2, null);
                     break;
             }
         }
@@ -520,8 +559,5 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
                 break;
         }
-
     }
-
-
 }

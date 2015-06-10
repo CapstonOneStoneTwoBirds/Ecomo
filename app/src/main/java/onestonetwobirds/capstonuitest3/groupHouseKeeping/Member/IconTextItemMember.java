@@ -1,7 +1,6 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
 
-import android.graphics.drawable.Drawable;
-
+import android.graphics.Bitmap;
 
 /**
  * Created by YeomJi on 2014. 12. 1..
@@ -11,7 +10,7 @@ public class IconTextItemMember {
     /**
      * Icon
      */
-    private Drawable mIcon;
+    private Bitmap bitmapIcon;
 
     /**
      * Data array
@@ -29,37 +28,17 @@ public class IconTextItemMember {
      * @param icon
      * @param obj
      */
-    public IconTextItemMember(Drawable icon, String[] obj) {
-        mIcon = icon;
-        mData = obj;
-    }
 
     /**
-     * Initialize with icon and strings
+     * Initialize with icon and data array
      *
      * @param icon
-     * @param obj01
+     * @param obj
      */
-    public IconTextItemMember(Drawable icon, String obj01) {
-        mIcon = icon;
-
+    public IconTextItemMember(Bitmap icon, String obj) {
+        bitmapIcon = icon;
         mData = new String[1];
-        mData[0] = obj01;
-    }
-
-    /**
-     * Initialize with icon and strings
-     *
-     * @param icon
-     * @param obj01
-     * @param obj02
-     * @param obj03
-     */
-    public IconTextItemMember(Drawable icon, String obj01, String obj02, String obj03, String obj04) {
-        mIcon = icon;
-
-        mData = new String[4];
-        mData[0] = obj01;
+        mData[0] = obj;
     }
 
     /**
@@ -110,17 +89,16 @@ public class IconTextItemMember {
      *
      * @param icon
      */
-    public void setIcon(Drawable icon) {
-        mIcon = icon;
+    public void setIcon(Bitmap icon) {
+        bitmapIcon = icon;
     }
-
     /**
      * Get icon
      *
      * @return
      */
-    public Drawable getIcon() {
-        return mIcon;
+    public Bitmap getIcon() {
+        return bitmapIcon;
     }
 
     /**

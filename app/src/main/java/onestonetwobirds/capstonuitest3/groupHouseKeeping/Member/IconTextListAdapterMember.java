@@ -1,6 +1,7 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Member;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +16,7 @@ public class IconTextListAdapterMember extends BaseAdapter {
 
     private Context mContext;
 
-    private List<IconTextItemMember> mItems = new ArrayList<IconTextItemMember>();
+    private List<IconTextItemMember> mItems = new ArrayList();
 
     public IconTextListAdapterMember(Context context) {
         mContext = context;
