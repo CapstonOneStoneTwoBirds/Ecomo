@@ -1,4 +1,4 @@
-package onestonetwobirds.capstonuitest3.user.MyInformation;
+package onestonetwobirds.capstonuitest3.user;
 
 import android.app.Activity;
 import android.content.Context;
@@ -49,7 +49,7 @@ public class MyInfoActivity extends Activity implements View.OnClickListener {
         final TextView phone_tv = (TextView)findViewById(R.id.check_info_phone);
         ImageView iv = (ImageView)findViewById(R.id.check_info_iv);
         Button btn = (Button)findViewById(R.id.check_info_fix_btn);
-
+        btn.setOnClickListener(this);
         iv.setOnClickListener(this);
         RequestParams param = new RequestParams();
 
@@ -231,7 +231,12 @@ public class MyInfoActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.check_info_fix_btn:
+                SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+                String email = mPreference.getString("email", "");
 
+                Intent intent = new Intent(getApplicationContext(), FixInfoActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
         }
     }

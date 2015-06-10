@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import onestonetwobirds.capstonuitest3.R;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
-import onestonetwobirds.capstonuitest3.user.MyInformation.MyInfoActivity;
+import onestonetwobirds.capstonuitest3.user.MyInfoActivity;
 
 /**
  * Created by YeomJi on 15. 6. 8..

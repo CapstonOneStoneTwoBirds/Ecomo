@@ -44,6 +44,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".user.FixInfoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".user.KeySetActivity"
             android:label="@string/app_name" >
         </activity>
@@ -100,7 +104,7 @@
             android:label="위젯 입력" >
         </activity>
         <activity
-            android:name=".user.MyInformation.MyInfoActivity"
+            android:name=".user.MyInfoActivity"
             android:label="개인정보 수정" >
         </activity>
         <activity
