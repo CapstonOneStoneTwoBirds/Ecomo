@@ -43,7 +43,7 @@ public class IconTextItemMember {
     public IconTextItemMember(Drawable icon, String obj01) {
         mIcon = icon;
 
-        mData = new String[3];
+        mData = new String[1];
         mData[0] = obj01;
     }
 

@@ -8,8 +8,8 @@
     <ImageView
         android:id="@+id/iconItemMember"
         android:src="@drawable/person"
-        android:layout_width="60sp"
-        android:layout_height="60sp"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
         android:layout_margin="10sp"/>
 
     <LinearLayout

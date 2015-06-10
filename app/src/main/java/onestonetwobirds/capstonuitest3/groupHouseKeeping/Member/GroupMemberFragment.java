@@ -99,13 +99,15 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                             adapterMember.addItem(new IconTextItemMember(getResources().getDrawable(R.drawable.default_person), got.get("name").toString()));
                         }
                     }
-                    listMember.setAdapter(adapterMember);
+                    //listMember.setAdapter(adapterMember);
 
                     listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             try {
                                 JSONObject obj = new JSONObject(member.get(position).toString());
+
+                                System.out.println("members Click OK " );
 
                                 // 누르면 다이얼로그 뜨는게 좋을듯.
                                 /*

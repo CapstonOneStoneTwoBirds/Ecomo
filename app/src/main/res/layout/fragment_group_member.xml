@@ -58,7 +58,7 @@
         <ListView
             android:id="@+id/group_member_me"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="60sp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5sp"
             android:layout_marginBottom="5sp">
@@ -89,7 +89,7 @@
         <ListView
             android:id="@+id/group_member_king"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="60sp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5sp"
             android:layout_marginBottom="5sp">

@@ -61,7 +61,7 @@
         android:padding="0.2sp">
 
         <TextView
-            android:layout_width="50sp"
+            android:layout_width="60sp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="13sp"
             android:layout_marginLeft="40sp"
@@ -106,7 +106,7 @@
         android:padding="0.2sp">
 
         <TextView
-            android:layout_width="50sp"
+            android:layout_width="60sp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="13sp"
             android:layout_marginLeft="40sp"
@@ -152,7 +152,7 @@
         android:padding="0.2sp">
 
         <TextView
-            android:layout_width="50sp"
+            android:layout_width="60sp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="13sp"
             android:layout_marginLeft="40sp"
