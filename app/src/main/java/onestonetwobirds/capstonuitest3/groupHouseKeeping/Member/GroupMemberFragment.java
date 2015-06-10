@@ -171,12 +171,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                                 DialogFragment diaFM = DialogFragment.newInstance(builder);
                                 diaFM.show(fm, null);
 
-                                // 누르면 다이얼로그 뜨는게 좋을듯.
-                                /*
-                                Intent intent = new Intent(v.getContext(), );
-                                intent.putExtra("jsonobject", obj.toString());
-                                startActivity(intent);
-                                */
                             } catch (JSONException e) {
                             }
                         }

@@ -16,6 +16,6 @@
         android:hint="추가하고 싶은 USER 입력"
         android:textDirection="locale"
         android:paddingTop="8dp"
-        android:inputType="textPassword"/>
+        android:inputType="textShortMessage"/>
 
 </LinearLayout>
