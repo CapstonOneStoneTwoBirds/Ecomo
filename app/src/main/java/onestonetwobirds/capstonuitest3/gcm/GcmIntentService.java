@@ -93,7 +93,7 @@ public class GcmIntentService extends IntentService
             //cls = ConsentInviteActivity.class;
         }
 
-        final Intent intent = new Intent(getApplicationContext(), cls);;
+        final Intent intent = new Intent(getApplicationContext(), cls);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(id, _id);
         if( code.equals("Invite")) {

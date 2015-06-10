@@ -28,11 +28,9 @@ public class WriteAnnounceActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_announce_write);
-<<<<<<< Updated upstream
         final SharedPreferences mPreference;
         mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
         final String group_id = mPreference.getString("group_id", "");
-=======
 
         NAnnounceOK = (Button)findViewById(R.id.new_announce_OK);
         NAnnounceCancel = (Button)findViewById(R.id.new_announce_Cancel);
@@ -40,7 +38,6 @@ public class WriteAnnounceActivity extends Activity{
         NAnnouncePlace = (EditText)findViewById(R.id.new_announce_place);
         NAnnounceContent = (EditText)findViewById(R.id.new_announce_content);
 
->>>>>>> Stashed changes
 
 
         NAnnounceOK.setOnClickListener(new View.OnClickListener() {
@@ -51,16 +48,10 @@ public class WriteAnnounceActivity extends Activity{
                 System.out.println("title 1: " + NAnnounceTitle.getText().toString());
 
                 RequestParams param = new RequestParams();
-<<<<<<< Updated upstream
                 param.put("groupid", group_id);
-                param.put("title", titleedt.getText().toString());
-                param.put("content", contentedt.getText().toString());
-=======
-                param.put("groupid", getIntent().getStringExtra("groupid"));
                 param.put("title", NAnnounceTitle.getText().toString());
                 param.put("place", NAnnouncePlace.getText().toString());
                 param.put("content", NAnnounceContent.getText().toString());
->>>>>>> Stashed changes
 
                 //System.out.println("title 2: " + title);
                 HttpClient.post("writeAnnounce/", param, new AsyncHttpResponseHandler() {
