@@ -112,6 +112,34 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
                                 System.out.println("members Click OK ");
 
+                                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+
+                                    @Override
+                                    protected void onBuildDone(Dialog dialog) {
+                                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                                        // 이런식으로...
+                                        //CAnnounceTitle.setText(obj.get("title"));
+                                    }
+
+                                    @Override
+                                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+                                        // 여기에다 코딩
+
+                                        onResume();
+                                        super.onPositiveActionClicked(fragment);
+                                    }
+
+                                };
+
+                                builder.title("멤버 확인")
+                                        .positiveAction("OK")
+                                        .contentView(R.layout.member_confirm_dialog);
+
+                                FragmentManager fm = getFragmentManager();
+                                DialogFragment diaFM = DialogFragment.newInstance(builder);
+                                diaFM.show(fm, null);
+
                                 // 누르면 다이얼로그 뜨는게 좋을듯.
                                 /*
                                 Intent intent = new Intent(v.getContext(), );
