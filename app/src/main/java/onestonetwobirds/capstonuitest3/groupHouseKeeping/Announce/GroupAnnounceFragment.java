@@ -1,5 +1,6 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +22,6 @@ import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
-import com.rey.material.widget.EditText;
 import com.rey.material.widget.SnackBar;
 
 import org.apache.http.Header;
@@ -38,41 +38,35 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 /**
  * Created by YeomJi on 15. 6. 7..
  */
-public class GroupAnnounceFragment extends Fragment implements View.OnClickListener {
+public class GroupAnnounceFragment extends Fragment{
 
     ListView listView;
     ArrayList<ExamEntity> announceArrayList;
     AnnounceListAdapter announceListAdapter;
-    TextView title_tv, place_tv, content_tv;
 
     SnackBar mSnackBar;
     TextView CAnnounceTitle, CAnnouncePlace, CAnnounceContent;
 
+    public void setT(TextView tv, String str){
+        tv.setText(str);
+    }
     public static GroupAnnounceFragment newInstance() {
         GroupAnnounceFragment fragment = new GroupAnnounceFragment();
 
         return fragment;
     }
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_group_announce, container, false);
-
-        title_tv = (TextView)v.findViewById(R.id.announce_confirm_title);
-        place_tv = (TextView)v.findViewById(R.id.announce_confirm_place);
-        content_tv = (TextView)v.findViewById(R.id.announce_confirm_content);
-        Log.e("GroupAnnouceFragment", "title_tv ::: " + title_tv);
-
+        final View v1 = inflater.inflate(R.layout.announce_confirm_dialog, container, false);
         Button NewAnnounceButton = (Button) v.findViewById(R.id.new_announce_btn);
         listView = (ListView) v.findViewById(R.id.group_announce_list);
 
+        CAnnounceTitle = (TextView) v1.findViewById(R.id.announce_confirm_title);
+        CAnnouncePlace = (TextView) v1.findViewById(R.id.announce_confirm_place);
+        CAnnounceContent = (TextView) v1.findViewById(R.id.announce_confirm_content);
 
-        CAnnounceTitle = (TextView) v.findViewById(R.id.announce_confirm_title);
-        CAnnouncePlace = (TextView) v.findViewById(R.id.announce_confirm_place);
-        CAnnounceContent = (TextView) v.findViewById(R.id.announce_confirm_content);
-
-
-        announceArrayList = new ArrayList<ExamEntity>();
+        announceArrayList = new ArrayList();
         announceListAdapter = new AnnounceListAdapter(getActivity().getApplicationContext(),
                 announceArrayList, R.layout.group_announce_list);
 
@@ -97,6 +91,7 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
                             JSONObject got = new JSONObject(announces.get(i).toString());
                             ExamEntity temp = new ExamEntity();
                             temp.title = got.get("title").toString();
+                            //temp.place = got.get("place").toString();
                             temp.content = got.get("content").toString();
 
                             announceArrayList.add(temp);
@@ -111,42 +106,43 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 try{
                                     final JSONObject jsonobj = new JSONObject(announces.get(position).toString());
+                                    RequestParams param = new RequestParams();
+                                    try {
+                                        param.add("announce_id", jsonobj.get("_id").toString());
+                                    }catch(JSONException e){}
+
+                                    HttpClient.post("getAnnounce/", param, new AsyncHttpResponseHandler() {
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                            try {
+                                                if (responseBody != null) {
+                                                    final JSONObject obj = new JSONObject(new String(responseBody));
+                                                    Log.e("GroupAnnounceFragment", "obj : " + obj);
+                                                    Log.e("GroupAnnounceFragment", "title : " + obj.get("title").toString());
+
+                                                    CAnnounceTitle.setText(obj.get("title").toString());
+                                                    //CAnnouncePlace.setText(obj.get("place").toString());
+                                                    CAnnounceContent.setText(obj.get("content").toString());
+                                                } else {
+                                                    System.out.println("Here Checker");
+                                                }
+                                            } catch (JSONException e) {
+                                                System.out.println(e);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                            System.out.println("error message : " + error);
+                                        }
+                                    });
+
                                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
 
                                         @Override
                                         protected void onBuildDone(Dialog dialog) {
                                             dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                                            RequestParams param = new RequestParams();
-                                            try {
-                                                param.add("announce_id", jsonobj.get("_id").toString());
-                                            }catch(JSONException e){}
 
-                                            HttpClient.post("getAnnounce/", param, new AsyncHttpResponseHandler() {
-                                                @Override
-                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                    try {
-                                                        if (responseBody != null) {
-                                                            final JSONObject obj = new JSONObject(new String(responseBody));
-                                                            Log.e("GroupAnnounceFragment", "obj : " + obj);
-                                                            Log.e("GroupAnnounceFragment", "title_tv : " + title_tv);
-                                                            Log.e("GroupAnnounceFragment", "title : " + obj.get("title").toString());
-                                                            title_tv.setText(obj.get("title").toString());
-                                                            //place_tv.setText(obj.get("place").toString());
-                                                            content_tv.setText(obj.get("content").toString());
-
-                                                        } else {
-                                                            System.out.println("Here Checker");
-                                                        }
-                                                    } catch (JSONException e) {
-                                                        System.out.println(e);
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                    System.out.println("error message : " + error);
-                                                }
-                                            });
                                         }
 
                                         @Override
@@ -203,18 +199,16 @@ public class GroupAnnounceFragment extends Fragment implements View.OnClickListe
 
 
         mSnackBar = ((InGroupActivity)getActivity()).getSnackBar();
-        NewAnnounceButton.setOnClickListener(this);
+        NewAnnounceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), WriteAnnounceActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return v;
     }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), WriteAnnounceActivity.class);
-        startActivity(intent);
-    }
-
-    
 
     @Override
     public void onPause() { super.onPause(); }

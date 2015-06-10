@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:layout_margin="10sp"
-            android:text="title"/>
+            android:text="Title"/>
         <TextView
         android:id="@+id/announce_confirm_title"
         android:layout_width="match_parent"
@@ -34,12 +34,13 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:layout_margin="10sp"
-            android:text="title"/>
+            android:text="Place"/>
         <TextView
             android:id="@+id/announce_confirm_place"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
+            android:text="임시"
             android:layout_margin="10sp"/>
 
     </LinearLayout>
@@ -53,7 +54,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:layout_margin="10sp"
-            android:text="title"/>
+            android:text="Content"/>
         <TextView
             android:id="@+id/announce_confirm_content"
             android:layout_width="match_parent"

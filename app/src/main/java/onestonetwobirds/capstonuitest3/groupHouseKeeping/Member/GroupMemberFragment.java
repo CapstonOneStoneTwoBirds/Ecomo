@@ -55,11 +55,12 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         return fragment;
     }
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.fragment_group_member, container, false);
+        final View v1 = inflater.inflate(R.layout.new_member_dialog, container, false);
         Button NewMemberButton = (Button) v.findViewById(R.id.new_member_btn);
-        email_edt = (EditText)v.findViewById(R.id.new_announce_content);
+        email_edt = (EditText)v1.findViewById(R.id.new_announce_content);
+        Log.e("GroupMemberFragment", "email_edt : " + email_edt);
 
         final SharedPreferences mPreference;
         mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
