@@ -1,6 +1,7 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -26,6 +27,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
@@ -36,6 +39,11 @@ import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -44,6 +52,7 @@ import onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce.GroupAnnounceF
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupCalendarFragment;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupInsertContentActivity;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Member.GroupMemberFragment;
+import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
@@ -84,6 +93,70 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
         vp = (CustomViewPager) findViewById(R.id.main_vp);
         tpi = (TabPageIndicator) findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar) findViewById(R.id.main_sn);
+
+        // Get GroupLists  이전 파일꺼 일단 붙여넣음.
+        /*
+        try {
+            SharedPreferences mPreference;
+            mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+
+            RequestParams param = new RequestParams();
+            param.put("owner", mPreference.getString("email", ""));
+            HttpClient.post("getGroupList/", param, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try {
+                        JSONArray jsonarr = new JSONArray(new String(responseBody));
+                        System.out.println("json result : " + jsonarr);
+
+                        final TextView tv1 = (TextView) findViewById(R.id.group1_tv);
+                        final TextView tv2 = (TextView) findViewById(R.id.group2_tv);
+                        final TextView tv3 = (TextView) findViewById(R.id.group3_tv);
+                        final TextView tv4 = (TextView) findViewById(R.id.group4_tv);
+
+                        ArrayList<TextView> tvlist = new ArrayList();
+                        tvlist.add(tv1);
+                        tvlist.add(tv2);
+                        tvlist.add(tv3);
+                        tvlist.add(tv4);
+
+
+                        if (jsonarr.length() != 0) {
+                            //System.out.println(jsonarr.get(0));
+                            //JSONObject got= new JSONObject(jsonarr.get(0).toString());
+
+                            for (int i = 0; i < jsonarr.length(); i++) {
+                                System.out.println(jsonarr.get(i));
+                                final JSONObject got = new JSONObject(jsonarr.get(i).toString());
+                                System.out.println("json check : " + i);
+                                tvlist.get(i).setText(got.get("groupname").toString());
+
+                                tvlist.get(i).setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = new Intent(getApplicationContext(), GroupArticleActivity.class);
+                                        try {
+                                            intent.putExtra("groupid", got.get("_id").toString());
+                                        } catch (JSONException e) {
+                                        }
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        }
+                    } catch (JSONException e) {
+                        System.out.println(e);
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    System.out.println("Failure Here ?");
+                }
+            });
+
+        }catch(Exception e){}
+        */
 
         FloatingActionButton InsertBtn = (FloatingActionButton)findViewById(R.id.insert_btn);
 

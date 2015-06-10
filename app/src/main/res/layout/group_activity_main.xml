@@ -41,8 +41,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1.0"
-            android:gravity="right|bottom"
-            android:layout_gravity="right|bottom"
+            android:gravity="end|bottom"
+            android:layout_gravity="end|bottom"
             android:layout_margin="20sp"
             android:padding="8dp" >
 

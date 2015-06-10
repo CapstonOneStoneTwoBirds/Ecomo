@@ -140,6 +140,18 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
 
                     System.out.println("Param : " + param);
 
+                    /*
+                    FileOutputStream outputStream;
+                    try {
+                        String filename = email+"_img.jpg"; // 그룹으로 바꾸자.
+                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                        scaled.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
+                        outputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    */
+
                     HttpClient.post("uploadImg_Group/", param, new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -165,6 +177,7 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
 
                 break;
             case R.id.create_group_NO:
+                finish();
                 break;
             case R.id.create_group_imgfromgal_btn:
                 loadImagefromGallery(v);

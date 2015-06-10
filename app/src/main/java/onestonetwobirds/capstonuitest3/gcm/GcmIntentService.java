@@ -82,7 +82,7 @@ public class GcmIntentService extends IntentService
 
         if (code.equals("Article")){
             id = "article_id";
-            //cls = GroupArticleCActivity.class;
+            //cls = GroupArticleCActivity.class; // 에러나서 임시 주석 아래 2개도.
         }
         else if( code.equals("Announce")){
             id = "announce_id";

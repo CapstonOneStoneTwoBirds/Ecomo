@@ -47,7 +47,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     private FrameLayout fl_drawer;
     private ListView lv_drawer;
     private CustomViewPager vp;
-
+    private String email;
     private DrawerAdapter mDrawerAdapter;
     private PagerAdapter mPagerAdapter;
 
@@ -61,6 +61,9 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences mPreference;
+        mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+        email = mPreference.getString("email","");
 
         setContentView(R.layout.group_activity_main);
 
@@ -161,7 +164,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
 
     public enum Tab { // 툴바 내용 버튼 각각의 내용
         INSERTCONTENT("INSERTCONTENT"),
-        PRIVATEINFO("개인 정보 수정"),
+        PRIVATEINFO("개인 정보"),
         MANUFACTURERS("만든 이"),
         LOGOUT("로그아웃");
         private final String name;
