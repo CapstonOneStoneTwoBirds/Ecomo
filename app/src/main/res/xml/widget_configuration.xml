@@ -2,6 +2,6 @@
 <appwidget-provider
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/my_custom_widget"
-    android:minWidth="220dp"
-    android:minHeight="72dp"
+    android:minWidth="350dp"
+    android:minHeight="100dp"
     android:label="Ecomo widget"/>
