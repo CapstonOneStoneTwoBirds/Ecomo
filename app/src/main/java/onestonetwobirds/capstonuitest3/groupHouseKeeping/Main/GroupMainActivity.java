@@ -32,7 +32,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import onestonetwobirds.capstonuitest3.R;
-import onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup.CreateCroupActivity;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.CreateGroup.CreateGroupActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.user.MyInfoActivity;
@@ -81,7 +81,7 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                     bt.setLineMorphingState((bt.getLineMorphingState() + 1) % 2, true);
                 }
 
-                Intent intent = new Intent(getApplicationContext(), CreateCroupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CreateGroupActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.rightin, R.anim.rightout);
 
