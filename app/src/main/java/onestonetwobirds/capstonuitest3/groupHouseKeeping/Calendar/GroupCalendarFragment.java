@@ -59,6 +59,8 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
 
     String group_id="";
 
+    String inToDay, inToTitle;
+
     int TokenYear, TokenMonth, TokenDay;
     String result;
     LayoutInflater infla;
@@ -160,6 +162,8 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
         switch (id) {
             case DIALOG_INSERT: // 여기 안에다가 써야함
 
+                final Bundle bundle = new Bundle();
+
                 RequestParams param = new RequestParams();
                 param.put("groupid", group_id);
 
@@ -174,8 +178,10 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
                                 //arrListInsert.add(result);
                                 for (int i = 0; i < articles.length(); i++) {
                                     JSONObject got = new JSONObject(articles.get(i).toString());
-                                    if(got.get("day").toString().equals(String.valueOf(TokenDay)) && got.get("month").toString().equals(String.valueOf(TokenMonth)) && got.get("year").toString().equals(String.valueOf(TokenYear)))
+                                    if(got.get("day").toString().equals(String.valueOf(TokenDay)) && got.get("month").toString().equals(String.valueOf(TokenMonth)) && got.get("year").toString().equals(String.valueOf(TokenYear))) {
                                         resultArr.add(got.get("title").toString() + "  " + got.get("price").toString());
+
+                                    }
                                 }
                                 listViewInsert.setAdapter(adapterInsert);
 
@@ -185,8 +191,12 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
                                         try {
                                             JSONObject obj = new JSONObject(articles.get(position).toString());
 
+                                            bundle.putString("day", obj.get("day").toString());
+                                            bundle.putString("title", obj.get("title").toString());
+
                                             Intent intent = new Intent(getActivity().getApplicationContext(), GroupInsertContentActivity.class);
                                             intent.putExtra("jsonobject", obj.toString());
+                                            intent.putExtras(bundle);
                                             startActivity(intent);
 
                                         } catch (JSONException e) {

@@ -54,11 +54,19 @@ public class GroupInsertContentActivity extends ActionBarActivity implements Too
     private Tab[] mItems = new Tab[]{Tab.INSERTCONTENT};
     private Tab[] mItemsS = new Tab[]{Tab.PRIVATEINFO, Tab.MANUFACTURERS, Tab.GROUPOUT, Tab.LOGOUT};
 
+    String inToDay, inToTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.group_insert_content_main);
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        inToDay = bundle.getString("day");
+        inToTitle = bundle.getString("title");
+        GroupInsertContentFragment.InToFragment(inToDay, inToTitle);
 
         dl_navigator = (DrawerLayout) findViewById(R.id.group_dl);
         fl_drawer = (FrameLayout) findViewById(R.id.group_fl_drawer);
