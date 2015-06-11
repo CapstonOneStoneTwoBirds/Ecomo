@@ -245,22 +245,22 @@ public class OCRResultsActivity extends Activity {
                                 ca = text.indexOf("베스");
                                 if( ca != -1){
                                     result = "LG 베스트샵";
-                                } /*else {
-                                    ca = text.indexOf("현금");
+                                } else {
+                                    ca = text.indexOf("Pla");
                                     if( ca != -1){
-                                        result = "현금";
+                                        result = "The Place";
                                     } else {
-                                        ca = text.indexOf("현금");
+                                        ca = text.indexOf("DIFF");
                                         if( ca != -1){
-                                            result = "현금";
-                                        } else {
+                                            result = "TO THE DIFFERENT";
+                                        }/* else {
                                             ca = text.indexOf("현금");
                                             if( ca != -1){
                                                 result = "현금";
                                             }
-                                        }
+                                        }*/
                                     }
-                                }*/
+                                }
                             }
                         }
                     }
@@ -322,7 +322,7 @@ public class OCRResultsActivity extends Activity {
 			//setContentView( tv );
 
             Bundle bundle = new Bundle();
-            bundle.putString("store", store);
+            bundle.putString("account", store);
             bundle.putString("year", year);
             bundle.putString("month", month);
             bundle.putString("date", day);
