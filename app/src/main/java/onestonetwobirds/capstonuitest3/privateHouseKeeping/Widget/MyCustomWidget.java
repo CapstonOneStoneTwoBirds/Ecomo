@@ -94,6 +94,7 @@ public class MyCustomWidget extends AppWidgetProvider
         String content = titleWidget + " / 최대 : " + goalWidget + " / 현재 : " + accWidget;
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.my_custom_widget);
         //updateViews.setTextViewText(R.id.widgettext, content);
+        updateViews.setTextViewText(R.id.widgetTitle, titleWidget);
         updateViews.setTextViewText(R.id.widgetLimit, String.valueOf(goalWidget)+" 원");
         updateViews.setTextViewText(R.id.widgetCurrent, String.valueOf(accWidget)+" 원");
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);
