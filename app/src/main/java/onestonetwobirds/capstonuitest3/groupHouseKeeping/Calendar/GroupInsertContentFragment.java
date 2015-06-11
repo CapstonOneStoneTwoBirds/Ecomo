@@ -83,7 +83,7 @@ public class GroupInsertContentFragment extends Fragment{
                             if (got.get("day").toString().equals(inToDay) && got.get("title").toString().equals(inToTitle)) {
                                 System.out.println("OK~");
                                 GroupInsertTitle.setText(inToTitle);
-                                GroupInsertPrice.setText(got.get("price").toString() + " ?õê");
+                                GroupInsertPrice.setText(got.get("price").toString() + " Ïõê");
                                 GroupInsertTime.setText(got.get("year").toString() + ". " + got.get("month").toString() + ". " + got.get("day").toString());
                                 GroupInsertContent.setText(got.get("content").toString());
                             }

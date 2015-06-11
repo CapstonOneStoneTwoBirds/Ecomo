@@ -110,7 +110,7 @@ public class WidgetFragment extends Fragment implements View.OnClickListener {
 
                 listView.setAdapter(adapter);
             } else
-                mSnackBar.applyStyle(R.style.SnackBarSingleLine).text("등록된 내용이 없습니다.").duration(2000).show();
+                //mSnackBar.applyStyle(R.style.SnackBarSingleLine).text("등록된 내용이 없습니다.").duration(2000).show();
 
             db.close();
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
