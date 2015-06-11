@@ -100,7 +100,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
         tpi = (TabPageIndicator) findViewById(R.id.main_tpi);
         mSnackBar = (SnackBar) findViewById(R.id.main_sn);
 
-        FloatingActionButton InsertBtn = (FloatingActionButton)findViewById(R.id.insert_btn);
+        FloatingActionButton InsertBtn = (FloatingActionButton) findViewById(R.id.insert_btn);
 
         InsertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +207,6 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
     }
 
 
-
     public enum Tab { // 툴바 내용 버튼 각각의 내용
 
         PRIVATEINFO("개인 정보"),
@@ -217,7 +216,6 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
         ANNOUNCE("ANNOUNCE"),
         CALENDAR("CALENDAR"),
         MEMBER("MEMBER");
-
 
 
         private final String name;
@@ -322,7 +320,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                         }
                     };
 
-                    ((SimpleDialog.Builder)builder).message("Produce by Ecomo Company").negativeAction("OK");
+                    ((SimpleDialog.Builder) builder).message("Produce by Ecomo Company").negativeAction("OK");
 
                     FragmentManager fm = getSupportFragmentManager();
                     DialogFragment diaFM = DialogFragment.newInstance(builder);
@@ -349,7 +347,7 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                                     String code = new String(responseBody);
-                                    switch( code ){
+                                    switch (code) {
                                         case "success":
                                             Toast toastView = Toast.makeText(getApplicationContext(),
                                                     "Success", Toast.LENGTH_LONG);
@@ -520,71 +518,10 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
     protected void GoDialog(int id) {
 
-        Dialog.Builder builder = null;
-        switch (id) {
-            case DIALOG_INSERT:
-                builder = new SimpleDialog.Builder(R.style.SimpleDialogLight) {
-
-                    @Override
-                    protected void onBuildDone(Dialog dialog) {
-                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        PrepareDialog(DIALOG_INSERT, dialog);
-                    }
-
-                    @Override // 취소 or 뒤로가기 누르면 다시 원이 회전하도록 만드셈
-                    public void onNegativeActionClicked(DialogFragment fragment) {
-                        super.onNegativeActionClicked(fragment);
-                    }
-                };
-
-                builder.title("어떤 방식으로 입력하시겠습니까?").negativeAction("CANCEL")
-                        .contentView(R.layout.insert_dialog);
-
-                FragmentManager fm = getSupportFragmentManager();
-                DialogFragment diaFM = DialogFragment.newInstance(builder);
-                diaFM.show(fm, null);
-                break;
-        }
+        Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade, R.anim.hold);
 
     }
 
-    protected void PrepareDialog(int id, Dialog dialog) {
-        switch (id) {
-            case DIALOG_INSERT:
-                final Dialog dialogD = (Dialog) dialog;
-                ImageView InsertOCRBtn = (ImageView) dialogD.findViewById(R.id.insert_ocr_btn);
-                ImageView InsertSpeechBtn = (ImageView) dialogD.findViewById(R.id.insert_speech_btn);
-                ImageView InsertHandBtn = (ImageView) dialogD.findViewById(R.id.insert_hand_btn);
-
-                InsertOCRBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-                        Uri fileUri = PrivateMainActivity.getOutputMediaFileUri(); // create a file to save the image
-                        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-
-                        startActivityForResult(intent, 0);
-                    }
-                });
-                InsertSpeechBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Speech", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                InsertHandBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fade, R.anim.hold);
-                        dialogD.dismiss();
-
-                        return;
-                    }
-                });
-
-                break;
-        }
-    }
 }

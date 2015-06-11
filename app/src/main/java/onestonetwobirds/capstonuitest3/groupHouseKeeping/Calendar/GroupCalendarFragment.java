@@ -3,6 +3,7 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar;
 import android.annotation.TargetApi;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -12,13 +13,21 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.rey.material.app.Dialog;
 import com.rey.material.app.DialogFragment;
 import com.rey.material.app.SimpleDialog;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,6 +40,7 @@ import onestonetwobirds.capstonuitest3.control.materialcalendar.CalendarDay;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.MaterialCalendarView;
 import onestonetwobirds.capstonuitest3.control.materialcalendar.OnDateChangedListener;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Main.InGroupActivity;
+import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 
 /**
  * Created by YeomJi on 15. 6. 7..
@@ -46,6 +56,8 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
     View convertView;
     ArrayAdapter<String> adapterInsert;
     View v;
+
+    String group_id="";
 
     int TokenYear, TokenMonth, TokenDay;
     String result;
@@ -67,6 +79,10 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
 
         infla = inflater;
         contain = container;
+
+        final SharedPreferences mPreference;
+        mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
+        group_id = mPreference.getString("group_id", "");
 
         MaterialCalendarView widget = (MaterialCalendarView) v.findViewById(R.id.groupCalendarView);
         widget.setOnDateChangedListener(this);
@@ -144,30 +160,57 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
         switch (id) {
             case DIALOG_INSERT: // 여기 안에다가 써야함
 
-/*      캘린더의 리스트뷰 글 클릭했을 경우
-                listViewInsert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                RequestParams param = new RequestParams();
+                param.put("groupid", group_id);
+
+                HttpClient.post("getArticleList/", param, new AsyncHttpResponseHandler() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //position == id
-                        //System.out.println("cursor ----> "+account[position]+" / "+category[position]+" / "+money[position]+" / "+content[position]);
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        try {
+                            if (responseBody != null) {
+                                final JSONArray articles = new JSONArray(new String(responseBody));
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("date", subDate);
-                        bundle.putString("account", account[position]);
-                        bundle.putString("category", category[position]);
-                        //bundle.putInt("money", money[position]);
-                        bundle.putString("money", String.valueOf(money[position]));
-                        bundle.putString("content", content[position]);
 
-                        // Intent로 새 액티비티 띄우기
-                        Intent intent = new Intent(getActivity(), InsertResultActivity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
+                                //arrListInsert.add(result);
+                                for (int i = 0; i < articles.length(); i++) {
+                                    JSONObject got = new JSONObject(articles.get(i).toString());
+                                    if(got.get("day").toString().equals(String.valueOf(TokenDay)))
+                                        resultArr.add(got.get("title").toString() + " / " + got.get("price").toString());
+                                }
+                                listViewInsert.setAdapter(adapterInsert);
 
+                                listViewInsert.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        try {
+                                            JSONObject obj = new JSONObject(articles.get(position).toString());
+
+                                            Intent intent = new Intent(getActivity().getApplicationContext(), GroupInsertContentActivity.class);
+                                            intent.putExtra("jsonobject", obj.toString());
+                                            startActivity(intent);
+
+                                        } catch (JSONException e) {
+                                        }
+                                    }
+                                });
+
+                                System.out.println("Articles : " + articles);
+                            } else {
+                                System.out.println("Here Checker");
+                            }
+
+                        } catch (JSONException e) {
+                            System.out.println(e);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        System.out.println("error message : " + error);
                     }
                 });
 
-                */
+                //listViewInsert.setAdapter(adapterInsert);
 
                 break;
         }

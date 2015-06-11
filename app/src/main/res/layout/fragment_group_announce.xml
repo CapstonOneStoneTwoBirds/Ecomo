@@ -33,13 +33,21 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginTop="10sp"
-            android:layout_marginBottom="20sp">
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp">
 
             <TableRow
                 android:layout_width="fill_parent"
@@ -48,13 +56,11 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:background="#00bfff"
                 android:padding="5sp"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="5sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginLeft="15sp"
                 android:layout_marginRight="3sp"
@@ -62,32 +68,44 @@
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="80sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_weight="1"
-                android:background="#afeeee"
                 android:padding="5sp"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="5sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginLeft="3sp"
                 android:layout_marginRight="3sp"
                 android:text="장소"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="150sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_weight="2"
-                android:background="#afe55f"
                 android:padding="5sp"
-                android:layout_marginTop="10sp"
+                android:layout_marginTop="5sp"
                 android:layout_marginBottom="5sp"
                 android:layout_marginLeft="3sp"
                 android:layout_marginRight="15sp"
                 android:text="내용"/>
             </TableRow>
         </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#c0c0c0"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="10sp"
+            android:orientation="horizontal"
+            android:padding="0.05sp" />
 
 
         <ListView

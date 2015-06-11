@@ -42,7 +42,7 @@ public class GroupMemberInfoActivity extends Activity {
             ImageView iv = (ImageView)findViewById(R.id.member_iv);
 
             Button memberOK = (Button)findViewById(R.id.memberinfo_phone_OK);
-            
+
             memberOK.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
