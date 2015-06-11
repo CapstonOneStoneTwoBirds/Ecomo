@@ -9,10 +9,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -46,7 +48,7 @@ public class StartActivity extends Activity implements View.OnClickListener{
     private GoogleCloudMessaging _gcm;
     private String _regId;
 
-    Button button1, button2, button3, button4;
+    Button button1, button2, button3;
     EditText email;
     EditText pw;
 
@@ -68,11 +70,9 @@ public class StartActivity extends Activity implements View.OnClickListener{
             button1 = (Button) findViewById(R.id.button_bt_start);
             button2 = (Button) findViewById(R.id.button_bt_main_sign_in);
             button3 = (Button) findViewById(R.id.button_bt_main_find_pwd);
-            button4 = (Button) findViewById(R.id.temp_btn);
             button1.setOnClickListener(this);
             button2.setOnClickListener(this);
             button3.setOnClickListener(this);
-            button4.setOnClickListener(this);
 
             email = (EditText)findViewById(R.id.login_email);
             pw = (EditText)findViewById(R.id.login_pwd);
@@ -142,8 +142,10 @@ public class StartActivity extends Activity implements View.OnClickListener{
                         editor.clear();
                         editor.commit();
 
-                        startActivity(new Intent(getApplicationContext(), StartActivity.class));
-                        overridePendingTransition(R.anim.fade, R.anim.hold);
+                        Toast toastView = Toast.makeText(getApplicationContext(),
+                                "Wrong Access", Toast.LENGTH_LONG);
+                        toastView.setGravity(Gravity.CENTER, 40, 25);
+                        toastView.show();
                     } else {
                         System.out.println("Login Success");
                         SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
@@ -327,11 +329,6 @@ public class StartActivity extends Activity implements View.OnClickListener{
                 overridePendingTransition(R.anim.fade, R.anim.hold);
                 break;
 
-            case R.id.temp_btn:
-                intent = new Intent(StartActivity.this, PrivateMainActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fade, R.anim.hold);
-                break;
         }
     }
 

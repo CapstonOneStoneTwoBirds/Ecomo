@@ -97,13 +97,6 @@
         android:text="비밀번호찾기"/>
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Jump to Private"
-        android:id="@+id/temp_btn"
-        android:layout_gravity="center_horizontal" />
-
 
     <com.rey.material.widget.SnackBar
         android:id="@+id/start_sn"

@@ -69,7 +69,7 @@ public class KeySetActivity extends Activity implements View.OnClickListener{
                                 Log.e("KeySetActivity", new String(responseBody));
 
                                 Toast toastView = Toast.makeText(getApplicationContext(),
-                                        "KEY 설정 완료", Toast.LENGTH_LONG);
+                                        "KEY set complete", Toast.LENGTH_LONG);
                                 toastView.setGravity(Gravity.CENTER, 40, 25);
                                 toastView.show();
                                 finish();

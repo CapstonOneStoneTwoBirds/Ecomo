@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
  * Created by New on 2015-06-04.
  */
 public class SendGmail extends AsyncTask {
-    String IP = "192.168.123.183";
+    String IP = "192.168.0.2";
     @Override
     protected Object doInBackground(Object[] params) {
         try {
