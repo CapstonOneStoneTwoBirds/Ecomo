@@ -174,8 +174,8 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
                                 //arrListInsert.add(result);
                                 for (int i = 0; i < articles.length(); i++) {
                                     JSONObject got = new JSONObject(articles.get(i).toString());
-                                    if(got.get("day").toString().equals(String.valueOf(TokenDay)))
-                                        resultArr.add(got.get("title").toString() + " / " + got.get("price").toString());
+                                    if(got.get("day").toString().equals(String.valueOf(TokenDay)) && got.get("month").toString().equals(String.valueOf(TokenMonth)) && got.get("year").toString().equals(String.valueOf(TokenYear)))
+                                        resultArr.add(got.get("title").toString() + "  " + got.get("price").toString());
                                 }
                                 listViewInsert.setAdapter(adapterInsert);
 

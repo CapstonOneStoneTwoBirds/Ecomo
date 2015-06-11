@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,6 +20,7 @@
             android:layout_marginLeft="15sp"
             android:layout_marginRight="3sp"
             android:layout_marginTop="10sp"
+            android:textColor="#000000"
             android:gravity="center"
             android:padding="5sp" />
 
@@ -33,6 +33,7 @@
             android:layout_marginLeft="3sp"
             android:layout_marginRight="3sp"
             android:layout_marginTop="10sp"
+            android:textColor="#000000"
             android:gravity="center"
             android:padding="5sp" />
 
@@ -44,6 +45,7 @@
             android:layout_marginLeft="3sp"
             android:layout_marginRight="15sp"
             android:layout_marginTop="10sp"
+            android:textColor="#000000"
             android:gravity="center"
             android:padding="5sp" />
 

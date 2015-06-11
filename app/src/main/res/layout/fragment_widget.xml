@@ -54,10 +54,9 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="80sp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="1"
                     android:padding="5sp"
                     android:layout_marginTop="10sp"
                     android:layout_marginBottom="5sp"
@@ -67,10 +66,9 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="130sp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="1"
                     android:padding="5sp"
                     android:layout_marginTop="10sp"
                     android:layout_marginBottom="5sp"
@@ -79,10 +77,9 @@
                     android:text="한계 금액"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="130sp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_weight="1"
                     android:padding="5sp"
                     android:layout_marginTop="10sp"
                     android:layout_marginBottom="5sp"

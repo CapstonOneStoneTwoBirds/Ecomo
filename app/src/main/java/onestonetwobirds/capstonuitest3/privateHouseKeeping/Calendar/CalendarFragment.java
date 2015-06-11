@@ -192,8 +192,8 @@ public class CalendarFragment extends Fragment implements OnDateChangedListener 
                         money[cursor.getPosition()] = cursor.getInt(moneyCol);
                         content[cursor.getPosition()] = cursor.getString(contentCol);
 
-                        result = AMPM[cursor.getPosition()] + "/" + time[cursor.getPosition()] + "/" +
-                                minute[cursor.getPosition()] + "  " + account[cursor.getPosition()] + " " +
+                        result = AMPM[cursor.getPosition()] + "/" + time[cursor.getPosition()] + ":" +
+                                minute[cursor.getPosition()] + "   " + account[cursor.getPosition()] + "  " +
                                 money[cursor.getPosition()];
 
                         System.out.println("TestOK : " + result);

@@ -102,7 +102,7 @@
             android:layout_weight="0.4"
             android:text="입력"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             app:rd_delayClick="afterRelease" />
 
         <View
@@ -119,7 +119,7 @@
             android:layout_weight="0.4"
             android:text="취소"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             app:rd_delayClick="afterRelease" />
 
     </LinearLayout>
