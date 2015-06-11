@@ -3,10 +3,12 @@ package onestonetwobirds.capstonuitest3.groupHouseKeeping.Announce;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.rey.material.widget.Button;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -21,15 +23,18 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 public class GroupAnnounceCActivity extends Activity {
 
     TextView CAnnounceTitle, CAnnouncePlace, CAnnounceContent;
+    Button CAnnounceOK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_announce);
+        setContentView(R.layout.group_announce_confirm_main);
 
         CAnnounceTitle = (TextView)findViewById(R.id.announce_confirm_title);
         CAnnouncePlace = (TextView)findViewById(R.id.announce_confirm_place);
         CAnnounceContent = (TextView)findViewById(R.id.announce_confirm_content);
+
+        CAnnounceOK = (Button)findViewById(R.id.announce_confirm_OK);
 
         String jsonobject = getIntent().getStringExtra("jsonobj");
         if( jsonobject == null ){
@@ -79,5 +84,14 @@ public class GroupAnnounceCActivity extends Activity {
                 }catch(Exception e){}
             } catch (Exception e) { Log.e("Heree!!!!!!!!!!!", e.toString());            }
         }
+
+        CAnnounceOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
+
 }

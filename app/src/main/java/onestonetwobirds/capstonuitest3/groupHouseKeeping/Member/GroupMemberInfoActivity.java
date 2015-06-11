@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.rey.material.widget.Button;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -31,13 +33,22 @@ public class GroupMemberInfoActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_member_info);
+        setContentView(R.layout.group_member_info_main);
         try{
             JSONObject obj = new JSONObject(getIntent().getStringExtra("jsonobject").toString());
             TextView email = (TextView)findViewById(R.id.memberinfo_email_tv);
             TextView name = (TextView)findViewById(R.id.memberinfo_name_tv);
             final TextView phone = (TextView)findViewById(R.id.memberinfo_phone_tv);
             ImageView iv = (ImageView)findViewById(R.id.member_iv);
+
+            Button memberOK = (Button)findViewById(R.id.memberinfo_phone_OK);
+            
+            memberOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 
             email.setText(obj.get("member").toString());
             name.setText(obj.get("name").toString());
@@ -118,5 +129,6 @@ public class GroupMemberInfoActivity extends Activity {
         }catch(IOException e){
             e.printStackTrace();
         }
+
     }
 }

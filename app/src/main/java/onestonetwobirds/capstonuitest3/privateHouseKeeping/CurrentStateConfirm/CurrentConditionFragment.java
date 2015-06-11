@@ -86,12 +86,12 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
 
             while (cursor.moveToNext()) {
 
-                CTotal.setText(cursor.getString(totalCol)+" 원");
-                CFood.setText(cursor.getString(foodCol)+" 원");
-                CPlay.setText(cursor.getString(playCol)+" 원");
-                CHouse.setText(cursor.getString(houseCol)+" 원");
-                CTraffic.setText(cursor.getString(trafficCol)+" 원");
-                CSaving.setText(cursor.getString(savingCol)+" 원");
+                CTotal.setText(cursor.getString(totalCol));
+                CFood.setText(cursor.getString(foodCol));
+                CPlay.setText(cursor.getString(playCol));
+                CHouse.setText(cursor.getString(houseCol));
+                CTraffic.setText(cursor.getString(trafficCol));
+                CSaving.setText(cursor.getString(savingCol));
 
             }
 

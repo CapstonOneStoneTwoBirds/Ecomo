@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ecomo_back2_50"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20sp"
+        android:layout_marginLeft="40sp"
+        android:layout_marginRight="40sp"
+        android:layout_marginTop="40sp"
+        android:gravity="center"
+        android:text="공지 확인"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="17sp"
+        android:orientation="horizontal"
+        android:padding="0.2sp">
+
+        <TextView
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="40sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text="제목"
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/announce_confirm_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="0sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text=""
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="17sp"
+        android:orientation="horizontal"
+        android:padding="0.2sp">
+
+        <TextView
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="40sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text="장소"
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/announce_confirm_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="0sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text=""
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.2sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="17sp"
+        android:orientation="horizontal"
+        android:padding="0.2sp">
+
+        <TextView
+            android:layout_width="60sp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="40sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text="내용"
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/announce_confirm_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="13sp"
+            android:layout_marginLeft="0sp"
+            android:layout_marginRight="40sp"
+            android:layout_marginTop="13sp"
+            android:text=""
+            android:inputType="textShortMessage"
+            android:textColorHint="#808080"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="17sp"
+        android:layout_marginRight="17sp"
+        android:background="#c0c0c0"
+        android:orientation="horizontal"
+        android:padding="0.05sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40sp"
+        android:layout_marginLeft="35sp"
+        android:layout_marginRight="35sp"
+        android:layout_marginTop="13sp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/announce_confirm_OK"
+            style="@style/RaiseWaveButtonRippleStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="80sp"
+            android:layout_marginRight="80sp"
+            android:layout_weight="0.4"
+            android:text="확인"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Button"
+            android:textColor="#000000"
+            app:rd_delayClick="afterRelease" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
