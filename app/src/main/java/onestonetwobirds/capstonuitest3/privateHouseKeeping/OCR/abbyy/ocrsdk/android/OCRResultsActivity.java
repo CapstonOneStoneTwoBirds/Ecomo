@@ -253,12 +253,12 @@ public class OCRResultsActivity extends Activity {
                                         ca = text.indexOf("DIFF");
                                         if( ca != -1){
                                             result = "TO THE DIFFERENT";
-                                        }/* else {
-                                            ca = text.indexOf("현금");
+                                        }else {
+                                            ca = text.indexOf("STAR");
                                             if( ca != -1){
-                                                result = "현금";
+                                                result = "STARBUCKS";
                                             }
-                                        }*/
+                                        }
                                     }
                                 }
                             }
