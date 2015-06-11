@@ -19,7 +19,8 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity
 public class OCRResultsActivity extends Activity {
 
 	String outputPath;
-    String year, month, day, price, way;
+    String year, month, day;
+    String store, price, way;
 	TextView tv;
 
 	@Override
@@ -75,6 +76,7 @@ public class OCRResultsActivity extends Activity {
 
         price = getPrice(text);
         way = getPaid(text);
+        store = getStore(text);
         String temp = price + " //// " + way; //추출되는 값이 없기 때문에 에러가 뜸
 
         // 현재 상표추출 알고리즘은 없음
@@ -213,6 +215,64 @@ public class OCRResultsActivity extends Activity {
 
         return result;
     }
+
+    public String getStore(String text){
+        String result = "";
+        int ca = text.indexOf("엔젤");
+        if ( ca != -1 )
+            result = "엔젤리너스";
+        else {
+            ca = text.indexOf("투썸");
+            if( ca != -1 )
+                result = "투썸플레이스";
+            else{
+                ca = text.indexOf("마카");
+                if( ca != -1){
+                    result = "마카나이";
+                } else {
+                    ca = text.indexOf("현금");
+                    if( ca != -1){
+                        result = "현금";
+                    } else {
+                        ca = text.indexOf("현금");
+                        if( ca != -1){
+                            result = "현금";
+                        } else {
+                            ca = text.indexOf("현금");
+                            if( ca != -1){
+                                result = "현금";
+                            } else {
+                                ca = text.indexOf("현금");
+                                if( ca != -1){
+                                    result = "현금";
+                                } else {
+                                    ca = text.indexOf("현금");
+                                    if( ca != -1){
+                                        result = "현금";
+                                    } else {
+                                        ca = text.indexOf("현금");
+                                        if( ca != -1){
+                                            result = "현금";
+                                        } else {
+                                            ca = text.indexOf("현금");
+                                            if( ca != -1){
+                                                result = "현금";
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(result.equals("")) result = "";
+
+        return result;
+    }
+
 
     public ArrayList<String> getDate(String text){
         int index = text.indexOf("2015");
