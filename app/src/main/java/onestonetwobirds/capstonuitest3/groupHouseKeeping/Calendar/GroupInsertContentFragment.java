@@ -62,9 +62,6 @@ public class GroupInsertContentFragment extends Fragment{
         GroupInsertPrice = (TextView) v.findViewById(R.id.group_insert_price);
         GroupInsertTime = (TextView) v.findViewById(R.id.group_insert_time);
         GroupInsertContent = (TextView) v.findViewById(R.id.group_insert_content);
-        GroupMemberComment = (ListView) v.findViewById(R.id.group_member_comment);
-        MyCommentTxt = (EditText) v.findViewById(R.id.my_comment_txt);
-        MyCommentBtn = (Button) v.findViewById(R.id.my_comment_btn);
 
         final SharedPreferences mPreference;
         mPreference = v.getContext().getSharedPreferences("myInfo", v.getContext().MODE_PRIVATE);
@@ -86,7 +83,7 @@ public class GroupInsertContentFragment extends Fragment{
                             if (got.get("day").toString().equals(inToDay) && got.get("title").toString().equals(inToTitle)) {
                                 System.out.println("OK~");
                                 GroupInsertTitle.setText(inToTitle);
-                                GroupInsertPrice.setText(got.get("price").toString() + " Ïõê");
+                                GroupInsertPrice.setText(got.get("price").toString() + " ?õê");
                                 GroupInsertTime.setText(got.get("year").toString() + ". " + got.get("month").toString() + ". " + got.get("day").toString());
                                 GroupInsertContent.setText(got.get("content").toString());
                             }
