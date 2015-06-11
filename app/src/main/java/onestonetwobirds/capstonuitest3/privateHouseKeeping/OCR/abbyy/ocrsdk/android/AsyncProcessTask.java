@@ -54,9 +54,9 @@ public class AsyncProcessTask extends AsyncTask<String, String, Boolean> {
 			// http://ocrsdk.com/documentation/faq/#faq3
 			
 			// Name of application you created
-			restClient.applicationId = "UOSUOSUOS";
+			restClient.applicationId = "bookkeeping application ";
 			// You should get e-mail from ABBYY Cloud OCR SDK service with the application password
-			restClient.password = "fTDQEwB3qjcb9ExINY9zYcVA";
+			restClient.password = "PBKb89Pqtyk/CtB+zFgBpIvT";
 
 			// Obtain installation id when running the application for the first time
 			SharedPreferences settings = activity.getPreferences(Activity.MODE_PRIVATE);

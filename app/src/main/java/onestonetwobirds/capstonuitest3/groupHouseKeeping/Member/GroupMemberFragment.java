@@ -91,7 +91,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                 try {
                     final JSONArray member = new JSONArray(new String(responseBody));
                     ret = new Bitmap[member.length()];
-                    Log.e(tag, member.toString());
                     //arrListInsert.add(result);
                     for (int i = 0; i < member.length(); i++) {
                         JSONObject got = new JSONObject(member.get(i).toString());
@@ -204,6 +203,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         // If Internal Storage has user's Img, get this one
         // else get from server.
         final String filename = email+"_profile.jpg";
+        Log.e(tag, "Here!! :::: " + i );
         ret[i] = null;
         try {
             FileInputStream fis = view.getContext().openFileInput(filename);
@@ -214,13 +214,14 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
             System.out.println("img catch exception");
             ret[i] = scaled;
         }catch( FileNotFoundException e){
+
             RequestParams param = new RequestParams();
             param.put("email", email);
-            Log.e(tag, "Error? : " + e);
-            HttpClient.post("getMemberImg/", param, new AsyncHttpResponseHandler() {
 
+            HttpClient.post("getMemberImg/", param, new AsyncHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    Log.e(tag, new String(responseBody));
                     if (new String(responseBody).equals("No Image")) {
                         ret[i] = BitmapFactory.decodeResource(getResources(), R.drawable.default_person);
                     } else {
@@ -251,6 +252,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         }
         try {
             while(true) {
+                Log.e(tag, ret[i].toString());
                 Thread.sleep(500);
                 if( ret[i] != null )
                     break;
