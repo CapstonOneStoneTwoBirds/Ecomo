@@ -91,9 +91,9 @@ public class OCRResultsActivity extends Activity {
             System.out.println("Confirm year : " + date.get(0));
             System.out.println("Confirm month : " + date.get(1));
             System.out.println("Confirm day : " + date.get(2));
+            System.out.println("Confirm "+temp);
+            System.out.println("Confirm "+date.get(0)+" / "+date.get(1)+" / "+date.get(2));
         }
-        System.out.println("Confirm "+temp);
-        System.out.println("Confirm "+date.get(0)+" / "+date.get(1)+" / "+date.get(2));
 
         tv.post(new MessagePoster(text));
         System.out.println("text length : " + text.length());
@@ -228,24 +228,24 @@ public class OCRResultsActivity extends Activity {
             else{
                 ca = text.indexOf("마카");
                 if( ca != -1){
-                    result = "마카나이";
+                    result = "마카나";
                 } else {
-                    ca = text.indexOf("현금");
+                    ca = text.indexOf("할리스");
                     if( ca != -1){
-                        result = "현금";
+                        result = "할리스커피";
                     } else {
-                        ca = text.indexOf("현금");
+                        ca = text.indexOf("파리");
                         if( ca != -1){
-                            result = "현금";
+                            result = "파리바게트";
                         } else {
-                            ca = text.indexOf("현금");
+                            ca = text.indexOf("올리");
                             if( ca != -1){
-                                result = "현금";
+                                result = "CJ 올리브영";
                             } else {
-                                ca = text.indexOf("현금");
+                                ca = text.indexOf("베스");
                                 if( ca != -1){
-                                    result = "현금";
-                                } else {
+                                    result = "LG 베스트샵";
+                                } /*else {
                                     ca = text.indexOf("현금");
                                     if( ca != -1){
                                         result = "현금";
@@ -260,7 +260,7 @@ public class OCRResultsActivity extends Activity {
                                             }
                                         }
                                     }
-                                }
+                                }*/
                             }
                         }
                     }
@@ -322,6 +322,7 @@ public class OCRResultsActivity extends Activity {
 			//setContentView( tv );
 
             Bundle bundle = new Bundle();
+            bundle.putString("store", store);
             bundle.putString("year", year);
             bundle.putString("month", month);
             bundle.putString("date", day);
