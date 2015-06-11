@@ -15,6 +15,7 @@ import android.util.Log;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.InviteMember.ConsentInviteActivity;
 
 public class GcmIntentService extends IntentService
 {
@@ -90,7 +91,7 @@ public class GcmIntentService extends IntentService
         }
         else if( code.equals("Invite")){
             id = "group_id";
-            //cls = ConsentInviteActivity.class;
+            cls = ConsentInviteActivity.class;
         }
 
         final Intent intent = new Intent(getApplicationContext(), cls);

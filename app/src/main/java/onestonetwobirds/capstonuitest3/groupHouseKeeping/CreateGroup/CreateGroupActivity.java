@@ -30,6 +30,8 @@ import com.rey.material.app.SimpleDialog;
 import com.rey.material.widget.Button;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,6 +52,7 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
     Button FromGal, CreateGroup_OK, CreateGroup_NO;
     ImageView setGroupImg1, setGroupImg2, setGroupImg3, setGroupImg4, setGroupImg5;
     File file = null;
+    String group_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,29 +98,58 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
                     HttpClient.get("createGroup/", param, new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            String code = new String(responseBody);
-                            System.out.println("code : " + code);
-                            switch (code) {
-                                case "1":
-                                    // Already Exist
-                                    Toast toastView = Toast.makeText(getApplicationContext(),
-                                            "Already you have the same group.", Toast.LENGTH_LONG);
-                                    toastView.setGravity(Gravity.CENTER, 40, 25);
-                                    toastView.show();
-                                    System.out.println("Success Here   1");
-                                    break;
+                            if( new String(responseBody).equals("1")) {
+                                // Already Exist
+                                Toast toastView = Toast.makeText(getApplicationContext(),
+                                        "Already you have the same group.", Toast.LENGTH_LONG);
+                                toastView.setGravity(Gravity.CENTER, 40, 25);
+                                toastView.show();
+                                System.out.println("Success Here   1");
+                            }
+                            else{
+                                // Create Success
+                                System.out.println("Success Here   2");
+                                try {
+                                    JSONObject obj = new JSONObject(new String(responseBody));
+                                    Log.e("CreateGroupActivity", "obj : " + obj);
+                                    Log.e("CreateGroupActivity", "Gtoup_id : " + group_id);
+                                    group_id = obj.getString("_id");
+                                    // Set Group Image////////////////////////////////////////////////
+                                    RequestParams param = new RequestParams();
+                                    param.put("groupname", Title.getText().toString());
+                                    param.put("group_id", group_id);
+                                    if( num == 0 ) {
+                                        try {
+                                            param.put("image", file, "image/jpg");
+                                        } catch (FileNotFoundException e) { }
 
-                                case "2":
-                                    // Create Success
-                                    System.out.println("Success Here   2");
-                                    Intent intent = new Intent(getApplicationContext(), GroupMainActivity.class);
-                                    startActivity(intent);
-                                    break;
+                                        HttpClient.post("uploadImg_Group/", param, new AsyncHttpResponseHandler() {
+                                            @Override
+                                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                System.out.println("img Save Success");
+                                                System.out.println("output : " + new String(responseBody));
+                                                switch (new String(responseBody)) {
+                                                    case "1":
+                                                        System.out.println("img save error");
+                                                        break;
 
-                                case "4":
-                                    // Save Error
-                                    System.out.println("Success Here    4");
-                                    break;
+                                                    case "Saved":
+                                                        System.out.println("img save Success");
+                                                        break;
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                System.out.println("error message : " + error);
+                                            }
+                                        });
+                                    }
+                                }catch(JSONException e){ e.printStackTrace();}
+
+                                Intent intent = new Intent(getApplicationContext(), GroupMainActivity.class);
+                                startActivity(intent);
+                                finish();
                             }
                         }
 
@@ -128,53 +160,6 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
                     });
 
                 }catch(Exception e){}
-
-
-                // Set Group Image////////////////////////////////////////////////
-                RequestParams param = new RequestParams();
-                param.put("groupname", Title.getText().toString());
-                param.put("group_id", mPreference.getString("group_id",""));
-                if( num == 0 ) {
-                    try {
-                        param.put("image", file, "image/jpg");
-                    } catch (FileNotFoundException e) { }
-
-
-                    /*
-                    FileOutputStream outputStream;
-                    try {
-                        String filename = email+"_img.jpg"; // 그룹으로 바꾸자.
-                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                        scaled.compress(Bitmap.CompressFormat.JPEG, 90, outputStream);
-                        outputStream.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    */
-
-                    HttpClient.post("uploadImg_Group/", param, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            System.out.println("img Save Success");
-                            System.out.println("output : " + new String(responseBody));
-                            switch (new String(responseBody)) {
-                                case "1":
-                                    System.out.println("img save error");
-                                    break;
-
-                                case "Saved":
-                                    System.out.println("img save Success");
-                                    break;
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            System.out.println("error message : " + error);
-                        }
-                    });
-                }
-
                 break;
             case R.id.create_group_NO:
                 finish();

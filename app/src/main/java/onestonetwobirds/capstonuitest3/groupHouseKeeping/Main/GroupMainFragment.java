@@ -35,9 +35,9 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
  * Created by YeomJi on 15. 6. 8..
  */
 public class GroupMainFragment extends Fragment {
-    private Bitmap bitmap=null;
     private IconTextListAdapterGroup adapter;
     private ListView lv_main;
+    Bitmap[] bitmap= null;
 
     public static GroupMainFragment newInstance() {
         GroupMainFragment fragment = new GroupMainFragment();
@@ -63,7 +63,7 @@ public class GroupMainFragment extends Fragment {
                 try {
                     final JSONArray jsonarr = new JSONArray(new String(responseBody));
                     Log.e("GroupMainActivity", "Post count: " + jsonarr.length());
-
+                    bitmap = new Bitmap[jsonarr.length()];
                     if (jsonarr.length() != 0) {
                         for (int i = 0; i < jsonarr.length(); i++) {
                             System.out.println(jsonarr.get(i));
@@ -74,7 +74,7 @@ public class GroupMainFragment extends Fragment {
                                 adapter.addItem(new IconTextItemGroup(getResources().getDrawable(getNumResources(num)), got.get("group_name").toString(), got.get("owner_name").toString(), got.get("member_cnt").toString()));
                             } else {
                                 //adaptor.addItem(new IconTextItemGroup(, got.get("groupname").toString()));
-                                Bitmap b = getMemberProfileImg(got.get("group_id").toString());
+                                Bitmap b = getMemberProfileImg(i, got.get("group_id").toString());
                                 adapter.addItem(new IconTextItemGroup(b, got.get("group_name").toString(), got.get("owner_name").toString(), got.get("member_cnt").toString()));
                             }
                         }
@@ -108,12 +108,12 @@ public class GroupMainFragment extends Fragment {
         return v;
     }
 
-    public Bitmap getMemberProfileImg(final String group_id){
+    public Bitmap getMemberProfileImg(final int i, final String group_id){
         // Get Group Img
         // If Internal Storage has user's Img, get this one
         // else get from server.
         final String filename = group_id+"_group.jpg";
-
+        bitmap[i] = null;
         try {
             FileInputStream fis = getActivity().openFileInput(filename);
             Bitmap scaled = BitmapFactory.decodeStream(fis);
@@ -121,23 +121,25 @@ public class GroupMainFragment extends Fragment {
 
             //string temp contains all the data of the file.
             System.out.println("Error here?");
-            bitmap = scaled;
+            bitmap[i] = scaled;
+            Log.e("GroupMainFragment", scaled.toString());
+
         }catch( FileNotFoundException e){
             RequestParams param = new RequestParams();
             param.put("group_id", group_id);
             System.out.println("Error? : " + e);
             HttpClient.post("getGroupImg/", param, new AsyncHttpResponseHandler() {
-
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    Log.e("GroupMainFragment", new String(responseBody));
                     if (new String(responseBody).equals("No Image")) {
-                        bitmap = null;
+                        bitmap[i] = null;
                     } else {
                         Bitmap d = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
 
                         int nh = (int) (d.getHeight() * (512.0 / d.getWidth()));
                         Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
-                        bitmap = scaled;
+                        bitmap[i] = scaled;
 
                         FileOutputStream outputStream;
                         try {
@@ -158,7 +160,16 @@ public class GroupMainFragment extends Fragment {
         }catch(IOException e){
             e.printStackTrace();
         }
-        return bitmap;
+        try {
+            while(true) {
+                Log.e("GroupMainFragment", bitmap[i].toString());
+                Thread.sleep(500);
+                if( bitmap[i] != null )
+                    break;
+            }
+        }catch(Exception e){}
+
+        return bitmap[i];
     }
 
     public int getNumResources(String num){

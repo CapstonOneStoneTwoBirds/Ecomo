@@ -166,6 +166,8 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
                 break;
             case R.id.tb_new:                                 // 새로 고침
                 //mToolbarManager.setCurrentGroup(0);
+                startActivity(getIntent());
+                finish();
                 break;
         }
         return true;

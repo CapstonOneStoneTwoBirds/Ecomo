@@ -52,10 +52,11 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
     SnackBar mSnackBar;
     String group_id="";
     View view = null;
+    Bitmap[] ret= null;
 
+    int n = 0;
     ListView listMember, listMe, listKing;
     IconTextListAdapterMember adapterMember, adapterMe, adapterKing;
-    Bitmap ret=null;
 
     public static GroupMemberFragment newInstance() {
         GroupMemberFragment fragment = new GroupMemberFragment();
@@ -86,28 +87,32 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         HttpClient.post("getMemberList/", param, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
                 try {
                     final JSONArray member = new JSONArray(new String(responseBody));
-
+                    ret = new Bitmap[member.length()];
+                    Log.e(tag, member.toString());
                     //arrListInsert.add(result);
                     for (int i = 0; i < member.length(); i++) {
                         JSONObject got = new JSONObject(member.get(i).toString());
 
                         if(got.get("member").toString().equals(mPreference.getString("email", ""))){
                             if( got.get("ownership").toString().equals("true") ){
-                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                Bitmap bitmap = getMemberProfileImg(i, got.get("member").toString());
                                 adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString() + " ☆"));
+                                n=i;
                             }else{
-                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                Bitmap bitmap = getMemberProfileImg(i, got.get("member").toString());
                                 adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
+                                n=i;
                             }
                         }
                         else{
                             if( got.get("ownership").toString().equals("true") ){
-                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                Bitmap bitmap = getMemberProfileImg(i, got.get("member").toString());
                                 adapterMember.addItemOnFirst(new IconTextItemMember(bitmap, got.get("name").toString() + " ☆"));
                             }else{
-                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                Bitmap bitmap = getMemberProfileImg(i, got.get("member").toString());
                                 adapterMember.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
                             }
                         }
@@ -120,10 +125,18 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             try {
-                                JSONObject obj = new JSONObject(member.get(position).toString());
-                                Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
-                                intent.putExtra("jsonobject", obj.toString());
-                                startActivity(intent);
+                                IconTextItemMember icon = (IconTextItemMember)adapterMember.getItem(position);
+                                String data = icon.getData(1);
+                                if( data.indexOf(' ') == -1){
+                                    for( int i = 0 ; i < member.length() ; i ++ ){
+                                        JSONObject obj = new JSONObject(member.get(i).toString());
+                                        if( obj.get("name").toString().equals(data)) {
+                                            Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
+                                            intent.putExtra("jsonobject", obj.toString());
+                                            startActivity(intent);
+                                        }
+                                    }
+                                }
                             } catch (JSONException e) {
                             }
                         }
@@ -133,7 +146,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                         @Override
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                             try {
-                                JSONObject obj = new JSONObject(member.get(position).toString());
+                                JSONObject obj = new JSONObject(member.get(n).toString());
                                 Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
                                 intent.putExtra("jsonobject", obj.toString());
                                 startActivity(intent);
@@ -186,12 +199,12 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() { super.onResume(); }
 
-    public Bitmap getMemberProfileImg(final String email){
+    public Bitmap getMemberProfileImg(final int i, final String email){
         // Get Member Profile Img
         // If Internal Storage has user's Img, get this one
         // else get from server.
         final String filename = email+"_profile.jpg";
-
+        ret[i] = null;
         try {
             FileInputStream fis = view.getContext().openFileInput(filename);
             Bitmap scaled = BitmapFactory.decodeStream(fis);
@@ -199,7 +212,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
 
             //string temp contains all the data of the file.
             System.out.println("img catch exception");
-            ret = scaled;
+            ret[i] = scaled;
         }catch( FileNotFoundException e){
             RequestParams param = new RequestParams();
             param.put("email", email);
@@ -209,13 +222,13 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     if (new String(responseBody).equals("No Image")) {
-                        ret = null;
+                        ret[i] = BitmapFactory.decodeResource(getResources(), R.drawable.default_person);
                     } else {
                         Bitmap d = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
 
                         int nh = (int) (d.getHeight() * (512.0 / d.getWidth()));
                         Bitmap scaled = Bitmap.createScaledBitmap(d, 512, nh, true);
-                        ret = scaled;
+                        ret[i] = scaled;
 
                         FileOutputStream outputStream;
                         try {
@@ -236,8 +249,14 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         }catch(IOException e){
             e.printStackTrace();
         }
-
-        return ret;
+        try {
+            while(true) {
+                Thread.sleep(500);
+                if( ret[i] != null )
+                    break;
+            }
+        }catch(Exception e){}
+        return ret[i];
     }
 
 }

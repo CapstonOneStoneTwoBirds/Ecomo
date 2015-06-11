@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="onestonetwobirds.capstonuitest3" >
 
+    <permission
+        android:name="onestonetwobirds.capstonuitest3.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-feature android:name="android.hardware.camera" />
@@ -17,14 +21,26 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-    <uses-permission android:name="com.capstone.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="onestonetwobirds.capstonuitest3.permission.C2D_MESSAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ecomo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <service android:name=".gcm.GcmIntentService" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <receiver
+            android:name=".gcm.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="onestonetwobirds.capstonuitest3.gcm" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".privateHouseKeeping.Widget.MyCustomWidget" android:label="Ecomo widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -39,7 +55,6 @@
             android:label="ECOMO" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -114,6 +129,11 @@
         <activity
             android:name=".groupHouseKeeping.CreateGroup.CreateGroupActivity"
             android:label="그룹 가계부 생성" >
+        </activity>
+        <activity
+            android:name=".groupHouseKeeping.InviteMember.ConsentInviteActivity"
+            android:exported="true"
+            android:label="가계부 입력" >
         </activity>
         <activity
             android:name=".privateHouseKeeping.Insert.InsertActivity"

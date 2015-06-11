@@ -2,6 +2,7 @@ package onestonetwobirds.capstonuitest3.user;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -73,6 +74,13 @@ public class SignInActivity extends Activity {
                                     // success
                                     case "2":
                                         System.out.println("2 called");
+                                        System.out.println("Login Success");
+                                        SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = mPreference.edit();
+                                        editor.putString("email", email.getText().toString());
+                                        editor.putString("pw", pw1.getText().toString());
+                                        editor.commit();
+
                                         Intent intent = new Intent(getApplicationContext(), KeySetActivity.class);
                                         intent.putExtra("email", email.getText().toString());
                                         finish();
