@@ -326,7 +326,7 @@ public class OCRResultsActivity extends Activity {
             bundle.putString("year", year);
             bundle.putString("month", month);
             bundle.putString("date", day);
-            bundle.putString("cost", price);
+            bundle.putString("money", price);
             bundle.putString("content", way);
 
             Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
