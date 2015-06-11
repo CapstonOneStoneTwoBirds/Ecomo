@@ -21,7 +21,14 @@ public class IconTextListAdapterMember extends BaseAdapter {
     public IconTextListAdapterMember(Context context) {
         mContext = context;
     }
-
+    public void addItemOnFirst(IconTextItemMember it){
+        List<IconTextItemMember> Items = new ArrayList();
+        Items.add(it);
+        for(int i = 0 ; i< mItems.size() ; i ++){
+            Items.add(mItems.get(i));
+        }
+        mItems = Items;
+    }
     public void addItem(IconTextItemMember it) {
         mItems.add(it);
     }

@@ -1,6 +1,7 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -44,7 +45,10 @@ public class IconTextViewGroup extends LinearLayout {
 
         // Set Icon
         mIcon = (ImageView) findViewById(R.id.iconItemGroup);
-        mIcon.setImageDrawable(aItem.getIcon());
+        if(aItem.getDrawableIcon()!=null)
+            mIcon.setImageDrawable(aItem.getDrawableIcon());
+        if(aItem.getBitmapIcon()!=null)
+            mIcon.setImageBitmap(aItem.getBitmapIcon());
 
         // Set Text 01
         mText01 = (TextView) findViewById(R.id.dataItem01Group);
@@ -85,5 +89,9 @@ public class IconTextViewGroup extends LinearLayout {
      */
     public void setIcon(Drawable icon) {
         mIcon.setImageDrawable(icon);
+    }
+
+    public void setIcon(Bitmap Icon)  {
+        mIcon.setImageBitmap(Icon);
     }
 }

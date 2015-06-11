@@ -8,12 +8,12 @@
     <ImageView
         android:id="@+id/iconItemGroup"
         android:src="@drawable/picture"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
         android:layout_margin="15sp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15sp"
         android:orientation="vertical">
@@ -25,16 +25,44 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:layout_margin="5sp"
-            android:textSize="16dp"
+            android:textSize="25dp"
             android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:text="총무 이름"
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textSize="15sp"
+                    android:layout_margin="5sp"
+                    android:textColor="#0000ff" />
+                <TextView
+                    android:id="@+id/dataItem02Group"
+                    android:text="총무 이름"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:textSize="15sp"
+                    android:layout_margin="5sp"
+                    android:textColor="#0000ff" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <TextView
-                android:id="@+id/dataItem02Group"
-                android:text="총무 이름"
-                android:layout_width="wrap_content"
+                android:text="회원 수"
+                android:layout_width="70sp"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
+                android:textSize="15sp"
                 android:layout_margin="5sp"
                 android:textColor="#0000ff" />
 
@@ -44,8 +72,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
+                android:textSize="15sp"
                 android:layout_margin="5sp"
                 android:textColor="#0000ff" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

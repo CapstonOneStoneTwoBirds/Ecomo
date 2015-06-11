@@ -76,11 +76,23 @@
             android:label="개인 가계부" >
         </activity>
         <activity
+            android:name=".groupHouseKeeping.Insert.InsertActivity"
+            android:label="그룹 가계부 입력" >
+        </activity>
+        <activity
+            android:name=".groupHouseKeeping.Insert.InsertConfrimActivity"
+            android:label="그룹 가계부 입력 확인" >
+        </activity>
+        <activity
             android:name=".groupHouseKeeping.Main.GroupMainActivity"
             android:label="그룹 가계부" >
         </activity>
         <activity
             android:name=".groupHouseKeeping.Main.InGroupActivity"
+            android:label="그룹 가계부" >
+        </activity>
+        <activity
+            android:name=".groupHouseKeeping.Member.GroupMemberInfoActivity"
             android:label="그룹 가계부" >
         </activity>
         <activity

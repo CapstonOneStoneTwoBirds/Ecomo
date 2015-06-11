@@ -40,9 +40,6 @@ import com.rey.material.widget.SnackBar;
 import com.rey.material.widget.TabPageIndicator;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -53,7 +50,7 @@ import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupCalendarF
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Calendar.GroupInsertContentActivity;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Member.GroupMemberFragment;
 import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
-import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity;
+import onestonetwobirds.capstonuitest3.groupHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 import onestonetwobirds.capstonuitest3.user.StartActivity;
@@ -342,9 +339,39 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
 
                         @Override
                         public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
+                            SharedPreferences mPreference = getSharedPreferences("myInfo", MODE_PRIVATE);
+                            String email = mPreference.getString("email", "");
+                            String group_id = getIntent().getStringExtra("group_id");
+                            RequestParams param = new RequestParams();
+                            param.put("email", email);
+                            param.put("group_id", group_id);
+                            HttpClient.post("leaveGroup/", param, new AsyncHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                    String code = new String(responseBody);
+                                    switch( code ){
+                                        case "success":
+                                            Toast toastView = Toast.makeText(getApplicationContext(),
+                                                    "Success", Toast.LENGTH_LONG);
+                                            toastView.setGravity(Gravity.CENTER, 40, 25);
+                                            toastView.show();
+                                            Intent intent = new Intent(getApplicationContext(), GroupMainActivity.class);
+                                            startActivity(intent);
+                                            break;
+                                        case "impossible":
+                                            toastView = Toast.makeText(getApplicationContext(),
+                                                    "Owner can't get out of group", Toast.LENGTH_LONG);
+                                            toastView.setGravity(Gravity.CENTER, 40, 25);
+                                            toastView.show();
+                                            break;
+                                    }
+                                }
 
-                            // 여기에다 코딩
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
+                                }
+                            });
                             onResume();
                             super.onPositiveActionClicked(fragment);
                         }

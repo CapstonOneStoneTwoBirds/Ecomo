@@ -1,5 +1,6 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
 
@@ -12,6 +13,7 @@ public class IconTextItemGroup {
      * Icon
      */
     private Drawable mIcon;
+    private Bitmap Icon;
 
     /**
      * Data array
@@ -57,6 +59,15 @@ public class IconTextItemGroup {
      */
     public IconTextItemGroup(Drawable icon, String obj01, String obj02, String obj03) {
         mIcon = icon;
+
+        mData = new String[3];
+        mData[0] = obj01;
+        mData[1] = obj02;
+        mData[2] = obj03;
+    }
+
+    public IconTextItemGroup(Bitmap icon, String obj01, String obj02, String obj03) {
+        Icon = icon;
 
         mData = new String[3];
         mData[0] = obj01;
@@ -134,14 +145,20 @@ public class IconTextItemGroup {
         mIcon = icon;
     }
 
+    public void setIcon(Bitmap icon) {
+        Icon = icon;
+    }
+
     /**
      * Get icon
      *
      * @return
      */
-    public Drawable getIcon() {
+    public Drawable getDrawableIcon() {
         return mIcon;
     }
+
+    public Bitmap getBitmapIcon(){ return Icon; }
 
     /**
      * Compare with the input object

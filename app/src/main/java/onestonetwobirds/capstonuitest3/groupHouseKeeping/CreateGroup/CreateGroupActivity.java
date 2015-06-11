@@ -133,12 +133,12 @@ public class CreateGroupActivity extends FragmentActivity implements View.OnClic
                 // Set Group Image////////////////////////////////////////////////
                 RequestParams param = new RequestParams();
                 param.put("groupname", Title.getText().toString());
+                param.put("group_id", mPreference.getString("group_id",""));
                 if( num == 0 ) {
                     try {
                         param.put("image", file, "image/jpg");
                     } catch (FileNotFoundException e) { }
 
-                    System.out.println("Param : " + param);
 
                     /*
                     FileOutputStream outputStream;

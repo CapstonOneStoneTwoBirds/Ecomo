@@ -80,10 +80,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         listMe = (ListView) v.findViewById(R.id.group_member_me);
         adapterMe = new IconTextListAdapterMember(getActivity());
 
-        // 총무 리스트
-        listKing = (ListView) v.findViewById(R.id.group_member_king);
-        adapterKing = new IconTextListAdapterMember(getActivity());
-
         RequestParams param = new RequestParams();
         param.add("groupid", group_id); // 가져와야한다.
 
@@ -96,62 +92,38 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     //arrListInsert.add(result);
                     for (int i = 0; i < member.length(); i++) {
                         JSONObject got = new JSONObject(member.get(i).toString());
-                        if (got.get("ownership").toString().equals("true")) {
-                            Log.e(tag, "Here1");
-                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
-                            adapterKing.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
-                        } else if (got.get("member").toString().equals(mPreference.getString("email", "")) && !got.get("ownership").toString().equals("true")) {
-                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
-                            adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
-                            Log.e(tag, "Here2");
-                        } else {
-                            Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
-                            Log.e(tag, "Here3");
-                            adapterMember.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
+
+                        if(got.get("member").toString().equals(mPreference.getString("email", ""))){
+                            if( got.get("ownership").toString().equals("true") ){
+                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString() + " ☆"));
+                            }else{
+                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                adapterMe.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
+                            }
+                        }
+                        else{
+                            if( got.get("ownership").toString().equals("true") ){
+                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                adapterMember.addItemOnFirst(new IconTextItemMember(bitmap, got.get("name").toString() + " ☆"));
+                            }else{
+                                Bitmap bitmap = getMemberProfileImg(got.get("member").toString());
+                                adapterMember.addItem(new IconTextItemMember(bitmap, got.get("name").toString()));
+                            }
                         }
                     }
 
                     listMember.setAdapter(adapterMember);
                     listMe.setAdapter(adapterMe);
-                    listKing.setAdapter(adapterKing);
 
                     listMember.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             try {
                                 JSONObject obj = new JSONObject(member.get(position).toString());
-
-                                System.out.println("members Click OK ");
-
-                                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
-
-                                    @Override
-                                    protected void onBuildDone(Dialog dialog) {
-                                        dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                                        // 이런식으로...
-                                        //CAnnounceTitle.setText(obj.get("title"));
-                                    }
-
-                                    @Override
-                                    public void onPositiveActionClicked(DialogFragment fragment) { // OK 버튼 눌렀을 때 액션 취하기(추가된 데이터 리스트에 띄우기)
-                                        // 여기에다 코딩
-
-
-                                        onResume();
-                                        super.onPositiveActionClicked(fragment);
-                                    }
-
-                                };
-
-                                builder.title("멤버 확인")
-                                        .positiveAction("OK")
-                                        .contentView(R.layout.member_confirm_dialog);
-
-                                FragmentManager fm = getFragmentManager();
-                                DialogFragment diaFM = DialogFragment.newInstance(builder);
-                                diaFM.show(fm, null);
-
+                                Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
+                                intent.putExtra("jsonobject", obj.toString());
+                                startActivity(intent);
                             } catch (JSONException e) {
                             }
                         }
@@ -160,16 +132,13 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     listMe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                            final IconTextListAdapterMember curItem = (IconTextListAdapterMember) adapterMe.getItem(position);
-
-                        }
-                    });
-
-                    listKing.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-
+                            try {
+                                JSONObject obj = new JSONObject(member.get(position).toString());
+                                Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
+                                intent.putExtra("jsonobject", obj.toString());
+                                startActivity(intent);
+                            } catch (JSONException e) {
+                            }
                         }
                     });
 

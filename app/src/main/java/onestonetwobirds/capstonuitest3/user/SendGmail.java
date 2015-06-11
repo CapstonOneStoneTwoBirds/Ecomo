@@ -16,6 +16,7 @@ import javax.mail.internet.MimeMessage;
  * Created by New on 2015-06-04.
  */
 public class SendGmail extends AsyncTask {
+    String IP = "192.168.123.183";
     @Override
     protected Object doInBackground(Object[] params) {
         try {
@@ -46,7 +47,7 @@ public class SendGmail extends AsyncTask {
                         InternetAddress.parse(params[0].toString()));
                 message.setSubject("Econo account reset mail");
                 message.setText("Hi, " + params[1].toString() + ". This mail will reset your 'Econo' account password. If you want to do it, click url below."
-                        + "\n\nhttp://192.168.25.22:3000/resetPassword?email="+params[0].toString()+"&code="+params[2].toString() +
+                        + "\n\nhttp://"+IP+":3000/resetPassword?email="+params[0].toString()+"&code="+params[2].toString() +
                         "\n\nWhen you activate this, your account's password will be set as a random key.\n\n Remember this key that will be shown on a next page."
                 );
 

@@ -94,6 +94,9 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
     public void onDateChanged(MaterialCalendarView widget, CalendarDay date) { // 다른 날짜가 눌러졌을 때 취하는 액션 --> 리스트를 다이얼로그로 띄웠다.
 
         final CalendarDay Cal = date;
+        TokenYear = Cal.getYear();
+        TokenMonth = Cal.getMonth()+1;
+        TokenDay = Cal.getDay();
 
         Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialogLight){
 
@@ -101,9 +104,7 @@ public class GroupCalendarFragment extends Fragment implements OnDateChangedList
             protected void onBuildDone(Dialog dialog) {
                 dialog.layoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                TokenYear = Cal.getYear();
-                TokenMonth = Cal.getMonth()+1;
-                TokenDay = Cal.getDay();
+
 
                 PrepareDialog(DIALOG_INSERT, dialog); // 다이얼로그 안의 리스트뷰 내용 준비
 

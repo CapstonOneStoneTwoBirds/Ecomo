@@ -1,6 +1,7 @@
 package onestonetwobirds.capstonuitest3.groupHouseKeeping.Main;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -60,7 +61,11 @@ public class IconTextListAdapterGroup extends BaseAdapter {
         } else {
             itemView = (IconTextViewGroup) convertView;
 
-            itemView.setIcon(mItems.get(position).getIcon());
+            if(mItems.get(position).getDrawableIcon() != null)
+                itemView.setIcon(mItems.get(position).getDrawableIcon());
+            if(mItems.get(position).getBitmapIcon() != null)
+                itemView.setIcon(mItems.get(position).getBitmapIcon());
+
             itemView.setText(0, mItems.get(position).getData(0));
         }
 

@@ -156,7 +156,7 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
 
         float mult = range;
 
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+        ArrayList<Entry> yVals1 = new ArrayList();
 
         yVals1.add(new Entry(Float.valueOf(CFood.getText().toString()) / Float.valueOf(CTotal.getText().toString()) * 100, 0));
         yVals1.add(new Entry(Float.valueOf(CPlay.getText().toString())/Float.valueOf(CTotal.getText().toString())*100,1));
@@ -164,14 +164,14 @@ public class CurrentConditionFragment extends Fragment implements OnChartValueSe
         yVals1.add(new Entry(Float.valueOf(CTraffic.getText().toString())/Float.valueOf(CTotal.getText().toString())*100,3));
         yVals1.add(new Entry(Float.valueOf(CSaving.getText().toString())/Float.valueOf(CTotal.getText().toString())*100,4));
 
-        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<String> xVals = new ArrayList();
 
         for (int i = 0; i < count + 1; i++)
             xVals.add(mParties[i % mParties.length]);
 
         PieDataSet dataSet = new PieDataSet(yVals1, null);
 
-        ArrayList<Integer> colors = new ArrayList<Integer>();
+        ArrayList<Integer> colors = new ArrayList();
 
 
         for (int c : ColorTemplate.JOYFUL_COLORS)
