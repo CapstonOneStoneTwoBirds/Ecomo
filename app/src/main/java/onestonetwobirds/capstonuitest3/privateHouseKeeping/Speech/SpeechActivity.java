@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.support.v4.app.FragmentActivity;
+import android.view.ViewGroup;
+import android.support.v4.app.FragmentManager;
+import android.widget.Toast;
 
+
+import com.rey.material.app.Dialog;
+import com.rey.material.app.DialogFragment;
+import com.rey.material.app.SimpleDialog;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -23,7 +28,7 @@ import onestonetwobirds.capstonuitest3.privateHouseKeeping.Insert.InsertActivity
 /**
  * Created by YeomJi on 15. 4. 30..
  */
-public class SpeechActivity extends Activity {
+public class SpeechActivity extends FragmentActivity {
 
     Vector<Integer> vectorCost = new Vector<Integer>();
     Vector<String> vectorProduct = new Vector<String>();
@@ -40,7 +45,27 @@ public class SpeechActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.speech_main);
 
-        voiceRecoder();
+        participate();
+
+    }
+
+    public void participate() {
+        Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+            @Override
+            public void onPositiveActionClicked(DialogFragment fragment) {
+                super.onPositiveActionClicked(fragment);
+                voiceRecoder();
+            }
+
+        };
+
+        ((SimpleDialog.Builder) builder)
+                .message("아래와 같은 항목에 맞춰서 말해 주세요.\n\n \'지출 제목\' + \'항목\' + \'지출 금액\' \n\n - 항목 내용\n 식비/여가비/주거비/교통비/저축비 \n\n ex) 마카나이 식비 7000원")
+                .title("알림 사항").positiveAction("OK");
+
+        FragmentManager fm = getSupportFragmentManager();
+        DialogFragment diaFM = DialogFragment.newInstance(builder);
+        diaFM.show(fm, null);
     }
 
     public void voiceRecoder() {
@@ -61,102 +86,145 @@ public class SpeechActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SPEAK_ACT) {
-            if (resultCode == RESULT_OK) {
-                ArrayList<String> arrResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+        try {
+            if (requestCode == SPEAK_ACT) {
+                if (resultCode == RESULT_OK) {
+                    ArrayList<String> arrResult = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
-                for (int i = 0; i < arrResult.size(); i++) {
+                    for (int i = 0; i < arrResult.size(); i++) {
 
-                    cost = 0;
-                    isCost = 0;
-
-
-
-                    str = arrResult.get(i);
-                    System.out.println("vectorCost 추출 위한 값  /  " + str);
+                        cost = 0;
+                        isCost = 0;
 
 
-                    StringTokenizer st = new StringTokenizer(str);
-                    while (st.hasMoreTokens()) {
+                        str = arrResult.get(i);
+                        System.out.println("vectorCost 추출 위한 값  /  " + str);
 
 
-                        token = st.nextToken();
-
-                        if (isCost == 0)
-                            CategoryToken(token);
-                        else
-                            CostToken(token);
+                        StringTokenizer st = new StringTokenizer(str);
+                        while (st.hasMoreTokens()) {
 
 
-                        System.out.println("vectorCost1");
-                    }
-                    InsertCostInvectorCost(cost);
+                            token = st.nextToken();
 
-                }
+                            if (isCost == 0)
+                                CategoryToken(token);
+                            else
+                                CostToken(token);
 
-                if (cost != 0) {
-                    int[] resultCost1 = new int[]{0, 0, 0, 0, 0, 0};
-                    int trueResultCost = 0; // 실제 추출된 가격 (가계부에 동기화 필요)
 
-                    for (int h = 0; h < 5; h++) {
-                        for (int g = 0; g < 5; g++) {
-                            if (vectorCost.elementAt(h).equals(vectorCost.elementAt(g))) {
-                                ++resultCost1[h];
-                            }
+                            System.out.println("vectorCost1");
                         }
-                        System.out.println("vectorCost2");
-                        if (resultCost1[5] < resultCost1[h]) {
-                            resultCost1[5] = resultCost1[h];
-                            trueResultCost = vectorCost.elementAt(h);
-                        }
+                        InsertCostInvectorCost(cost);
+
                     }
 
+                    int checkCost = 0, checkProduct = 0;
 
-                    System.out.println("vectorCost3");
-
-                    if (!vectorProduct.isEmpty()) {
-                        int[] resultProduct = new int[]{0, 0, 0, 0, 0, 0};
-                        String trueResultProduct = ""; // 실제 추출된 가격 (가계부에 동기화 필요)
+                    if (cost != 0) {
+                        int[] resultCost1 = new int[]{0, 0, 0, 0, 0, 0};
+                        int trueResultCost = 0;
 
                         for (int h = 0; h < 5; h++) {
                             for (int g = 0; g < 5; g++) {
-                                if (vectorProduct.elementAt(h).equals(vectorProduct.elementAt(g))) {
-
-                                    ++resultProduct[h];
+                                if (vectorCost.elementAt(h).equals(vectorCost.elementAt(g))) {
+                                    ++resultCost1[h];
                                 }
                             }
-                            if (resultProduct[5] < resultProduct[h]) {
-                                resultProduct[5] = resultProduct[h];
-                                trueResultProduct = vectorProduct.elementAt(h);
+                            System.out.println("vectorCost2");
+                            if (resultCost1[5] < resultCost1[h]) {
+                                resultCost1[5] = resultCost1[h];
+                                trueResultCost = vectorCost.elementAt(h);
+                                checkCost = resultCost1[5];
                             }
                         }
 
-                        System.out.println("vectorCost 최종 결과 store -------> " + trueResultProduct);
-                        System.out.println("vectorCost 최종 결과 product -------> " + product);
-                        System.out.println("vectorCost 최종 결과 cost -------> " + trueResultCost);
+
+                        System.out.println("vectorCost3");
+
+                        if (!vectorProduct.isEmpty()) {
+                            int[] resultProduct = new int[]{0, 0, 0, 0, 0, 0};
+                            String trueResultProduct = "";
+
+                            for (int h = 0; h < 5; h++) {
+                                for (int g = 0; g < 5; g++) {
+                                    if (vectorProduct.elementAt(h).equals(vectorProduct.elementAt(g))) {
+
+                                        ++resultProduct[h];
+                                    }
+                                }
+                                if (resultProduct[5] < resultProduct[h]) {
+                                    resultProduct[5] = resultProduct[h];
+                                    trueResultProduct = vectorProduct.elementAt(h);
+                                    checkProduct = resultProduct[5];
+                                }
+                            }
+
+                            // 조건 확
+                            if (checkCost < 3 || checkProduct < 3) {
+                                Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+                                    @Override
+                                    public void onPositiveActionClicked(DialogFragment fragment) {
+                                        super.onPositiveActionClicked(fragment);
+                                        voiceRecoder();
+                                    }
+
+                                };
+
+                                ((SimpleDialog.Builder) builder)
+                                        .message("큰 소리로 다시 말해 주세요.")
+                                        .title("알림 사항").positiveAction("OK");
+
+                                FragmentManager fm = getSupportFragmentManager();
+                                DialogFragment diaFM = DialogFragment.newInstance(builder);
+                                diaFM.show(fm, null);
+                                return;
+                            }
+
+                            System.out.println("vectorCost 최종 결과 store -------> " + trueResultProduct);
+                            System.out.println("vectorCost 최종 결과 product -------> " + product);
+                            System.out.println("vectorCost 최종 결과 cost -------> " + trueResultCost);
 
 
-                        vectorCost.removeAllElements();
-                        vectorProduct.removeAllElements();
+                            vectorCost.removeAllElements();
+                            vectorProduct.removeAllElements();
 
 
-                        // store => account
-                        // product => category
-                        // cost => money
+                            // store => account
+                            // product => category
+                            // cost => money
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("account", trueResultProduct);
-                        bundle.putString("category", product);
-                        bundle.putString("money", String.valueOf(trueResultCost));
+                            Bundle bundle = new Bundle();
+                            bundle.putString("account", trueResultProduct);
+                            bundle.putString("category", product);
+                            bundle.putString("money", String.valueOf(trueResultCost));
 
-                        Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
+                            Intent intent = new Intent(getApplicationContext(), InsertActivity.class);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
+
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
+                @Override
+                public void onPositiveActionClicked(DialogFragment fragment) {
+                    super.onPositiveActionClicked(fragment);
+                    voiceRecoder();
                 }
 
-            }
+            };
+
+            ((SimpleDialog.Builder) builder)
+                    .message("큰 소리로 다시 말해 주세요.")
+                    .title("알림 사항").positiveAction("OK");
+
+            FragmentManager fm = getSupportFragmentManager();
+            DialogFragment diaFM = DialogFragment.newInstance(builder);
+            diaFM.show(fm, null);
         }
     }
 
@@ -166,14 +234,11 @@ public class SpeechActivity extends Activity {
                 costC.contains("교통") || costC.contains("저축") || costC.contains("기타")) {
             while (queue.peek() != null) CheckStore += " " + queue.poll();
             vectorProduct.addElement(CheckStore);
-            // 식비, 의류 , 주거 등은 나중에 가계부 입력 값에 맞게 수정
             if (costC.contains("식비")) product = "식비";
-            else if (costC.contains("의류")) product = "의류";
             else if (costC.contains("주거")) product = "주거";
             else if (costC.contains("여가")) product = "여가";
             else if (costC.contains("교통")) product = "교통";
             else if (costC.contains("저축")) product = "저축";
-            else if (costC.contains("기타")) product = "기타";
 
             isCost = 1;
 
@@ -193,7 +258,7 @@ public class SpeechActivity extends Activity {
                     (costN.charAt(0) == '7') || (costN.charAt(0) == '8') || (costN.charAt(0) == '9')) {
                 if (costN.contains("만") || costN.contains("천") || costN.contains("백")) {
                     if (costN.endsWith("원")) costN = costN.replace("원", "");
-                    switch (costN.charAt(1)) { // 십만 이상 고려 X 십원 단위 이하 고려 X
+                    switch (costN.charAt(1)) {
                         case '만':
                             cost += ((int) costN.charAt(0) - 48) * 10000;
                             break;

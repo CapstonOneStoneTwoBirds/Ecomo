@@ -88,6 +88,7 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
         adapter.setDropDownViewResource(R.layout.row_spn_dropdown);
         InsertSpinner.setAdapter(adapter);
 
+
         InsertSpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(Spinner spinner, View view, int i, long l) {
@@ -176,23 +177,21 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             if (bundle.containsKey("money")) InsertMoney.setText(bundle.getString("money"));
             if (bundle.containsKey("product")) {
                 switch (bundle.getString("category")) {
-                    case "의류":
-                        InsertSpinner.setSelection(1);
+                    case "여가":
+                        InsertSpinner.setSelection(2);
+                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
                         break;
                     case "주거":
-                        InsertSpinner.setSelection(2);
-                        break;
-                    case "여가":
                         InsertSpinner.setSelection(3);
+                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
                         break;
                     case "교통":
                         InsertSpinner.setSelection(4);
+                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
                         break;
                     case "저축":
                         InsertSpinner.setSelection(5);
-                        break;
-                    case "기타":
-                        InsertSpinner.setSelection(5);
+                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
                         break;
                     default:
                         break;
@@ -200,6 +199,8 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             }
             if (bundle.containsKey("content")) InsertContent.setText(bundle.getString("content"));
         }
+
+        System.out.print("vectorCost 추출 값 final : " + bundle.getString("category"));
 
         if (year != null) {
             String setDate = year + ". " + month + ". " + date + ". ";

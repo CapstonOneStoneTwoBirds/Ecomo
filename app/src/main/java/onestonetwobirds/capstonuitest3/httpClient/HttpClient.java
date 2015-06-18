@@ -12,7 +12,7 @@ import org.apache.http.HttpEntity;
  * Created by New on 2015-04-16.
  */
 public class HttpClient {
-    private static final String BASE_URL = "http://110.15.224.106:3000/";
+    private static final String BASE_URL = "http://192.168.0.60:3000/";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 
