@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
 
 import onestonetwobirds.capstonuitest3.R;
+import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
 
 public class MainActivity extends Activity {
 

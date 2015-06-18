@@ -67,7 +67,7 @@ public class GcmIntentService extends IntentService
     private void sendNotification(Intent intentt) {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        // ÆË¾÷ ´©¸¦½Ã °¥ ÆäÀÌÁö. ÇØ´ç ±Û·Î °¡µµ·Ï ÇØ¾ßµÅ. °øÁöµç ÁöÃâ³»¿ªÀÌµç
+        // í˜¸ã…—ï¿½Ë¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ï¿½Ø´ï¿½ ï¿½Û·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ßµï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â³»ï¿½ï¿½ï¿½Ìµï¿½
         String _id = intentt.getStringExtra("_id");
         String code = intentt.getStringExtra("code");
         String email="";
@@ -83,7 +83,7 @@ public class GcmIntentService extends IntentService
 
         if (code.equals("Article")){
             id = "article_id";
-            //cls = GroupArticleCActivity.class; // ¿¡·¯³ª¼­ ÀÓ½Ã ÁÖ¼® ¾Æ·¡ 2°³µµ.
+            //cls = GroupArticleCActivity.class; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½Ö¼ï¿½ ï¿½Æ·ï¿½ 2ï¿½ï¿½ï¿½ï¿½.
         }
         else if( code.equals("Announce")){
             id = "announce_id";

@@ -15,12 +15,12 @@ public class BasePreferenceUtil
     }
 
     /**
-     * key ¼öµ¿ ¼³Á¤
+     * key ì—­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
+     *           Å° ï¿½ï¿½
      * @param value
-     *           ³»¿ë
+     *           ï¿½ï¿½ï¿½ï¿½
      */
     protected void put(String $key, String $value)
     {
@@ -30,11 +30,11 @@ public class BasePreferenceUtil
     }
 
     /**
-     * String °ª °¡Á®¿À±â
+     * String ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
-     * @return String (±âº»°ª null)
+     *           Å° ï¿½ï¿½
+     * @return String (ï¿½âº»ï¿½ï¿½ null)
      */
     protected String get(String $key)
     {
@@ -42,12 +42,12 @@ public class BasePreferenceUtil
     }
 
     /**
-     * key ¼³Á¤
+     * key ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
+     *           Å° ï¿½ï¿½
      * @param value
-     *           ³»¿ë
+     *           ï¿½ï¿½ï¿½ï¿½
      */
     protected void put(String $key, boolean $value)
     {
@@ -57,12 +57,12 @@ public class BasePreferenceUtil
     }
 
     /**
-     * Boolean °ª °¡Á®¿À±â
+     * Boolean ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
+     *           Å° ï¿½ï¿½
      * @param defValue
-     *           ±âº»°ª
+     *           ï¿½âº»ï¿½ï¿½
      * @return Boolean
      */
     protected boolean get(String $key, boolean $default)
@@ -71,12 +71,12 @@ public class BasePreferenceUtil
     }
 
     /**
-     * key ¼³Á¤
+     * key ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
+     *           Å° ï¿½ï¿½
      * @param value
-     *           ³»¿ë
+     *           ï¿½ï¿½ï¿½ï¿½
      */
     protected void put(String $key, int $value)
     {
@@ -86,12 +86,12 @@ public class BasePreferenceUtil
     }
 
     /**
-     * int °ª °¡Á®¿À±â
+     * int ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      *
      * @param key
-     *           Å° °ª
+     *           Å° ï¿½ï¿½
      * @param defValue
-     *           ±âº»°ª
+     *           ï¿½âº»ï¿½ï¿½
      * @return int
      */
     protected int get(String $key, int $default)

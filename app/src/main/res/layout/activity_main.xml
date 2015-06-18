@@ -17,4 +17,5 @@
         android:singleLine="true"
         android:textColor="#ffffff"
         android:text="ECOMO" />
+
 </LinearLayout>

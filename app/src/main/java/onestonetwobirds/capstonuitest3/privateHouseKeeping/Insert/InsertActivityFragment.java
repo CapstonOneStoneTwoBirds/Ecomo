@@ -175,23 +175,19 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             else minute = resultDateTime[4];
             if (bundle.containsKey("account")) InsertTitle.setText(bundle.getString("account"));
             if (bundle.containsKey("money")) InsertMoney.setText(bundle.getString("money"));
-            if (bundle.containsKey("product")) {
+            if (bundle.containsKey("category")) {
                 switch (bundle.getString("category")) {
                     case "여가":
-                        InsertSpinner.setSelection(2);
-                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
+                        InsertSpinner.setSelection(1);
                         break;
                     case "주거":
-                        InsertSpinner.setSelection(3);
-                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
+                        InsertSpinner.setSelection(2);
                         break;
                     case "교통":
-                        InsertSpinner.setSelection(4);
-                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
+                        InsertSpinner.setSelection(3);
                         break;
                     case "저축":
-                        InsertSpinner.setSelection(5);
-                        System.out.print("vectorCost 추출 값 : " + bundle.getString("category"));
+                        InsertSpinner.setSelection(4);
                         break;
                     default:
                         break;
@@ -199,8 +195,6 @@ public class InsertActivityFragment extends Fragment implements View.OnClickList
             }
             if (bundle.containsKey("content")) InsertContent.setText(bundle.getString("content"));
         }
-
-        System.out.print("vectorCost 추출 값 final : " + bundle.getString("category"));
 
         if (year != null) {
             String setDate = year + ". " + month + ". " + date + ". ";

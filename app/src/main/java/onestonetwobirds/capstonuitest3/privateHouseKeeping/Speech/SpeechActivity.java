@@ -60,7 +60,7 @@ public class SpeechActivity extends FragmentActivity {
         };
 
         ((SimpleDialog.Builder) builder)
-                .message("아래와 같은 항목에 맞춰서 말해 주세요.\n\n \'지출 제목\' + \'항목\' + \'지출 금액\' \n\n - 항목 내용\n 식비/여가비/주거비/교통비/저축비 \n\n ex) 마카나이 식비 7000원")
+                .message("아래와 같은 항목에 맞춰서 또박 또박 말해 주세요.\n\n \'지출 제목\' + \'항목\' + \'지출 금액\' \n\n - 항목 내용\n 식비/여가비/주거비/교통비/저축비 \n\n ex) 마카나이 식비 7000원")
                 .title("알림 사항").positiveAction("OK");
 
         FragmentManager fm = getSupportFragmentManager();
@@ -111,9 +111,6 @@ public class SpeechActivity extends FragmentActivity {
                                 CategoryToken(token);
                             else
                                 CostToken(token);
-
-
-                            System.out.println("vectorCost1");
                         }
                         InsertCostInvectorCost(cost);
 
@@ -131,16 +128,12 @@ public class SpeechActivity extends FragmentActivity {
                                     ++resultCost1[h];
                                 }
                             }
-                            System.out.println("vectorCost2");
                             if (resultCost1[5] < resultCost1[h]) {
                                 resultCost1[5] = resultCost1[h];
                                 trueResultCost = vectorCost.elementAt(h);
                                 checkCost = resultCost1[5];
                             }
                         }
-
-
-                        System.out.println("vectorCost3");
 
                         if (!vectorProduct.isEmpty()) {
                             int[] resultProduct = new int[]{0, 0, 0, 0, 0, 0};
@@ -167,6 +160,7 @@ public class SpeechActivity extends FragmentActivity {
                                     public void onPositiveActionClicked(DialogFragment fragment) {
                                         super.onPositiveActionClicked(fragment);
                                         voiceRecoder();
+                                        return;
                                     }
 
                                 };
@@ -178,7 +172,6 @@ public class SpeechActivity extends FragmentActivity {
                                 FragmentManager fm = getSupportFragmentManager();
                                 DialogFragment diaFM = DialogFragment.newInstance(builder);
                                 diaFM.show(fm, null);
-                                return;
                             }
 
                             System.out.println("vectorCost 최종 결과 store -------> " + trueResultProduct);
@@ -230,8 +223,10 @@ public class SpeechActivity extends FragmentActivity {
 
     public void CategoryToken(String costC) {
         String CheckStore = "";
-        if (costC.contains("식비") || costC.contains("의류") || costC.contains("주거") || costC.contains("여가") ||
-                costC.contains("교통") || costC.contains("저축") || costC.contains("기타")) {
+        if (costC.contains("식비") || costC.contains("주거") || costC.contains("여가") ||
+                costC.contains("교통") || costC.contains("저축") || costC.contains("여관")|| costC.contains("갑이")
+                || costC.contains("여자")|| costC.contains("여과")|| costC.contains("여관비")|| costC.contains("가비")
+                || costC.contains("역앞")|| costC.contains("녀가")) {
             while (queue.peek() != null) CheckStore += " " + queue.poll();
             vectorProduct.addElement(CheckStore);
             if (costC.contains("식비")) product = "식비";
@@ -239,6 +234,14 @@ public class SpeechActivity extends FragmentActivity {
             else if (costC.contains("여가")) product = "여가";
             else if (costC.contains("교통")) product = "교통";
             else if (costC.contains("저축")) product = "저축";
+            else if (costC.contains("여관")) product = "여가";
+            else if (costC.contains("여자")) product = "여가";
+            else if (costC.contains("여과")) product = "여가";
+            else if (costC.contains("여관비")) product = "여가";
+            else if (costC.contains("갑이")) product = "여가";
+            else if (costC.contains("가비")) product = "여가";
+            else if (costC.contains("역앞")) product = "여가";
+            else if (costC.contains("녀가")) product = "여가";
 
             isCost = 1;
 
