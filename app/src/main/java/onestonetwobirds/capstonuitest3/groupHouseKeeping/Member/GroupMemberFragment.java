@@ -92,6 +92,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                     final JSONArray member = new JSONArray(new String(responseBody));
                     ret = new Bitmap[member.length()];
                     //arrListInsert.add(result);
+                    Log.e(tag, member.toString());
                     for (int i = 0; i < member.length(); i++) {
                         JSONObject got = new JSONObject(member.get(i).toString());
 
@@ -125,17 +126,20 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             try {
                                 IconTextItemMember icon = (IconTextItemMember)adapterMember.getItem(position);
-                                String data = icon.getData(1);
-                                if( data.indexOf(' ') == -1){
+                                //String data = icon.getData(1);
+                                //if( data.indexOf(' ') == -1){
                                     for( int i = 0 ; i < member.length() ; i ++ ){
-                                        JSONObject obj = new JSONObject(member.get(i).toString());
-                                        if( obj.get("name").toString().equals(data)) {
-                                            Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
-                                            intent.putExtra("jsonobject", obj.toString());
-                                            startActivity(intent);
+                                        if( i != n ) {
+                                            JSONObject obj = new JSONObject(member.get(i).toString());
+                                            //if (obj.get("name").toString().equals(data)) {
+                                                Intent intent = new Intent(v.getContext(), GroupMemberInfoActivity.class);
+                                                intent.putExtra("jsonobject", obj.toString());
+                                                startActivity(intent);
+                                            //}
                                         }
                                     }
-                                }
+                                //    System.out.println("   !!!!n : " + n);
+                                //}
                             } catch (JSONException e) {
                             }
                         }
@@ -154,8 +158,7 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
                         }
                     });
 
-                    System.out.println("getMemberList Success 1");
-                    System.out.println("members : " + member);
+                    System.out.println("members : " + member + "   n : " + n);
                     switch (new String(responseBody)) {
                         case "1":
                             System.out.println("getMemberList error");
@@ -203,7 +206,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         // If Internal Storage has user's Img, get this one
         // else get from server.
         final String filename = email+"_profile.jpg";
-        Log.e(tag, "Here!! :::: " + i );
         ret[i] = null;
         try {
             FileInputStream fis = view.getContext().openFileInput(filename);
@@ -211,7 +213,6 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
             fis.close();
 
             //string temp contains all the data of the file.
-            System.out.println("img catch exception");
             ret[i] = scaled;
         }catch( FileNotFoundException e){
 
@@ -260,5 +261,4 @@ public class GroupMemberFragment extends Fragment implements View.OnClickListene
         }catch(Exception e){}
         return ret[i];
     }
-
 }

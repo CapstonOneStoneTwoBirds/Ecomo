@@ -131,8 +131,6 @@ public class GroupMainActivity extends ActionBarActivity implements ToolbarManag
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mItems);
         vp.setAdapter(mPagerAdapter);
 
-
-
         mDrawerAdapter = new DrawerAdapter();
         lv_drawer.setAdapter(mDrawerAdapter);                       // DrawerLayout 보여줘
 

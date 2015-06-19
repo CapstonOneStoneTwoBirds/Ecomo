@@ -53,6 +53,7 @@ import onestonetwobirds.capstonuitest3.httpClient.HttpClient;
 import onestonetwobirds.capstonuitest3.groupHouseKeeping.Insert.InsertActivity;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.CustomViewPager;
 import onestonetwobirds.capstonuitest3.privateHouseKeeping.Main.PrivateMainActivity;
+import onestonetwobirds.capstonuitest3.user.MyInfoActivity;
 import onestonetwobirds.capstonuitest3.user.StartActivity;
 
 public class InGroupActivity extends ActionBarActivity implements ToolbarManager.OnToolbarGroupChangedListener {
@@ -286,25 +287,17 @@ public class InGroupActivity extends ActionBarActivity implements ToolbarManager
                 v.setBackgroundResource(0);
                 ((TextView) v).setTextColor(0xFF000000);
             }
-
-
             return v;
         }
-
 
         @Override
         public void onClick(View v) { // 텝이 클릭되었을 때
             int position = (Integer) v.getTag();
             switch (position) {
                 case 0:
-                    /*
-                    Intent intent = new Intent(getApplicationContext(), ModifyInfoActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), MyInfoActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.rightin, R.anim.rightout);
-                    */
-                    //아래는 그룹 캘린더에서 리스트 클릭하면 뜨는 화면
-                    Intent intent = new Intent(getApplicationContext(), GroupInsertContentActivity.class);
-                    startActivity(intent);
                     break;
                 case 1:
                     Dialog.Builder builder = new SimpleDialog.Builder(R.style.SimpleDialog) {
